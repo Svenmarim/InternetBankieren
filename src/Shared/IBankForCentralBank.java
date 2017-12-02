@@ -1,7 +1,6 @@
 package Shared;
 
 import BankServer.Session;
-import BankServer.Transaction;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
