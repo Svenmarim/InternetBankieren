@@ -27,7 +27,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    public void login(String iban, String hashedPassword){
+    public void login(String iban, String password){
 
     }
 

@@ -13,12 +13,18 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     private String name;
     private String shortcut;
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getShortcut() {
         return shortcut;
+    }
+
+    public static void main(String[] args) throws RemoteException {
+
     }
 
     public Bank(String name, String shortcut) throws RemoteException{

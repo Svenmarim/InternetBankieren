@@ -1,5 +1,6 @@
 package BankServer;
 
+import BankServer.BankAccount;
 import Shared.*;
 
 import java.rmi.RemoteException;
@@ -13,12 +14,9 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     private Date lastActivity;
     private BankAccount bankAccount;
 
+    @Override
     public Date getLastActivity() {
         return lastActivity;
-    }
-
-    public BankAccount getBankAccount() {
-        return bankAccount;
     }
 
     public Session(double amount, String iban, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email, double limitIn, double limitOut) throws RemoteException {
