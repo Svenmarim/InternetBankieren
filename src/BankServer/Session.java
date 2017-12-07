@@ -22,8 +22,6 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     public Session(double amount, String iban, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email, double limitIn, double limitOut) throws RemoteException {
         bankAccount = new BankAccount(amount, iban, firstName, lastName, postalCode, houseNumber, dateOfBirth, email, limitIn, limitOut);
         lastActivity = new Date();
-//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        System.out.println(dateFormat.format(lastActivity)); //02/12/2017 12:08:43
     }
 
     @Override

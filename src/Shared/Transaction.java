@@ -1,6 +1,8 @@
 package Shared;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,8 +14,9 @@ public class Transaction implements Serializable {
     private double amount;
     private String description;
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
     }
 
     public String getIban() {

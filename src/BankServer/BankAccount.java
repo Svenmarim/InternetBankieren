@@ -3,6 +3,7 @@ package BankServer;
 import Shared.Address;
 import Shared.Transaction;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,6 +20,8 @@ public class BankAccount {
     private String email;
     private double limitInAddressbook;
     private double limitOutAddressbook;
+    private ArrayList<Address> addressbook;
+    private ArrayList<Transaction> transactionHistory;
 
     public double getAmount() {
         return amount;
@@ -71,33 +74,51 @@ public class BankAccount {
         this.email = email;
         this.limitInAddressbook = limitIn;
         this.limitOutAddressbook = limitOut;
+        this.addressbook = new ArrayList<>();
+        this.transactionHistory = new ArrayList<>();
     }
 
     public void editAccount(String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
-
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.postalCode = postalCode;
+        this.houseNumber = houseNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
     }
 
     public void editLimits(double limitIn, double limitOut) {
-
+        this.limitInAddressbook = limitIn;
+        this.limitOutAddressbook = limitOut;
     }
 
     public void deleteAddress(Address address) {
-
+        this.addressbook.remove(address);
     }
 
-    public boolean makeTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
-        return false;
+    public void makeTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
+        changeAmount(amount);
+        transactionHistory.add(new Transaction(new Date(), ibanReceiver, amount, description));
+
+        if(addToAddress){
+            addressbook.add(new Address(name, ibanReceiver));
+        }
     }
 
     public boolean makeRequest(double amount, String name, String ibanReceiver, String description) {
         return false;
     }
 
-    public boolean receiveTransaction(Transaction transaction) {
-        return false;
+    public void receiveTransaction(Transaction transaction) {
+        changeAmount(transaction.getAmount());
+        transactionHistory.add(transaction);
     }
 
     public void changeAmount(double amount) {
-
+        if(amount < 0){
+            this.amount -= amount;
+        } else if (amount > 0){
+            this.amount += amount;
+        }
     }
 }
