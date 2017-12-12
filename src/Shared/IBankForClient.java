@@ -78,7 +78,7 @@ public interface IBankForClient extends Remote {
      * @return If received transfer correctly or not
      * @throws RemoteException for exception with RMI
      */
-    boolean receiveBankAccountsTransaction(Transaction transaction) throws RemoteException;
+    void receiveBankAccountsTransaction(Transaction transaction) throws RemoteException;
 
     /**
      * Method for changing your amount of your bank account

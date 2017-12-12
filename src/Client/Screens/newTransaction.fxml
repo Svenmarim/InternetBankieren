@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="275.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Client">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Amount">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="42.0" text="EUR">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="165.0" layoutY="49.0" text=",">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <TextField alignment="CENTER_RIGHT" layoutX="99.0" layoutY="37.0" prefHeight="25.0" prefWidth="59.0" style="-fx-background-radius: 5;" text="00" />
+      <TextField layoutX="175.0" layoutY="37.0" prefHeight="25.0" prefWidth="38.0" style="-fx-background-radius: 5;" text="00" />
+      <Label layoutX="14.0" layoutY="78.0" text="To">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="102.0" text="Name">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="135.0" text="IBAN">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="99.0" layoutY="98.0" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 5;" />
+      <TextField layoutX="99.0" layoutY="130.0" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 5;" />
+      <Button layoutX="274.0" layoutY="98.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-radius: 5;" text="Address book">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <CheckBox layoutX="99.0" layoutY="168.0" mnemonicParsing="false" text="Add to address book">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </CheckBox>
+      <Label layoutX="19.0" layoutY="200.0" text="Description">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="99.0" layoutY="200.0" prefHeight="57.0" prefWidth="154.0" style="-fx-background-radius: 5;" />
+      <Button layoutX="274.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-radius: 5;" text="Request">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="274.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-radius: 5;" text="Transfer">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

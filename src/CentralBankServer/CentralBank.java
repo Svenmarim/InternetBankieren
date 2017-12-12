@@ -5,7 +5,11 @@ import BankServer.Session;
 import Shared.Transaction;
 import Shared.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
@@ -16,11 +20,46 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     private IBankForCentralBank bank;
 
     public static void main(String[] args) throws RemoteException {
+        //Print port number for registry
+        InetAddress localhost = null;
+        try {
+            localhost = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("CentralBank: IP Address: " + localhost.getHostAddress());
 
+        try {
+            CentralBank centralBank = new CentralBank();
+            System.out.println("CentralBank: CentralBank created");
+        } catch (RemoteException e) {
+            System.out.println("CentralBank: Cannot create CentralBank");
+            System.out.println("CentralBank: RemoteException: " + e.getMessage());
+        }
     }
 
     public CentralBank() throws RemoteException {
+        //Create registry at port number
+        Registry registry = null;
+        try {
+            registry = LocateRegistry.createRegistry(1099);
+            System.out.println("CentralBank: Registry created");
+        } catch (RemoteException e) {
+            System.out.println("CentralBank: Cannot create registry");
+            System.out.println("CentralBank: RemoteException: " + e.getMessage());
+        }
 
+        //Bind using registry
+        try {
+            registry.rebind("CentralBank", this);
+            System.out.println("CentralBank: CentralBank bound to registry");
+        } catch (RemoteException e) {
+            System.out.println("CentralBank: Cannot bind CentralBank");
+            System.out.println("CentralBank: RemoteException: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("CentralBank: Port already in use. \nCentralBank: Please check if the server isn't already running");
+            System.out.println("CentralBank: NullPointerException: " + e.getMessage());
+        }
     }
 
     @Override

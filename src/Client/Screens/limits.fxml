@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200.0" prefWidth="208.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Client">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Inside address book">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="36.0" layoutY="44.0" text="EUR">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="120.0" text="EUR">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="92.0" text="Outside address book">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="145.0" layoutY="52.0" text=",">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <TextField alignment="CENTER_RIGHT" layoutX="79.0" layoutY="40.0" prefHeight="25.0" prefWidth="59.0" style="-fx-background-radius: 5;" text="00" />
+      <TextField layoutX="155.0" layoutY="40.0" prefHeight="25.0" prefWidth="38.0" style="-fx-background-radius: 5;" text="00" />
+      <Label layoutX="146.0" layoutY="128.0" text=",">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="156.0" layoutY="116.0" prefHeight="25.0" prefWidth="38.0" style="-fx-background-radius: 5;" text="00" />
+      <TextField alignment="CENTER_RIGHT" layoutX="80.0" layoutY="116.0" prefHeight="25.0" prefWidth="59.0" style="-fx-background-radius: 5;" text="00" />
+      <Button layoutX="77.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" style="-fx-background-radius: 5;" text="Accept">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

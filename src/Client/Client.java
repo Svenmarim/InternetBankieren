@@ -19,10 +19,6 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private IRemotePublisherForListener publisherForListener;
     private IRemotePublisherForDomain publisherForDomain;
 
-    public static void main(String[] args) {
-
-    }
-
     public Client() throws RemoteException {
 
     }
