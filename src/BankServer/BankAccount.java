@@ -105,7 +105,7 @@ public class BankAccount {
         }
     }
 
-    public boolean makeRequest(double amount, String name, String ibanReceiver, String description) {
+    public boolean makeRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
         return false;
     }
 

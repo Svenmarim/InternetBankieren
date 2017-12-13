@@ -40,7 +40,7 @@ public interface ICentralBankForClient extends Remote {
      * @return The session from the client he just logged in to
      * @throws RemoteException for exception with RMI
      */
-    Session loginClient(String iban, String hashedPassword) throws RemoteException;
+    IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException;
 
     /**
      * Method to logout the admin
@@ -53,7 +53,7 @@ public interface ICentralBankForClient extends Remote {
      * @param session The session from the client he wants to logout to
      * @throws RemoteException for exception with RMI
      */
-    void logOutClient(Session session) throws RemoteException;
+    void logOutClient(IBankForClient session) throws RemoteException;
 
     /**
      * Method to create a bank as an admin

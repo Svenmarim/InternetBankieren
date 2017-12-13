@@ -30,38 +30,44 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
 
     @Override
     public boolean isSessionValid() {
-        //Check if sessions last activity is longer then 5 minutes ago
+        //TODO Check if sessions last activity is longer then 5 minutes ago
         return false;
     }
 
     @Override
     public void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
-        //Edit account in database
+        //TODO Edit account in database
         bankAccount.editAccount(firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
     }
 
     @Override
+    public void deleteBankAccount() {
+        //TODO Delete account in database
+        this.bankAccount = null;
+    }
+
+    @Override
     public void editBankAccountsLimits(double limitIn, double limitOut) {
-        //Edit limits in database
+        //TODO Edit limits in database
         bankAccount.editLimits(limitIn, limitOut);
     }
 
     @Override
     public void deleteBankAccountsAddress(Address address) {
-        //Delete bank accounts address in database
+        //TODO Delete bank accounts address in database
         bankAccount.deleteAddress(address);
     }
 
     @Override
     public boolean makeBankAccountsTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
-        //Call central bank transaction method
+        //TODO Call central bank transaction method
         //if true then continue
         bankAccount.makeTransaction(amount, name, ibanReceiver, description, addToAddress);
         return true;
     }
 
     @Override
-    public boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description) {
+    public boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
         return false;
     }
 
@@ -75,7 +81,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         bankAccount.changeAmount(amount);
     }
 
-    public void getCentralBank() {
+    private void getCentralBank() {
         // Locate registry at IP address and port number
         Registry registry;
         try {

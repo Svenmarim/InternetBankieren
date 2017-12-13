@@ -1,14 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.Screens.BankAccount"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="screenBankAccount" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller">
+   <children>
+      <Label layoutX="30.0" layoutY="24.0" text="From">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="81.0" layoutY="13.0" prefHeight="38.0" prefWidth="486.0" style="-fx-border-color: black; -fx-border-radius: 5;">
+         <children>
+            <Label fx:id="lbName" prefHeight="16.0" prefWidth="181.0" text="Sven de Vries">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="lbIban" prefHeight="16.0" prefWidth="238.0" text="NL56ABNA0123456789">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbAmount" style="-fx-alignment: right;" text="€ 50,-">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+      </HBox>
+      <Button layoutX="27.0" layoutY="70.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="30.0" prefWidth="125.0" style="-fx-background-radius: 5;" text="Account">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="168.0" layoutY="70.0" mnemonicParsing="false" onAction="#openLimits" prefHeight="30.0" prefWidth="125.0" style="-fx-background-radius: 5;" text="Limits">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="306.0" layoutY="70.0" mnemonicParsing="false" onAction="#openAddressBook" prefHeight="30.0" prefWidth="125.0" style="-fx-background-radius: 5;" text="Address book">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="442.0" layoutY="70.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="125.0" style="-fx-background-radius: 5;" text="Logout">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="442.0" layoutY="108.0" mnemonicParsing="false" onAction="#openTransaction" prefHeight="30.0" prefWidth="125.0" style="-fx-background-radius: 5;" text="New transaction">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="241.0" layoutY="146.0" text="Transaction history">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tabelTransactions" layoutX="27.0" layoutY="171.0" prefHeight="208.0" prefWidth="544.0">
+        <columns>
+          <TableColumn prefWidth="93.0" text="Date" />
+          <TableColumn prefWidth="185.0" text="IBAN" />
+            <TableColumn prefWidth="101.0" text="Amount" />
+            <TableColumn prefWidth="164.0" text="Description" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>

@@ -73,7 +73,7 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public Session loginClient(String iban, String hashedPassword) throws RemoteException {
+    public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
         return null;
     }
 
@@ -83,7 +83,7 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public void logOutClient(Session session) throws RemoteException {
+    public void logOutClient(IBankForClient session) throws RemoteException {
 
     }
 

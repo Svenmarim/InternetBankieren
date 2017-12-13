@@ -4,6 +4,7 @@ import Shared.*;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
 public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IRemotePublisherForDomain, IRemotePublisherForListener {
     private String name;
     private String shortcut;
+    private List<IBankForClient> sessions;
 
     @Override
     public String getName() {
@@ -30,16 +32,19 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     public Bank(String name, String shortcut) throws RemoteException{
         this.name = name;
         this.shortcut = shortcut;
+        this.sessions = new ArrayList<>();
     }
 
     @Override
-    public Session loginClient(String iban, String hashedPassword) throws RemoteException {
+    public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
+        //TODO get bank account details from database
+//        return new Session();
         return null;
     }
 
     @Override
-    public void logOutClient(Session session) throws RemoteException {
-
+    public void logOutClient(IBankForClient session) throws RemoteException {
+        sessions.remove(session);
     }
 
     @Override

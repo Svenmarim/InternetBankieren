@@ -28,14 +28,14 @@ public interface IBankForCentralBank extends Remote {
      * @return Current session for client to work with
      * @throws RemoteException for exception with RMI
      */
-    Session loginClient(String iban, String hashedPassword) throws RemoteException;
+    IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException;
 
     /**
      * Method for logging out the client
      * @param session The session to log out with
      * @throws RemoteException for exception with RMI
      */
-    void logOutClient(Session session) throws RemoteException;
+    void logOutClient(IBankForClient session) throws RemoteException;
 
     /**
      * Method to send the transaction from central bank to bank

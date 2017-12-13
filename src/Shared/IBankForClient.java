@@ -35,6 +35,11 @@ public interface IBankForClient extends Remote {
     void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
 
     /**
+     * Method to delete own bank account
+     */
+    void deleteBankAccount();
+
+    /**
      * Method for changing the limits of an bank account
      * @param limitIn The limit of transfering money inside your addressbook
      * @param limitOut The limit of transfering money outside your addressbook
@@ -70,7 +75,7 @@ public interface IBankForClient extends Remote {
      * @return If the request is succeeded or not
      * @throws RemoteException for exception with RMI
      */
-    boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description) throws RemoteException;
+    boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) throws RemoteException;
 
     /**
      * Method for receiving an tranfer from some other account

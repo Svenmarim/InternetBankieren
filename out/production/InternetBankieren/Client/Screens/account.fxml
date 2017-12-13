@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.Screens.Account"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="screenEditAccount" prefHeight="258.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller">
+    <children>
+        <PasswordField fx:id="tbPassword" layoutX="142.0" layoutY="20.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <PasswordField fx:id="tbRepeatPassword" layoutX="142.0" layoutY="65.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <TextField fx:id="tbFirstName" layoutX="142.0" layoutY="112.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <TextField fx:id="tbLastName" layoutX="142.0" layoutY="154.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <TextField fx:id="tbPostalCode" layoutX="431.0" layoutY="20.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <TextField fx:id="tbHouseNumber" layoutX="431.0" layoutY="65.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <DatePicker fx:id="dtpDateOfBirth" layoutX="431.0" layoutY="112.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <TextField fx:id="tbEmail" layoutX="431.0" layoutY="155.0" prefHeight="25.0" prefWidth="136.0" style="-fx-background-radius: 5;" />
+        <Label layoutX="63.0" layoutY="24.0" text="Password">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="16.0" layoutY="69.0" text="Repeat password">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="61.0" layoutY="116.0" text="First name">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="61.0" layoutY="159.0" text="Last name">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="339.0" layoutY="24.0" text="Postal code">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="322.0" layoutY="69.0" text="House number">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="338.0" layoutY="116.0" text="Date of birth">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="372.0" layoutY="160.0" text="E-mail">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+      <Button layoutX="271.0" layoutY="209.0" mnemonicParsing="false" onAction="#deleteBankAccount" prefHeight="26.0" prefWidth="83.0" style="-fx-background-radius: 5;" text="Delete">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+        <Button layoutX="378.0" layoutY="209.0" mnemonicParsing="false" onAction="#editBankAccount" prefHeight="26.0" prefWidth="83.0" style="-fx-background-radius: 5;" text="Change">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="484.0" layoutY="209.0" mnemonicParsing="false" onAction="#cancelToBankAccount" prefHeight="26.0" prefWidth="83.0" style="-fx-background-radius: 5;" text="Cancel">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
 </AnchorPane>
