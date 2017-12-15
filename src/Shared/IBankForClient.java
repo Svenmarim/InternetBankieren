@@ -37,7 +37,7 @@ public interface IBankForClient extends Remote {
     /**
      * Method to delete own bank account
      */
-    void deleteBankAccount();
+    void deleteBankAccount() throws RemoteException;
 
     /**
      * Method for changing the limits of an bank account

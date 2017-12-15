@@ -35,7 +35,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="245.0" layoutY="208.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="135.0" style="-fx-background-radius: 5;" text="Logout">
+      <Button layoutX="245.0" layoutY="208.0" mnemonicParsing="false" onAction="#logoutAdmin" prefHeight="30.0" prefWidth="135.0" style="-fx-background-radius: 5;" text="Logout">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

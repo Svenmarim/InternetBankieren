@@ -22,53 +22,26 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    public boolean login(String iban, String password) {
-        if (iban.equals("admin")){
-            try {
-                admin = centralBank.loginAdmin(hashPassword(password));
-                return admin;
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                return false;
-            }
-        } else{
-            try {
-                session = centralBank.loginClient(iban, hashPassword(password));
-                if(session != null){
-                    return true;
-                } else{
-                    return false;
-                }
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-    }
-
-    public void logout() {
-        if (admin){
-            try {
-                centralBank.logOutAdmin();
-                admin = false;
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+    public void login(String iban, String password) throws RemoteException {
+        if (iban.equals("admin")) {
+            admin = centralBank.loginAdmin(hashPassword(password));
         } else {
-            try {
-                centralBank.logOutClient(session);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            session = centralBank.loginClient(iban, hashPassword(password));
         }
     }
 
-    public void createBank(String name, String shortcut) {
-        try {
-            centralBank.createBank(name, shortcut);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+    public void logout() throws RemoteException {
+        if (admin) {
+            centralBank.logOutAdmin();
+            admin = false;
+        } else {
+            centralBank.logOutClient(session);
+            this.session = null;
         }
+    }
+
+    public void createBank(String name, String shortcut) throws RemoteException {
+        centralBank.createBank(name, shortcut);
     }
 
     public void deleteBank(String bankName) {
@@ -87,8 +60,9 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    public void deleteBankAccount(){
+    public void deleteBankAccount() throws RemoteException {
         session.deleteBankAccount();
+        centralBank.logOutClient(session);
         this.session = null;
     }
 
