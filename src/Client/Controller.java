@@ -1,6 +1,9 @@
 package Client;
 
+import CentralBankServer.CentralBank;
 import Shared.Address;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,7 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -60,10 +66,22 @@ public class Controller {
     private Client client;
 
     public Controller() {
+        //Print ip address and port number for registry
+        InetAddress localhost = null;
+        try {
+            localhost = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Client: IP Address: " + localhost.getHostAddress());
+        System.out.println("Client: Port number: 1097");
+
         try {
             client = new Client();
+            System.out.println("Client: Client created");
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Client: Cannot create Client");
+            System.out.println("Client: RemoteException: " + e.getMessage());
         }
     }
 
@@ -71,52 +89,54 @@ public class Controller {
         String iban = tbIban.getText();
         String password = tbPassword.getText();
         try {
-            client.login(iban, password);
+            if (client.login(iban, password)){
+                if (iban.equals("admin")) {
+                    changeScreenTo(Screens.MANAGEBANKS);
+                } else {
+                    changeScreenTo(Screens.BANKACCOUNT);
+                }
+            } else {
+                showErrorMessage("Wrong username or password.");
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
-            //TODO show error message
-        }
-        if (iban.equals("admin")) {
-            changeScreens(Screens.MANAGEBANKS);
-        } else {
-            changeScreens(Screens.BANKACCOUNT);
         }
     }
 
     public void logoutClient() {
         try {
             client.logout();
+            changeScreenTo(Screens.LOGIN);
         } catch (RemoteException e) {
             e.printStackTrace();
-            //TODO show error message
         }
-        changeScreens(Screens.LOGIN);
     }
 
     public void logoutAdmin() {
         try {
             client.logout();
+            changeScreenTo(Screens.LOGIN);
         } catch (RemoteException e) {
             e.printStackTrace();
-            //TODO show error message
         }
-        changeScreens(Screens.LOGIN);
     }
 
     public void cancelToLogin() {
-        changeScreens(Screens.LOGIN);
+        changeScreenTo(Screens.LOGIN);
     }
 
     public void createBank() {
         String name = tbBankName.getText();
         String shortcut = tbShortcut.getText();
         try {
-            client.createBank(name, shortcut);
+            if (client.createBank(name, shortcut)){
+                changeScreenTo(Screens.MANAGEBANKS);
+            } else {
+                showErrorMessage("Bank name or shortcut already excist.");
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
-            //TODO show error message
         }
-        changeScreens(Screens.MANAGEBANKS);
     }
 
     public void deleteBank() {
@@ -136,8 +156,16 @@ public class Controller {
         Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         String email = tbEmail.getText();
         String bankName = cmbbank.getValue().toString();
-        client.createBankAccount(bankName, password, passwordRepeat, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
-        changeScreens(Screens.BANKACCOUNT);
+        if (password.equals(passwordRepeat) && !password.equals("")){
+            if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && !bankName.equals("")){
+                client.createBankAccount(bankName, password, passwordRepeat, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+                changeScreenTo(Screens.BANKACCOUNT);
+            } else {
+                showErrorMessage("Personal details are not valid or there is no bank selected.");
+            }
+        } else {
+            showErrorMessage("Password can not be empty or is not the same as repeated password.");
+        }
     }
 
     public void editBankAccount() {
@@ -149,29 +177,40 @@ public class Controller {
         int houseNumber = Integer.parseInt(tbHouseNumber.getText());
         Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         String email = tbEmail.getText();
-        client.editBankAccount(password, passwordRepeat, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
-        changeScreens(Screens.BANKACCOUNT);
+        if (password.equals(passwordRepeat) && !password.equals("")){
+            if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("")){
+                client.editBankAccount(password, passwordRepeat, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+                changeScreenTo(Screens.BANKACCOUNT);
+            } else {
+                showErrorMessage("Personal details are not valid.");
+            }
+        } else {
+            showErrorMessage("Password can not be empty or is not the same as repeated password.");
+        }
     }
 
     public void deleteBankAccount() {
         try {
             client.deleteBankAccount();
+            changeScreenTo(Screens.LOGIN);
         } catch (RemoteException e) {
             e.printStackTrace();
-            //TODO show error message
         }
-        changeScreens(Screens.LOGIN);
     }
 
     public void cancelToBankAccount() {
-        changeScreens(Screens.BANKACCOUNT);
+        changeScreenTo(Screens.BANKACCOUNT);
     }
 
     public void editBankAccountsLimits() {
         double limitIn = Double.parseDouble(tbEuroIn.getText() + "," + tbCentIn.getText());
         double limitOut = Double.parseDouble(tbEuroOut.getText() + "," + tbCentOut.getText());
-        client.editBankAccountsLimits(limitIn, limitOut);
-        changeScreens(Screens.BANKACCOUNT);
+        if (limitIn > 0 && limitOut > 0){
+            client.editBankAccountsLimits(limitIn, limitOut);
+            changeScreenTo(Screens.BANKACCOUNT);
+        } else {
+            showErrorMessage("Limits can not be 0.");
+        }
     }
 
     public void deleteBankAccountsAddress() {
@@ -185,15 +224,19 @@ public class Controller {
         String ibanReceiver = tbIbanReceiver.getText();
         String description = tbDescription.getText();
         boolean addToAddress = cbAddToAddressBook.isSelected();
-        client.makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
-        changeScreens(Screens.BANKACCOUNT);
+        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
+            client.makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
+            changeScreenTo(Screens.BANKACCOUNT);
+        } else {
+            showErrorMessage("Amount and receiver details can not be empty.");
+        }
     }
 
     public void chooseAddress() {
         Address address = (Address) tabelAddresses.getSelectionModel().getSelectedItem();
         tbNameReceiver.setText(address.getName());
         tbIbanReceiver.setText(address.getIban());
-        changeScreens(Screens.NEWTRANSACTION);
+        changeScreenTo(Screens.NEWTRANSACTION);
     }
 
     public void makeBankAccountsRequest() {
@@ -202,36 +245,40 @@ public class Controller {
         String ibanReceiver = tbIbanReceiver.getText();
         String description = tbDescription.getText();
         boolean addToAddress = cbAddToAddressBook.isSelected();
-        client.makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress);
-        changeScreens(Screens.BANKACCOUNT);
+        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
+            client.makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress);
+            changeScreenTo(Screens.BANKACCOUNT);
+        } else {
+            showErrorMessage("Amount and receiver details can not be empty.");
+        }
     }
 
     public void openCreateAccount() {
-        changeScreens(Screens.CREATEBANKACCOUNT);
+        changeScreenTo(Screens.CREATEBANKACCOUNT);
     }
 
     public void openAccount() {
-        changeScreens(Screens.ACCOUNT);
+        changeScreenTo(Screens.ACCOUNT);
     }
 
     public void openLimits() {
-        changeScreens(Screens.LIMITS);
+        changeScreenTo(Screens.LIMITS);
     }
 
     public void openAddressBook() {
-        changeScreens(Screens.ADDRESSBOOK);
+        changeScreenTo(Screens.ADDRESSBOOK);
     }
 
     public void openAddressBookTransaction() {
-        changeScreens(Screens.ADDRESSBOOKTRANSACTION);
+        changeScreenTo(Screens.ADDRESSBOOKTRANSACTION);
     }
 
     public void openTransaction() {
-        changeScreens(Screens.NEWTRANSACTION);
+        changeScreenTo(Screens.NEWTRANSACTION);
     }
 
     public void openCreateBank() {
-        changeScreens(Screens.CREATEBANK);
+        changeScreenTo(Screens.CREATEBANK);
     }
 
     private void initAccountScreen() throws IOException {
@@ -241,7 +288,7 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.BANKACCOUNT));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.BANKACCOUNT));
         stage.show();
     }
 
@@ -252,7 +299,7 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.BANKACCOUNT));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.BANKACCOUNT));
         stage.show();
     }
 
@@ -263,7 +310,7 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.NEWTRANSACTION));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.NEWTRANSACTION));
         stage.show();
     }
 
@@ -285,7 +332,7 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.MANAGEBANKS));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.MANAGEBANKS));
         stage.show();
     }
 
@@ -296,7 +343,7 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.LOGIN));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.LOGIN));
         stage.show();
     }
 
@@ -307,7 +354,7 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.BANKACCOUNT));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.BANKACCOUNT));
         stage.show();
     }
 
@@ -340,11 +387,19 @@ public class Controller {
         stage.setResizable(false);
         stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         stage.setScene(new Scene(root));
-        stage.setOnCloseRequest(event -> changeScreens(Screens.BANKACCOUNT));
+        stage.setOnCloseRequest(event -> changeScreenTo(Screens.BANKACCOUNT));
         stage.show();
     }
 
-    private void changeScreens(Screens screen) {
+    private void showErrorMessage(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("ERROR!");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void changeScreenTo(Screens screen) {
         if (screenEditAccount != null) {
             Stage currentStage = (Stage) screenEditAccount.getScene().getWindow();
             currentStage.close();
@@ -412,7 +467,6 @@ public class Controller {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            //TODO show error message
         }
     }
 }

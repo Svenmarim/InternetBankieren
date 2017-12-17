@@ -12,15 +12,17 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
  */
 public class CentralBank extends UnicastRemoteObject implements ICentralBankForBank, ICentralBankForClient {
-    private IBankForCentralBank bank;
+    private DatabaseCentralBank database;
+    private List<IBankForCentralBank> banks;
 
-    public static void main(String[] args) throws RemoteException {
-        //Print port number for registry
+    public static void main(String[] args) {
+        //Print ip address and port number for registry
         InetAddress localhost = null;
         try {
             localhost = InetAddress.getLocalHost();
@@ -28,6 +30,7 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
             System.out.println(e.getMessage());
         }
         System.out.println("CentralBank: IP Address: " + localhost.getHostAddress());
+        System.out.println("CentralBank: Port number: 1099");
 
         try {
             CentralBank centralBank = new CentralBank();
@@ -39,6 +42,57 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     public CentralBank() throws RemoteException {
+        this.database = new DatabaseCentralBank();
+        createRegistry();
+    }
+
+    @Override
+    public void createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
+
+    }
+
+    @Override
+    public boolean loginAdmin(String hashedPassword) {
+        return database.loginAdmin(hashedPassword);
+    }
+
+    @Override
+    public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
+        String bankShortcut = iban.substring(4, 8);
+        for(IBankForCentralBank bank : banks){
+            if(bank.getShortcut().equals(bankShortcut)){
+                return bank.loginClient(iban, hashedPassword);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void logOutAdmin() throws RemoteException {
+
+    }
+
+    @Override
+    public void logOutClient(IBankForClient session) throws RemoteException {
+
+    }
+
+    @Override
+    public boolean createBank(String name, String shortcut) throws RemoteException {
+        return false;
+    }
+
+    @Override
+    public void deleteBank(Bank bank) throws RemoteException {
+
+    }
+
+    @Override
+    public boolean transaction(String iban, String name, Transaction transaction) throws RemoteException {
+        return false;
+    }
+
+    private void createRegistry(){
         //Create registry at port number
         Registry registry = null;
         try {
@@ -60,45 +114,5 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
             System.out.println("CentralBank: Port already in use. \nCentralBank: Please check if the server isn't already running");
             System.out.println("CentralBank: NullPointerException: " + e.getMessage());
         }
-    }
-
-    @Override
-    public void createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
-
-    }
-
-    @Override
-    public boolean loginAdmin(String hashedPassword) throws RemoteException {
-        return false;
-    }
-
-    @Override
-    public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public void logOutAdmin() throws RemoteException {
-
-    }
-
-    @Override
-    public void logOutClient(IBankForClient session) throws RemoteException {
-
-    }
-
-    @Override
-    public void createBank(String name, String shortcut) throws RemoteException {
-
-    }
-
-    @Override
-    public void deleteBank(Bank bank) throws RemoteException {
-
-    }
-
-    @Override
-    public boolean transaction(String iban, String name, Transaction transaction) throws RemoteException {
-        return false;
     }
 }

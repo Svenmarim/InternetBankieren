@@ -4,9 +4,16 @@ import Shared.Address;
 import BankServer.Bank;
 import Shared.*;
 
+import javax.xml.bind.DatatypeConverter;
 import java.beans.PropertyChangeEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 /**
@@ -19,14 +26,17 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private IRemotePublisherForListener publisherForListener;
 
     public Client() throws RemoteException {
-
+        createRegistry();
+        getCentralBank();
     }
 
-    public void login(String iban, String password) throws RemoteException {
+    public boolean login(String iban, String password) throws RemoteException {
         if (iban.equals("admin")) {
             admin = centralBank.loginAdmin(hashPassword(password));
+            return admin;
         } else {
             session = centralBank.loginClient(iban, hashPassword(password));
+            return session != null;
         }
     }
 
@@ -40,8 +50,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         }
     }
 
-    public void createBank(String name, String shortcut) throws RemoteException {
-        centralBank.createBank(name, shortcut);
+    public boolean createBank(String name, String shortcut) throws RemoteException {
+        return centralBank.createBank(name, shortcut);
     }
 
     public void deleteBank(String bankName) {
@@ -64,10 +74,6 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         session.deleteBankAccount();
         centralBank.logOutClient(session);
         this.session = null;
-    }
-
-    private String hashPassword(String password) {
-        return null;
     }
 
     public void editBankAccountsLimits(double limitIn, double limitOut) {
@@ -93,5 +99,70 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     @Override
     public void propertyChange(PropertyChangeEvent event) throws RemoteException {
 
+    }
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] digest = md.digest();
+            return DatatypeConverter.printHexBinary(digest).toUpperCase();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void createRegistry(){
+        //Create registry at port number
+        Registry registry = null;
+        try {
+            registry = LocateRegistry.createRegistry(1097);
+            System.out.println("Client: Registry created");
+        } catch (RemoteException e) {
+            System.out.println("Client: Cannot create registry");
+            System.out.println("Client: RemoteException: " + e.getMessage());
+        }
+
+        //Bind using registry
+        try {
+            registry.rebind("Client", this);
+            System.out.println("Client: Client bound to registry");
+        } catch (RemoteException e) {
+            System.out.println("Client: Cannot bind Client");
+            System.out.println("Client: RemoteException: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Client: Port already in use. \nClient: Please check if the server isn't already running");
+            System.out.println("Client: NullPointerException: " + e.getMessage());
+        }
+    }
+
+    private void getCentralBank(){
+        // Locate registry at IP address and port number
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry("localhost", 1099);
+            System.out.println("Client: Registry located");
+        } catch (RemoteException ex) {
+            System.out.println("Client: Cannot locate registry");
+            System.out.println("Client: RemoteException: " + ex.getMessage());
+            registry = null;
+        }
+
+        //Get CentralBank from registry
+        if (registry != null) {
+            try {
+                centralBank = (ICentralBankForClient) registry.lookup("CentralBank");
+                System.out.println("Client: CentralBank retrieved");
+            } catch (RemoteException e) {
+                System.out.println("Client: RemoteException on ICentralBankForClient");
+                System.out.println("Client: RemoteException: " + e.getMessage());
+                System.exit(0);
+            } catch (NotBoundException e) {
+                System.out.println("Client: Cannot bind ICentralBankForClient");
+                System.out.println("Client: NotBoundException: " + e.getMessage());
+                System.exit(0);
+            }
+        }
     }
 }

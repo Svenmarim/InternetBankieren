@@ -96,12 +96,13 @@ public class BankAccount {
         this.addressbook.remove(address);
     }
 
-    public void makeTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
+    public void makeTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) {
+        amount -= amount + amount;
         changeAmount(amount);
         transactionHistory.add(new Transaction(new Date(), ibanReceiver, amount, description));
 
         if(addToAddress){
-            addressbook.add(new Address(name, ibanReceiver));
+            addressbook.add(new Address(nameReceiver, ibanReceiver));
         }
     }
 

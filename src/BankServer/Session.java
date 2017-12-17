@@ -59,11 +59,13 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     }
 
     @Override
-    public boolean makeBankAccountsTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
-        //TODO Call central bank transaction method
-        //if true then continue
-        bankAccount.makeTransaction(amount, name, ibanReceiver, description, addToAddress);
-        return true;
+    public boolean makeBankAccountsTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
+        Transaction transaction = new Transaction(new Date(), bankAccount.getIban(), amount, description);
+        if (centralBank.transaction(ibanReceiver, nameReceiver, transaction)){
+            bankAccount.makeTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -85,31 +87,27 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         // Locate registry at IP address and port number
         Registry registry;
         try {
-            registry = LocateRegistry.getRegistry("192.168.42.1", 1099);
+            registry = LocateRegistry.getRegistry("localhost", 1099);
+            System.out.println("Session: Registry located");
         } catch (RemoteException ex) {
             System.out.println("Session: Cannot locate registry");
             System.out.println("Session: RemoteException: " + ex.getMessage());
             registry = null;
         }
 
-        // Print result locating registry
-        if (registry != null) {
-            System.out.println("Session: Registry located");
-        } else {
-            System.out.println("Session: Cannot locate registry");
-            System.out.println("Session: Registry is null pointer");
-        }
-
-        //Bind using registry
+        //Get CentralBank from registry
         if (registry != null) {
             try {
                 centralBank = (ICentralBankForBank) registry.lookup("CentralBank");
+                System.out.println("Session: CentralBank retrieved");
             } catch (RemoteException e) {
+                System.out.println("Session: RemoteException on ICentralBankForBank");
                 System.out.println("Session: RemoteException: " + e.getMessage());
-                centralBank = null;
+                System.exit(0);
             } catch (NotBoundException e) {
+                System.out.println("Session: Cannot bind ICentralBankForBank");
                 System.out.println("Session: NotBoundException: " + e.getMessage());
-                centralBank = null;
+                System.exit(0);
             }
         }
     }

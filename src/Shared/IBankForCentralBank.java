@@ -13,13 +13,13 @@ public interface IBankForCentralBank extends Remote {
      * Method for getting the name of the bank
      * @return The name of the bank
      */
-    String getName();
+    String getName() throws RemoteException;
 
     /**
      * Method for getting the shortcut of the bank
      * @return The shortcut of the bank
      */
-    String getShortcut();
+    String getShortcut() throws RemoteException;
 
     /**
      * Method to log the client in on the app

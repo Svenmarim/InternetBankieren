@@ -1,8 +1,18 @@
 package BankServer;
 
 import Shared.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +24,8 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     private String name;
     private String shortcut;
     private List<IBankForClient> sessions;
+    private DatabaseBankServer database;
+    private IRemotePropertyListener client;
 
     @Override
     public String getName() {
@@ -25,14 +37,11 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
         return shortcut;
     }
 
-    public static void main(String[] args) throws RemoteException {
-
-    }
-
-    public Bank(String name, String shortcut) throws RemoteException{
+    public Bank(String name, String shortcut) throws RemoteException {
         this.name = name;
         this.shortcut = shortcut;
         this.sessions = new ArrayList<>();
+        this.database = new DatabaseBankServer();
     }
 
     @Override
@@ -80,5 +89,39 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     @Override
     public void unsubscribeRemoteListener(IRemotePropertyListener listener, String property) throws RemoteException {
 
+    }
+
+    public void createRegistry() {
+        //Create registry at port number
+        Registry registry = null;
+        try {
+            registry = LocateRegistry.createRegistry(1098);
+            System.out.println("Bank: Registry created");
+        } catch (RemoteException e) {
+            System.out.println("Bank: Cannot create registry");
+            try {
+                registry = LocateRegistry.getRegistry("localhost", 1098);
+                System.out.println("Bank: Registry located");
+            } catch (RemoteException e1) {
+                System.out.println("Bank: Cannot locate registry");
+            }
+        }
+
+        //Bind using registry
+        try {
+            registry.rebind(name, this);
+            System.out.println("Bank: Bank bound to registry");
+        } catch (RemoteException e) {
+            System.out.println("Bank: Cannot bind Bank");
+            System.out.println("Bank: RemoteException: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Bank: Port already in use. \nBank: Please check if the server isn't already running");
+            System.out.println("Bank: NullPointerException: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

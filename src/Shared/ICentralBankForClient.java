@@ -61,7 +61,7 @@ public interface ICentralBankForClient extends Remote {
      * @param shortcut The shortcut of the bank
      * @throws RemoteException for exception with RMI
      */
-    void createBank(String name, String shortcut) throws RemoteException;
+    boolean createBank(String name, String shortcut) throws RemoteException;
 
     /**
      * Method to delete an existing bank
