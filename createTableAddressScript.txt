@@ -1,0 +1,10 @@
+CREATE TABLE `bankieren`.`abna_address` (
+  `iban` NVARCHAR(50) NOT NULL,
+  `bankAccount_iban` NVARCHAR(50) NOT NULL,
+  `name` NVARCHAR(50) NOT NULL,
+  PRIMARY KEY (`iban`),
+CONSTRAINT `bankAccount_address`
+  FOREIGN KEY (`bankAccount_iban`)
+  REFERENCES `bankieren`.`abna_bankaccount` (`iban`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION);

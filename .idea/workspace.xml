@@ -1,42 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4db8163e-3351-4fbd-af2c-ec8130f5ca11" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/InternetBankieren.iml" afterPath="$PROJECT_DIR$/InternetBankieren.iml" />
-      <change beforePath="$PROJECT_DIR$/ideal_logo.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/account.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/account.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/addressBook.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/addressBook.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/addressBookTransaction.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/addressBookTransaction.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/bankAccount.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/bankAccount.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/createBank.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/createBank.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/createBankAccount.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/createBankAccount.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/limits.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/limits.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/login.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/login.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/manageBanks.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/manageBanks.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/newTransaction.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/newTransaction.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/BankServer/Bank.java" afterPath="$PROJECT_DIR$/src/BankServer/Bank.java" />
-      <change beforePath="$PROJECT_DIR$/src/BankServer/BankAccount.java" afterPath="$PROJECT_DIR$/src/BankServer/BankAccount.java" />
-      <change beforePath="$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java" afterPath="$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java" />
-      <change beforePath="$PROJECT_DIR$/src/BankServer/Session.java" afterPath="$PROJECT_DIR$/src/BankServer/Session.java" />
-      <change beforePath="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" afterPath="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" />
-      <change beforePath="$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java" afterPath="$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" afterPath="$PROJECT_DIR$/src/Client/Client.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Controller.java" afterPath="$PROJECT_DIR$/src/Client/Controller.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Main.java" afterPath="$PROJECT_DIR$/src/Client/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/account.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/account.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/addressBook.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/addressBook.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/addressBookTransaction.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/addressBookTransaction.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/bankAccount.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/bankAccount.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/createBank.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/createBank.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/createBankAccount.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/createBankAccount.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/limits.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/limits.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/login.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/login.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/manageBanks.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/manageBanks.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Screens/newTransaction.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/newTransaction.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" afterPath="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/ICentralBankForClient.java" afterPath="$PROJECT_DIR$/src/Shared/ICentralBankForClient.java" />
-    </list>
+    <list default="true" id="4db8163e-3351-4fbd-af2c-ec8130f5ca11" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -97,7 +62,6 @@
         <option value="$PROJECT_DIR$/src/BankServer/BankAccount.java" />
         <option value="$PROJECT_DIR$/src/BankServer/Session.java" />
         <option value="$PROJECT_DIR$/src/Client/Controller.java" />
-        <option value="$PROJECT_DIR$/src/Client/Client.java" />
         <option value="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" />
         <option value="$PROJECT_DIR$/src/Client/Main.java" />
         <option value="$PROJECT_DIR$/src/Client/Screens/addressBook.fxml" />
@@ -116,6 +80,9 @@
         <option value="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" />
         <option value="$PROJECT_DIR$/src/BankServer/Bank.java" />
         <option value="$PROJECT_DIR$/src/BankServer/MainBank.java" />
+        <option value="$PROJECT_DIR$/createTableBankAccountScript.txt" />
+        <option value="$PROJECT_DIR$/createTableAddressScript.txt" />
+        <option value="$PROJECT_DIR$/src/Client/Client.java" />
       </list>
     </option>
   </component>
@@ -188,13 +155,6 @@
               <item name="InternetBankieren" type="b2602c69:ProjectViewProjectNode" />
               <item name="InternetBankieren" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="Screens" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="InternetBankieren" type="b2602c69:ProjectViewProjectNode" />
-              <item name="InternetBankieren" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Shared" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -234,7 +194,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainBank">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -401,12 +361,12 @@
       <workItem from="1513272047088" duration="61000" />
       <workItem from="1513272281621" duration="9514000" />
       <workItem from="1513375210024" duration="252000" />
-      <workItem from="1513512982267" duration="20814000" />
+      <workItem from="1513512982267" duration="22741000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84183000" />
+    <option name="totallyTimeSpent" value="86110000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -424,7 +384,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17030849" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17030849" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -448,65 +408,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="32" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Client/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#3811#3812#0" expanded="true" />
-            <element signature="e#3856#3857#0" expanded="true" />
-            <element signature="e#7305#7306#0" expanded="true" />
-            <element signature="e#7356#7357#0" expanded="true" />
-            <element signature="e#9795#9796#0" expanded="true" />
-            <element signature="e#9852#9853#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#9932#9933#0" expanded="true" />
-            <element signature="e#9964#9965#0" expanded="true" />
-            <element signature="e#10010#10011#0" expanded="true" />
-            <element signature="e#10047#10048#0" expanded="true" />
-            <element signature="e#10098#10099#0" expanded="true" />
-            <element signature="e#10146#10147#0" expanded="true" />
-            <element signature="e#10208#10209#0" expanded="true" />
-            <element signature="e#10245#10246#0" expanded="true" />
-            <element signature="e#10299#10300#0" expanded="true" />
-            <element signature="e#10335#10336#0" expanded="true" />
-            <element signature="e#10385#10386#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#3811#3812#0" expanded="true" />
-            <element signature="e#3856#3857#0" expanded="true" />
-            <element signature="e#7305#7306#0" expanded="true" />
-            <element signature="e#7356#7357#0" expanded="true" />
-            <element signature="e#9795#9796#0" expanded="true" />
-            <element signature="e#9852#9853#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#9932#9933#0" expanded="true" />
-            <element signature="e#9964#9965#0" expanded="true" />
-            <element signature="e#10010#10011#0" expanded="true" />
-            <element signature="e#10047#10048#0" expanded="true" />
-            <element signature="e#10098#10099#0" expanded="true" />
-            <element signature="e#10146#10147#0" expanded="true" />
-            <element signature="e#10208#10209#0" expanded="true" />
-            <element signature="e#10245#10246#0" expanded="true" />
-            <element signature="e#10299#10300#0" expanded="true" />
-            <element signature="e#10335#10336#0" expanded="true" />
-            <element signature="e#10385#10386#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
@@ -711,17 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CentralBankServer/CentralBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding>
-            <element signature="e#1886#1887#0" expanded="false" />
-            <element signature="e#1944#1945#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -797,17 +692,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Screens/limits.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Screens/login.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
@@ -899,17 +783,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
+    <entry file="file://$PROJECT_DIR$/src/BankServer/Bank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="138" column="0" lean-forward="true" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+        <state relative-caret-position="217">
+          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding>
+            <element signature="e#3730#3731#0" expanded="true" />
+            <element signature="e#3757#3758#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BankServer/MainBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="57" column="23" lean-forward="true" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
+          <folding>
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#603#604#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CentralBankServer/CentralBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Screens/login.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
+        <state relative-caret-position="2956">
           <caret line="423" column="41" lean-forward="true" selection-start-line="423" selection-start-column="41" selection-end-line="423" selection-end-column="41" />
           <folding>
             <element signature="e#3811#3812#0" expanded="true" />
@@ -934,25 +851,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankServer/Bank.java">
+    <entry file="file://$PROJECT_DIR$/createTableBankAccountScript.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding>
-            <element signature="e#3730#3731#0" expanded="true" />
-            <element signature="e#3757#3758#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankServer/MainBank.java">
+    <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="57" column="23" lean-forward="true" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
-          <folding>
-            <element signature="e#575#576#0" expanded="true" />
-            <element signature="e#603#604#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="374">
+          <caret line="36" column="16" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createTableAddressScript.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>

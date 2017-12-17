@@ -1,0 +1,12 @@
+CREATE TABLE `bankieren`.`abna_bankaccount` (
+  `iban` NVARCHAR(50) NOT NULL,
+  `amount` DOUBLE NOT NULL,
+  `firstName` NVARCHAR(50) NOT NULL,
+  `lastName` NVARCHAR(50) NOT NULL,
+  `postalCode` NVARCHAR(50) NOT NULL,
+  `houseNumber` INT NOT NULL,
+  `dateOfBirth` DATETIME NOT NULL,
+  `email` NVARCHAR(50) NOT NULL,
+  `limitIn` DOUBLE NOT NULL,
+  `limitOut` DOUBLE NOT NULL,
+  PRIMARY KEY (`iban`));
