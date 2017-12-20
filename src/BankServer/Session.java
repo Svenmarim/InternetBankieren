@@ -20,17 +20,17 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
 
     @Override
     public Date getLastActivity() {
-        return lastActivity;
+        return this.lastActivity;
     }
 
     @Override
     public ArrayList<Address> getAddressbook() {
-        return bankAccount.getAddressbook();
+        return this.bankAccount.getAddressbook();
     }
 
     @Override
     public ArrayList<Transaction> getTransactionHistory() {
-        return bankAccount.getTransactionHistory();
+        return this.bankAccount.getTransactionHistory();
     }
 
     public Session(BankAccount bankAccount) throws RemoteException {
@@ -41,36 +41,41 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
 
     @Override
     public boolean isSessionValid() {
-        //TODO Check if sessions last activity is longer then 5 minutes ago
-        return false;
+        //Returns false if difference is MORE then 5 minutes
+        return new Date().getTime() - lastActivity.getTime() >= 5*60*1000;
     }
 
     @Override
     public void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+        this.lastActivity = new Date();
         //TODO Edit account in database
         bankAccount.editAccount(firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
     }
 
     @Override
     public void deleteBankAccount() {
+        this.lastActivity = new Date();
         //TODO Delete account in database
         this.bankAccount = null;
     }
 
     @Override
     public void editBankAccountsLimits(double limitIn, double limitOut) {
+        this.lastActivity = new Date();
         //TODO Edit limits in database
         bankAccount.editLimits(limitIn, limitOut);
     }
 
     @Override
     public void deleteBankAccountsAddress(Address address) {
+        this.lastActivity = new Date();
         //TODO Delete bank accounts address in database
         bankAccount.deleteAddress(address);
     }
 
     @Override
     public boolean makeBankAccountsTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
+        this.lastActivity = new Date();
         Transaction transaction = new Transaction(new Date(), bankAccount.getIban(), amount, description);
         if (centralBank.transaction(ibanReceiver, nameReceiver, transaction)){
             bankAccount.makeTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
@@ -81,6 +86,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
 
     @Override
     public boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
+        this.lastActivity = new Date();
         return false;
     }
 

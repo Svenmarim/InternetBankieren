@@ -100,8 +100,16 @@ public class BankAccount {
         this.limitOutAddressbook = limitOut;
     }
 
+    public void addAddress(Address address){
+        this.addressbook.add(address);
+    }
+
     public void deleteAddress(Address address) {
         this.addressbook.remove(address);
+    }
+
+    public void addTransaction(Transaction transaction){
+        this.transactionHistory.add(transaction);
     }
 
     public void makeTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) {

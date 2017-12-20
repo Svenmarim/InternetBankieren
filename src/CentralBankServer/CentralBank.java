@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class CentralBank extends UnicastRemoteObject implements ICentralBankForBank, ICentralBankForSession, ICentralBankForClient {
     private DatabaseCentralBank database;
     private List<IBankForCentralBank> banks;
+    private boolean adminLoggedIn;
 
     public static void main(String[] args) {
         //Print ip address and port number for registry
@@ -42,22 +44,30 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     public CentralBank() throws RemoteException {
+        this.banks = new ArrayList<>();
         this.database = new DatabaseCentralBank();
     }
 
     @Override
-    public void createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
+    public String createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
 
+        return null; //iban
     }
 
     @Override
     public boolean loginAdmin(String hashedPassword) {
-        return database.loginAdmin(hashedPassword);
+        if(!adminLoggedIn){
+            if (database.loginAdmin(hashedPassword)){
+                this.adminLoggedIn = true;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
-        String bankShortcut = iban.substring(4, 8);
+        String bankShortcut = iban.substring(4, 8).toUpperCase();
         for(IBankForCentralBank bank : banks){
             if(bank.getShortcut().equals(bankShortcut)){
                 return bank.loginClient(iban, hashedPassword);
@@ -67,13 +77,17 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public void logOutAdmin() throws RemoteException {
-
+    public void logOutAdmin() {
+        this.adminLoggedIn = false;
     }
 
     @Override
     public void logOutClient(IBankForClient session) throws RemoteException {
-
+        for(IBankForCentralBank bank : banks){
+            if(bank.getSessions().contains(session)){
+                bank.logOutClient(session);
+            }
+        }
     }
 
     @Override

@@ -21,9 +21,10 @@ public interface ICentralBankForClient extends Remote {
      * @param houseNumber The house number of the account holder
      * @param dateOfBirth The date of birth of the account holder
      * @param email The email address of the account holder
+     * @return The generated iban number
      * @throws RemoteException for exception with RMI
      */
-    void createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
+    String createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
 
     /**
      * Method to login the admin

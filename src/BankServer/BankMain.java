@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
 /**
  * InternetBankieren Created by Sven de Vries on 17-12-2017
  */
-public class MainBank extends Application {
+public class BankMain extends Application {
     public ComboBox cmbBank;
 
     public static void main(String[] args) {

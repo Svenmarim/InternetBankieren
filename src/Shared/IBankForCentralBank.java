@@ -1,6 +1,7 @@
 package Shared;
 
 import BankServer.Session;
+import com.sun.javafx.UnmodifiableArrayList;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -22,6 +23,13 @@ public interface IBankForCentralBank extends Remote {
      * @throws RemoteException for exception with RMI
      */
     String getShortcut() throws RemoteException;
+
+    /**
+     * Method for getting all the sessions of that bank
+     * @return The list of sessions of that bank
+     * @throws RemoteException for exception with RMI
+     */
+    UnmodifiableArrayList<IBankForClient> getSessions() throws RemoteException;
 
     /**
      * Method to log the client in on the app

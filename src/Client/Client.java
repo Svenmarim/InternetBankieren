@@ -26,7 +26,6 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private IRemotePublisherForListener publisherForListener;
 
     public Client() throws RemoteException {
-        bindClientInRegistry();
         getCentralBank();
     }
 
@@ -34,10 +33,14 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         if (iban.equals("admin")) {
             admin = centralBank.loginAdmin(hashPassword(password));
             return admin;
-        } else {
+        } else if (iban.length() == 18) {
             session = centralBank.loginClient(iban, hashPassword(password));
+            if (session != null){
+                bindClientInRegistry(iban);
+            }
             return session != null;
         }
+        return false;
     }
 
     public void logout() throws RemoteException {
@@ -62,12 +65,13 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    public void createBankAccount(String bankName, String password, String passwordRepeat, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
-
+    public boolean createBankAccount(String bankName, String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
+        String iban = centralBank.createBankAccount(bankName, hashPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+        return login(iban, password);
     }
 
-    public void editBankAccount(String password, String passwordRepeat, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
-
+    public void editBankAccount(String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
+        session.editBankAccount(hashPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
     }
 
     public void deleteBankAccount() throws RemoteException {
@@ -113,7 +117,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         }
     }
 
-    private void bindClientInRegistry() {
+    private void bindClientInRegistry(String iban) {
         //Create registry at port number
         Registry registry = null;
         try {
@@ -126,7 +130,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
         //Bind using registry
         try {
-            registry.rebind("Client", this);
+            registry.rebind(iban, this);
             System.out.println("Client: Client bound to registry");
         } catch (RemoteException e) {
             System.out.println("Client: Cannot bind Client");

@@ -1,6 +1,7 @@
 package BankServer;
 
 import Shared.*;
+import com.sun.javafx.UnmodifiableArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,6 +37,11 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     @Override
     public String getShortcut() {
         return shortcut;
+    }
+
+    @Override
+    public UnmodifiableArrayList<IBankForClient> getSessions() {
+        return (UnmodifiableArrayList<IBankForClient>) sessions;
     }
 
     public Bank(String name, String shortcut) throws RemoteException {
