@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,17 +16,27 @@ import java.util.Date;
 public class Session extends UnicastRemoteObject implements IBankForClient {
     private Date lastActivity;
     private BankAccount bankAccount;
-    private ICentralBankForBank centralBank;
+    private ICentralBankForSession centralBank;
 
     @Override
     public Date getLastActivity() {
         return lastActivity;
     }
 
-    public Session(double amount, String iban, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email, double limitIn, double limitOut) throws RemoteException {
+    @Override
+    public ArrayList<Address> getAddressbook() {
+        return bankAccount.getAddressbook();
+    }
+
+    @Override
+    public ArrayList<Transaction> getTransactionHistory() {
+        return bankAccount.getTransactionHistory();
+    }
+
+    public Session(BankAccount bankAccount) throws RemoteException {
+        this.bankAccount = bankAccount;
+        this.lastActivity = new Date();
         getCentralBank();
-        bankAccount = new BankAccount(amount, iban, firstName, lastName, postalCode, houseNumber, dateOfBirth, email, limitIn, limitOut);
-        lastActivity = new Date();
     }
 
     @Override
@@ -87,7 +98,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         // Locate registry at IP address and port number
         Registry registry;
         try {
-            registry = LocateRegistry.getRegistry("localhost", 1099);
+            registry = LocateRegistry.getRegistry("localhost", 1234);
             System.out.println("Session: Registry located");
         } catch (RemoteException ex) {
             System.out.println("Session: Cannot locate registry");
@@ -98,16 +109,14 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         //Get CentralBank from registry
         if (registry != null) {
             try {
-                centralBank = (ICentralBankForBank) registry.lookup("CentralBank");
+                centralBank = (ICentralBankForSession) registry.lookup("CentralBank");
                 System.out.println("Session: CentralBank retrieved");
             } catch (RemoteException e) {
-                System.out.println("Session: RemoteException on ICentralBankForBank");
+                System.out.println("Session: RemoteException on ICentralBankForSession");
                 System.out.println("Session: RemoteException: " + e.getMessage());
-                System.exit(0);
             } catch (NotBoundException e) {
-                System.out.println("Session: Cannot bind ICentralBankForBank");
+                System.out.println("Session: Cannot bind ICentralBankForSession");
                 System.out.println("Session: NotBoundException: " + e.getMessage());
-                System.exit(0);
             }
         }
     }

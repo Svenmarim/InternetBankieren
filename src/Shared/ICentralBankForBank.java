@@ -4,16 +4,13 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * InternetBankieren Created by Sven de Vries on 1-12-2017
+ * InternetBankieren Created by Sven de Vries on 20-12-2017
  */
-public interface ICentralBankForBank extends Remote {
+public interface ICentralBankForBank extends Remote{
     /**
-     * Method to send the transfer from session to central bank
-     * @param iban Iban number from receiver
-     * @param name Name of the receiver
-     * @param transaction Transfer details for transaction history
-     * @return If transfer was succeeded or not
+     * Method to set the bank in the list from banks in central bank
+     * @param bank the bank that needs to be added to the list
      * @throws RemoteException for exception with RMI
      */
-    boolean transaction(String iban, String name, Transaction transaction) throws RemoteException;
+    void startUpBank(IBankForCentralBank bank) throws RemoteException;
 }

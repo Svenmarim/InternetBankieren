@@ -26,6 +26,7 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     private List<IBankForClient> sessions;
     private DatabaseBankServer database;
     private IRemotePropertyListener client;
+    private ICentralBankForBank centralBank;
 
     @Override
     public String getName() {
@@ -46,8 +47,12 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
 
     @Override
     public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
-        //TODO get bank account details from database
-//        return new Session();
+        BankAccount bankAccount = database.login(iban, hashedPassword, shortcut);
+        if (bankAccount != null) {
+            Session session = new Session(bankAccount);
+            sessions.add(session);
+            return session;
+        }
         return null;
     }
 
@@ -91,32 +96,60 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
 
     }
 
-    public void createRegistry() {
+    public void bindBankInRegistry() {
         //Create registry at port number
         Registry registry = null;
         try {
-            registry = LocateRegistry.createRegistry(1098);
-            System.out.println("Bank: Registry created");
-        } catch (RemoteException e) {
-            System.out.println("Bank: Cannot create registry");
-            try {
-                registry = LocateRegistry.getRegistry("localhost", 1098);
-                System.out.println("Bank: Registry located");
-            } catch (RemoteException e1) {
-                System.out.println("Bank: Cannot locate registry");
-            }
+            registry = LocateRegistry.getRegistry("localhost", 1234);
+            System.out.println("Bank: Registry located");
+        } catch (RemoteException e1) {
+            System.out.println("Bank: Cannot locate registry");
+            System.exit(0);
         }
 
         //Bind using registry
         try {
             registry.rebind(name, this);
             System.out.println("Bank: Bank bound to registry");
+//            centralBank.startUpBank(this); //TODO NullpointerException???
+//            System.out.println("Bank: Bank added in central bank");
         } catch (RemoteException e) {
             System.out.println("Bank: Cannot bind Bank");
             System.out.println("Bank: RemoteException: " + e.getMessage());
+            System.exit(0);
         } catch (NullPointerException e) {
-            System.out.println("Bank: Port already in use. \nBank: Please check if the server isn't already running");
+            System.out.println("Bank: Port already in use");
             System.out.println("Bank: NullPointerException: " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    public void getCentralBank() {
+        // Locate registry at IP address and port number
+        Registry registry = null;
+        try {
+            registry = LocateRegistry.getRegistry("localhost", 1234);
+            System.out.println("Bank: Registry located");
+        } catch (RemoteException ex) {
+            System.out.println("Bank: Cannot locate registry");
+            System.out.println("Bank: RemoteException: " + ex.getMessage());
+            System.exit(0);
+        }
+
+        //Get CentralBank from registry
+        if (registry != null) {
+            try {
+                centralBank = (ICentralBankForBank) registry.lookup("CentralBank");
+                System.out.println("Bank: CentralBank retrieved");
+            } catch (RemoteException e) {
+                System.out.println("Bank: RemoteException on ICentralBankForBank");
+                System.out.println("Bank: RemoteException: " + e.getMessage());
+                System.exit(0);
+            } catch (NotBoundException e) {
+                System.out.println("Bank: Cannot bind ICentralBankForBank");
+                System.out.println("Bank: NotBoundException: " + e.getMessage());
+                System.exit(0);
+            }
         }
     }
 

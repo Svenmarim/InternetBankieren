@@ -1,5 +1,6 @@
-CREATE TABLE `bankieren`.`abna_bankaccount` (
+CREATE TABLE `bankieren`.`ingb_bankaccount` (
   `iban` NVARCHAR(50) NOT NULL,
+  `password` NVARCHAR(100) NOT NULL,
   `amount` DOUBLE NOT NULL,
   `firstName` NVARCHAR(50) NOT NULL,
   `lastName` NVARCHAR(50) NOT NULL,

@@ -63,6 +63,14 @@ public class BankAccount {
         return limitOutAddressbook;
     }
 
+    public ArrayList<Address> getAddressbook() {
+        return addressbook;
+    }
+
+    public ArrayList<Transaction> getTransactionHistory() {
+        return transactionHistory;
+    }
+
     public BankAccount(double amount, String iban, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email, double limitIn, double limitOut) {
         this.amount = amount;
         this.iban = iban;
@@ -101,7 +109,7 @@ public class BankAccount {
         changeAmount(amount);
         transactionHistory.add(new Transaction(new Date(), ibanReceiver, amount, description));
 
-        if(addToAddress){
+        if (addToAddress) {
             addressbook.add(new Address(nameReceiver, ibanReceiver));
         }
     }
@@ -116,9 +124,9 @@ public class BankAccount {
     }
 
     public void changeAmount(double amount) {
-        if(amount < 0){
+        if (amount < 0) {
             this.amount -= amount;
-        } else if (amount > 0){
+        } else if (amount > 0) {
             this.amount += amount;
         }
     }

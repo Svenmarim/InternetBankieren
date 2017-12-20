@@ -66,22 +66,13 @@ public class Controller {
     private Client client;
 
     public Controller() {
-        //Print ip address and port number for registry
-        InetAddress localhost = null;
-        try {
-            localhost = InetAddress.getLocalHost();
-        } catch (UnknownHostException e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Client: IP Address: " + localhost.getHostAddress());
-        System.out.println("Client: Port number: 1097");
-
         try {
             client = new Client();
             System.out.println("Client: Client created");
         } catch (RemoteException e) {
             System.out.println("Client: Cannot create Client");
             System.out.println("Client: RemoteException: " + e.getMessage());
+            System.exit(0);
         }
     }
 

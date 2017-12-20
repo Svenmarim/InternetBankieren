@@ -10,14 +10,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;;
+import java.net.UnknownHostException;
 
 /**
  * InternetBankieren Created by Sven de Vries on 17-12-2017
  */
 public class MainBank extends Application {
     public ComboBox cmbBank;
-    private DatabaseBankServer database;
 
     public static void main(String[] args) {
         launch(args);
@@ -36,28 +35,21 @@ public class MainBank extends Application {
 
     public void setBanksInComboBox(){
         cmbBank.getItems().clear();
-        this.database = new DatabaseBankServer();
-        for(Bank bank : database.getBanks()){
+        DatabaseBankServer database = new DatabaseBankServer();
+        for(Bank bank : database.getOfflineBanks()){
             cmbBank.getItems().add(bank);
         }
     }
 
     public void chooseBankToStartUpFrom(){
         if (cmbBank.getValue() != null){
-            //Print ip address and port number for registry
-            InetAddress localhost = null;
-            try {
-                localhost = InetAddress.getLocalHost();
-            } catch (UnknownHostException e) {
-                System.out.println(e.getMessage());
-            }
-            System.out.println("Bank: IP Address: " + localhost.getHostAddress());
-            System.out.println("Bank: Port number: 1098");
-
+            //Creates bank
             Bank bank = (Bank) cmbBank.getValue();
-            bank.createRegistry();
+            bank.getCentralBank();
+            bank.bindBankInRegistry();
             System.out.println("Bank: Bank created");
 
+            //Closes the GUI
             Stage currentStage = (Stage) cmbBank.getScene().getWindow();
             currentStage.close();
         } else {

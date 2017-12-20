@@ -1,7 +1,6 @@
 package CentralBankServer;
 
 import BankServer.Bank;
-import BankServer.Session;
 import Shared.Transaction;
 import Shared.*;
 
@@ -17,7 +16,7 @@ import java.util.List;
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
  */
-public class CentralBank extends UnicastRemoteObject implements ICentralBankForBank, ICentralBankForClient {
+public class CentralBank extends UnicastRemoteObject implements ICentralBankForBank, ICentralBankForSession, ICentralBankForClient {
     private DatabaseCentralBank database;
     private List<IBankForCentralBank> banks;
 
@@ -30,10 +29,11 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
             System.out.println(e.getMessage());
         }
         System.out.println("CentralBank: IP Address: " + localhost.getHostAddress());
-        System.out.println("CentralBank: Port number: 1099");
+        System.out.println("CentralBank: Port number: 1234");
 
         try {
             CentralBank centralBank = new CentralBank();
+            centralBank.createRegistry();
             System.out.println("CentralBank: CentralBank created");
         } catch (RemoteException e) {
             System.out.println("CentralBank: Cannot create CentralBank");
@@ -43,7 +43,6 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
 
     public CentralBank() throws RemoteException {
         this.database = new DatabaseCentralBank();
-        createRegistry();
     }
 
     @Override
@@ -88,6 +87,11 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
+    public void startUpBank(IBankForCentralBank bank) throws RemoteException{
+        this.banks.add(bank);
+    }
+
+    @Override
     public boolean transaction(String iban, String name, Transaction transaction) throws RemoteException {
         return false;
     }
@@ -96,11 +100,12 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
         //Create registry at port number
         Registry registry = null;
         try {
-            registry = LocateRegistry.createRegistry(1099);
+            registry = LocateRegistry.createRegistry(1234);
             System.out.println("CentralBank: Registry created");
         } catch (RemoteException e) {
             System.out.println("CentralBank: Cannot create registry");
             System.out.println("CentralBank: RemoteException: " + e.getMessage());
+            System.exit(0);
         }
 
         //Bind using registry
@@ -110,9 +115,11 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
         } catch (RemoteException e) {
             System.out.println("CentralBank: Cannot bind CentralBank");
             System.out.println("CentralBank: RemoteException: " + e.getMessage());
+            System.exit(0);
         } catch (NullPointerException e) {
             System.out.println("CentralBank: Port already in use. \nCentralBank: Please check if the server isn't already running");
             System.out.println("CentralBank: NullPointerException: " + e.getMessage());
+            System.exit(0);
         }
     }
 }

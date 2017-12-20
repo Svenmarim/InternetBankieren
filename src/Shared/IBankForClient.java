@@ -2,6 +2,7 @@ package Shared;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,8 +12,23 @@ public interface IBankForClient extends Remote {
     /**
      * Method for getting the last activity date
      * @return The date that the user was last active on
+     * @throws RemoteException for exception with RMI
      */
-    Date getLastActivity();
+    Date getLastActivity() throws RemoteException;
+
+    /**
+     * Method for getting the addressbook
+     * @return The addressbook
+     * @throws RemoteException for exception with RMI
+     */
+    ArrayList<Address> getAddressbook() throws RemoteException;
+
+    /**
+     * Method for getting the transaction history
+     * @return The transaction history
+     * @throws RemoteException for exception with RMI
+     */
+    ArrayList<Transaction> getTransactionHistory() throws RemoteException;
 
     /**
      * Method to check if session is still valid

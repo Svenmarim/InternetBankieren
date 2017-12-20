@@ -26,7 +26,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private IRemotePublisherForListener publisherForListener;
 
     public Client() throws RemoteException {
-        createRegistry();
+        bindClientInRegistry();
         getCentralBank();
     }
 
@@ -113,15 +113,15 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         }
     }
 
-    private void createRegistry(){
+    private void bindClientInRegistry() {
         //Create registry at port number
         Registry registry = null;
         try {
-            registry = LocateRegistry.createRegistry(1097);
-            System.out.println("Client: Registry created");
-        } catch (RemoteException e) {
-            System.out.println("Client: Cannot create registry");
-            System.out.println("Client: RemoteException: " + e.getMessage());
+            registry = LocateRegistry.getRegistry("localhost", 1234);
+            System.out.println("Client: Registry located");
+        } catch (RemoteException e1) {
+            System.out.println("Client: Cannot locate registry");
+            System.exit(0);
         }
 
         //Bind using registry
@@ -131,22 +131,24 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         } catch (RemoteException e) {
             System.out.println("Client: Cannot bind Client");
             System.out.println("Client: RemoteException: " + e.getMessage());
+            System.exit(0);
         } catch (NullPointerException e) {
             System.out.println("Client: Port already in use. \nClient: Please check if the server isn't already running");
             System.out.println("Client: NullPointerException: " + e.getMessage());
+            System.exit(0);
         }
     }
 
-    private void getCentralBank(){
+    private void getCentralBank() {
         // Locate registry at IP address and port number
-        Registry registry;
+        Registry registry = null;
         try {
-            registry = LocateRegistry.getRegistry("localhost", 1099);
+            registry = LocateRegistry.getRegistry("localhost", 1234);
             System.out.println("Client: Registry located");
         } catch (RemoteException ex) {
             System.out.println("Client: Cannot locate registry");
             System.out.println("Client: RemoteException: " + ex.getMessage());
-            registry = null;
+            System.exit(0);
         }
 
         //Get CentralBank from registry
