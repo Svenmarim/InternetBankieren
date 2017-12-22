@@ -2,13 +2,19 @@ package BankServer;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -17,6 +23,7 @@ import java.net.UnknownHostException;
  */
 public class BankMain extends Application {
     public ComboBox cmbBank;
+    private DatabaseBankServer database;
 
     public static void main(String[] args) {
         launch(args);
@@ -33,16 +40,16 @@ public class BankMain extends Application {
         primaryStage.show();
     }
 
-    public void setBanksInComboBox(){
+    public void setBanksInComboBox() {
         cmbBank.getItems().clear();
-        DatabaseBankServer database = new DatabaseBankServer();
-        for(Bank bank : database.getOfflineBanks()){
+        database = new DatabaseBankServer();
+        for (Bank bank : database.getOfflineBanks()) {
             cmbBank.getItems().add(bank);
         }
     }
 
-    public void chooseBankToStartUpFrom(){
-        if (cmbBank.getValue() != null){
+    public void chooseBankToStartUpFrom() {
+        if (cmbBank.getValue() != null) {
             //Creates bank
             Bank bank = (Bank) cmbBank.getValue();
             bank.getCentralBank();
@@ -52,6 +59,20 @@ public class BankMain extends Application {
             //Closes the GUI
             Stage currentStage = (Stage) cmbBank.getScene().getWindow();
             currentStage.close();
+
+            //Opens bank running GUI
+            Stage stage = new Stage();
+            Text text = new Text(5, 25, "Running bank server: " + bank.getName() + " ");
+            text.setFont(new Font("Times New Roman", 25));
+            Scene scene = new Scene(new Group(text));
+
+            stage.setTitle("Bank Server");
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setOnCloseRequest(event -> database.setBankOffline(bank));
+            stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ERROR!");

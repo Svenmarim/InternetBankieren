@@ -7,8 +7,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
@@ -24,12 +24,12 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     }
 
     @Override
-    public ArrayList<Address> getAddressbook() {
+    public List<Address> getAddressbook() {
         return this.bankAccount.getAddressbook();
     }
 
     @Override
-    public ArrayList<Transaction> getTransactionHistory() {
+    public List<Transaction> getTransactionHistory() {
         return this.bankAccount.getTransactionHistory();
     }
 

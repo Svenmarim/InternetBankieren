@@ -2,7 +2,7 @@ CREATE TABLE `bankieren`.`ingb_transaction` (
   `bankAccount_iban` NVARCHAR(50) NOT NULL,
   `date` DATETIME NOT NULL,
   `iban` NVARCHAR(50) NOT NULL,
-  `amount` NVARCHAR(50) NOT NULL,
+  `amount` DOUBLE NOT NULL,
   `description` NVARCHAR(50) NOT NULL);
 
 ALTER TABLE `bankieren`.`ingb_transaction` 

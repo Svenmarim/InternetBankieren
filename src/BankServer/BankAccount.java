@@ -4,7 +4,9 @@ import Shared.Address;
 import Shared.Transaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
@@ -63,12 +65,12 @@ public class BankAccount {
         return limitOutAddressbook;
     }
 
-    public ArrayList<Address> getAddressbook() {
-        return addressbook;
+    public List<Address> getAddressbook() {
+        return Collections.unmodifiableList(addressbook);
     }
 
-    public ArrayList<Transaction> getTransactionHistory() {
-        return transactionHistory;
+    public List<Transaction> getTransactionHistory() {
+        return Collections.unmodifiableList(transactionHistory);
     }
 
     public BankAccount(double amount, String iban, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email, double limitIn, double limitOut) {

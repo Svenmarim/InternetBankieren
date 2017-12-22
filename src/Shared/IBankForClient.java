@@ -2,8 +2,8 @@ package Shared;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
@@ -21,14 +21,14 @@ public interface IBankForClient extends Remote {
      * @return The addressbook
      * @throws RemoteException for exception with RMI
      */
-    ArrayList<Address> getAddressbook() throws RemoteException;
+    List<Address> getAddressbook() throws RemoteException;
 
     /**
      * Method for getting the transaction history
      * @return The transaction history
      * @throws RemoteException for exception with RMI
      */
-    ArrayList<Transaction> getTransactionHistory() throws RemoteException;
+    List<Transaction> getTransactionHistory() throws RemoteException;
 
     /**
      * Method to check if session is still valid

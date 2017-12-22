@@ -1,14 +1,20 @@
 package Client.Controllers;
 
-import Client.ControlledScreen;
+import Client.ClientMain;
+import Client.IControllers;
 import Client.ScreensController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
+import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * InternetBankieren Created by Sven de Vries on 20-12-2017
  */
-public class BankAccountController implements ControlledScreen {
+public class BankAccountController implements IControllers {
     private ScreensController myController;
 
     //FXML fields
@@ -18,28 +24,33 @@ public class BankAccountController implements ControlledScreen {
     public TableView tabelTransactions;
 
     public void openAccount() {
-//        changeScreenTo(Screens.ACCOUNT);
+        myController.setScreen(ClientMain.screenAccountId);
     }
 
     public void openLimits() {
-//        changeScreenTo(Screens.LIMITS);
+        myController.setScreen(ClientMain.screenLimitsId);
     }
 
     public void openAddressBook() {
-//        changeScreenTo(Screens.ADDRESSBOOK);
+        myController.setScreen(ClientMain.screenAddressBookId);
     }
 
     public void openTransaction() {
-//        changeScreenTo(Screens.NEWTRANSACTION);
+        myController.setScreen(ClientMain.screenNewTransactionId);
     }
 
     public void logoutClient() {
-//        try {
-//            client.logout();
-//            changeScreenTo(Screens.LOGIN);
-//        } catch (RemoteException e) {
-//            showErrorMessage(e.getMessage());
-//        }
+        try {
+            myController.getClient().logout();
+            myController.setScreen(ClientMain.screenLoginId);
+        } catch (RemoteException e) {
+            myController.showErrorMessage(e.getMessage());
+        }
+    }
+
+    public void setTransaction(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.format(date); //Set this value in table
     }
 
     @Override

@@ -41,6 +41,8 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
             System.out.println("CentralBank: Cannot create CentralBank");
             System.out.println("CentralBank: RemoteException: " + e.getMessage());
         }
+
+
     }
 
     public CentralBank() throws RemoteException {

@@ -3,7 +3,7 @@ package Client;
 /**
  * InternetBankieren Created by Sven de Vries on 20-12-2017
  */
-public interface ControlledScreen {
+public interface IControllers {
 
     /**
      * This method will allow the injection of the Parent ScreenPane

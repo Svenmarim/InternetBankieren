@@ -1,21 +1,14 @@
 package BankServer;
 
 import Shared.*;
-import com.sun.javafx.UnmodifiableArrayList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,8 +33,8 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     }
 
     @Override
-    public UnmodifiableArrayList<IBankForClient> getSessions() {
-        return (UnmodifiableArrayList<IBankForClient>) sessions;
+    public List<IBankForClient> getSessions() {
+        return Collections.unmodifiableList(sessions);
     }
 
     public Bank(String name, String shortcut) throws RemoteException {
@@ -53,7 +46,7 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
 
     @Override
     public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
-        BankAccount bankAccount = database.login(iban, hashedPassword, shortcut);
+        BankAccount bankAccount = database.login(iban.toUpperCase(), hashedPassword, shortcut);
         if (bankAccount != null) {
             Session session = new Session(bankAccount);
             sessions.add(session);
@@ -117,8 +110,11 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
         try {
             registry.rebind(name, this);
             System.out.println("Bank: Bank bound to registry");
-//            centralBank.startUpBank(this); //TODO NullpointerException???
-//            System.out.println("Bank: Bank added in central bank");
+            centralBank.startUpBank(this);
+            System.out.println("Bank: Bank added in central bank");
+            if (database.setBankOnline(this)){
+                System.out.println("Bank: Bank online in database");
+            }
         } catch (RemoteException e) {
             System.out.println("Bank: Cannot bind Bank");
             System.out.println("Bank: RemoteException: " + e.getMessage());

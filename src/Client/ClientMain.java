@@ -31,6 +31,7 @@ public class ClientMain extends Application {
     public static String screenNewTransactionId = "newTransaction";
     public static String screenNewTransactionFile = "Screens/newTransaction.fxml";
     private static Stage primaryStage;
+    private static ScreensController mainContainer;
 
     public static void main(String[] args) {
         launch(args);
@@ -40,7 +41,7 @@ public class ClientMain extends Application {
     public void start(Stage primaryStage) {
         ClientMain.primaryStage = primaryStage;
 
-        ScreensController mainContainer = new ScreensController();
+        mainContainer = new ScreensController();
         mainContainer.loadScreen(ClientMain.screenAccountId, ClientMain.screenAccountFile);
         mainContainer.loadScreen(ClientMain.screenAddressBookId, ClientMain.screenAddressBookFile);
         mainContainer.loadScreen(ClientMain.screenAddressBookTransactionId, ClientMain.screenAddressBookTransactionFile);
@@ -56,16 +57,56 @@ public class ClientMain extends Application {
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
-        primaryStage.setTitle("Login");
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
         primaryStage.setScene(new Scene(root));
-        primaryStage.setOnCloseRequest(event -> System.exit(0));
         primaryStage.show();
     }
 
-    public static void resizeScreen(){
+    public static void setProperties(String name){
         primaryStage.sizeToScene();
         primaryStage.centerOnScreen();
+        switch (name){
+            case "account":
+                primaryStage.setTitle("Account");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                break;
+            case "addressBook":
+                primaryStage.setTitle("Address Book");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                break;
+            case "addressBookTransaction":
+                primaryStage.setTitle("Address Book");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenNewTransactionId));
+                break;
+            case "bankAccount":
+                primaryStage.setTitle("Bank Account");
+                primaryStage.setOnCloseRequest(event -> mainContainer.getBankAccountController().logoutClient());
+                break;
+            case "createBank":
+                primaryStage.setTitle("Create Bank");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenManageBanksId));
+                break;
+            case "createBankAccount":
+                primaryStage.setTitle("Create Bank Account");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenLoginId));
+                break;
+            case "limits":
+                primaryStage.setTitle("Limits");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                break;
+            case "login":
+                primaryStage.setTitle("Login");
+                primaryStage.setOnCloseRequest(event -> System.exit(0));
+                break;
+            case "manageBanks":
+                primaryStage.setTitle("Manage Banks");
+                primaryStage.setOnCloseRequest(event -> mainContainer.getManageBanksController().logoutAdmin());
+                break;
+            case "newTransaction":
+                primaryStage.setTitle("New Transaction");
+                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                break;
+        }
     }
 }

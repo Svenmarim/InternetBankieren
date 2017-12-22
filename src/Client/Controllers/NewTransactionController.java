@@ -1,6 +1,7 @@
 package Client.Controllers;
 
-import Client.ControlledScreen;
+import Client.ClientMain;
+import Client.IControllers;
 import Client.ScreensController;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
@@ -9,7 +10,7 @@ import javafx.scene.control.TextField;
 /**
  * InternetBankieren Created by Sven de Vries on 20-12-2017
  */
-public class NewTransactionController implements ControlledScreen {
+public class NewTransactionController implements IControllers {
     private ScreensController myController;
 
     //FXML fields
@@ -21,35 +22,35 @@ public class NewTransactionController implements ControlledScreen {
     public TextArea tbDescription;
 
     public void openAddressBookTransaction() {
-//        changeScreenTo(Screens.ADDRESSBOOKTRANSACTION);
+        myController.setScreen(ClientMain.screenAddressBookTransactionId);
     }
 
     public void makeBankAccountsRequest() {
-//        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText());
-//        String nameReceiver = tbNameReceiver.getText();
-//        String ibanReceiver = tbIbanReceiver.getText();
-//        String description = tbDescription.getText();
-//        boolean addToAddress = cbAddToAddressBook.isSelected();
-//        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
-//            client.makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress);
-//            changeScreenTo(Screens.BANKACCOUNT);
-//        } else {
-//            showErrorMessage("Amount and receiver details can not be empty.");
-//        }
+        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText());
+        String nameReceiver = tbNameReceiver.getText();
+        String ibanReceiver = tbIbanReceiver.getText();
+        String description = tbDescription.getText();
+        boolean addToAddress = cbAddToAddressBook.isSelected();
+        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
+            myController.getClient().makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress);
+            myController.setScreen(ClientMain.screenBankAccountId);
+        } else {
+            myController.showErrorMessage("Amount and receiver details can not be empty.");
+        }
     }
 
     public void makeBankAccountsTransaction() {
-//        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText());
-//        String nameReceiver = tbNameReceiver.getText();
-//        String ibanReceiver = tbIbanReceiver.getText();
-//        String description = tbDescription.getText();
-//        boolean addToAddress = cbAddToAddressBook.isSelected();
-//        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
-//            client.makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
-//            changeScreenTo(Screens.BANKACCOUNT);
-//        } else {
-//            showErrorMessage("Amount and receiver details can not be empty.");
-//        }
+        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText());
+        String nameReceiver = tbNameReceiver.getText();
+        String ibanReceiver = tbIbanReceiver.getText();
+        String description = tbDescription.getText();
+        boolean addToAddress = cbAddToAddressBook.isSelected();
+        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
+            myController.getClient().makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
+            myController.setScreen(ClientMain.screenBankAccountId);
+        } else {
+            myController.showErrorMessage("Amount and receiver details can not be empty.");
+        }
     }
 
     @Override

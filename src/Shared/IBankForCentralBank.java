@@ -1,10 +1,8 @@
 package Shared;
 
-import BankServer.Session;
-import com.sun.javafx.UnmodifiableArrayList;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
@@ -29,7 +27,7 @@ public interface IBankForCentralBank extends Remote {
      * @return The list of sessions of that bank
      * @throws RemoteException for exception with RMI
      */
-    UnmodifiableArrayList<IBankForClient> getSessions() throws RemoteException;
+    List<IBankForClient> getSessions() throws RemoteException;
 
     /**
      * Method to log the client in on the app
