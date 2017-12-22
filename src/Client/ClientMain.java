@@ -1,6 +1,7 @@
 package Client;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -74,14 +75,17 @@ public class ClientMain extends Application {
             case "addressBook":
                 primaryStage.setTitle("Address Book");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                mainContainer.getAddressBookController().setAddressBook(mainContainer.getClient().getAddressBook());
                 break;
             case "addressBookTransaction":
                 primaryStage.setTitle("Address Book");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenNewTransactionId));
+                mainContainer.getAddressBookTransactionController().setAddressBook(mainContainer.getClient().getAddressBook());
                 break;
             case "bankAccount":
                 primaryStage.setTitle("Bank Account");
                 primaryStage.setOnCloseRequest(event -> mainContainer.getBankAccountController().logoutClient());
+                mainContainer.getBankAccountController().setTransactionHistory(mainContainer.getClient().getTransactionHistory());
                 break;
             case "createBank":
                 primaryStage.setTitle("Create Bank");
@@ -94,6 +98,7 @@ public class ClientMain extends Application {
             case "limits":
                 primaryStage.setTitle("Limits");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                mainContainer.getLimitsController().setLimits(mainContainer.getClient().getLimitIn(), mainContainer.getClient().getLimitOut());
                 break;
             case "login":
                 primaryStage.setTitle("Login");
@@ -102,6 +107,7 @@ public class ClientMain extends Application {
             case "manageBanks":
                 primaryStage.setTitle("Manage Banks");
                 primaryStage.setOnCloseRequest(event -> mainContainer.getManageBanksController().logoutAdmin());
+                mainContainer.getManageBanksController().setBanks(mainContainer.getClient().getBanks());
                 break;
             case "newTransaction":
                 primaryStage.setTitle("New Transaction");

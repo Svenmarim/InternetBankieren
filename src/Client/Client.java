@@ -1,12 +1,10 @@
 package Client;
 
 import Shared.Address;
-import BankServer.Bank;
 import Shared.*;
 
 import javax.xml.bind.DatatypeConverter;
 import java.beans.PropertyChangeEvent;
-import java.lang.reflect.InvocationTargetException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -15,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 2-12-2017
@@ -24,6 +23,51 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private ICentralBankForClient centralBank;
     private IBankForClient session;
     private IRemotePublisherForListener publisherForListener;
+
+    public List<Address> getAddressBook() {
+        try {
+            return session.getAddressbook();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Transaction> getTransactionHistory() {
+        try {
+            return session.getTransactionHistory();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Double getLimitIn() {
+        try {
+            return session.getLimitIn();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Double getLimitOut() {
+        try {
+            return session.getLimitOut();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<IBankForCentralBank> getBanks() {
+        try {
+            return centralBank.getAllBanks();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public Client() throws RemoteException {
         getCentralBank();
@@ -35,7 +79,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
             return admin;
         } else if (iban.length() == 18) {
             session = centralBank.loginClient(iban, hashPassword(password));
-            if (session != null){
+            if (session != null) {
                 bindClientInRegistry(iban);
             }
             return session != null;
@@ -57,8 +101,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         return centralBank.createBank(name, shortcut);
     }
 
-    public void deleteBank(String bankName) {
-
+    public void deleteBank(TempBank bank) throws RemoteException {
+        centralBank.deleteBank(bank);
     }
 
     private void isSessionValid() {
@@ -80,8 +124,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         this.session = null;
     }
 
-    public void editBankAccountsLimits(double limitIn, double limitOut) {
-
+    public void editBankAccountsLimits(double limitIn, double limitOut) throws RemoteException {
+        session.editBankAccountsLimits(limitIn, limitOut);
     }
 
     public void deleteBankAccountsAddress(Address address) {
@@ -92,8 +136,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    public void makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
-
+    public boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
+        return session.makeBankAccountsRequest(amount, name, ibanReceiver, description, addToAddress);
     }
 
     public void receiveBankAccountsTransaction(Transaction transaction) {

@@ -13,4 +13,11 @@ public interface ICentralBankForBank extends Remote{
      * @throws RemoteException for exception with RMI
      */
     void startUpBank(IBankForCentralBank bank) throws RemoteException;
+
+    /**
+     * Method to delete the bank in the list from banks in central bank
+     * @param bank the bank that needs to be removed from the list
+     * @throws RemoteException for exception with RMI
+     */
+    void shutDownBank(IBankForCentralBank bank) throws RemoteException;
 }

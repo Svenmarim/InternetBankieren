@@ -41,8 +41,11 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
             System.out.println("CentralBank: Cannot create CentralBank");
             System.out.println("CentralBank: RemoteException: " + e.getMessage());
         }
+    }
 
-
+    @Override
+    public List<IBankForCentralBank> getAllBanks() throws RemoteException {
+        return banks.get(0).getAllBanks();
     }
 
     public CentralBank() throws RemoteException {
@@ -51,15 +54,16 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public String createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
-
-        return null; //iban
+    public String createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+        //TODO Generate iban
+//        database.insertBankAccount(iban, hashedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+        return null; //return iban
     }
 
     @Override
     public boolean loginAdmin(String hashedPassword) {
-        if(!adminLoggedIn){
-            if (database.loginAdmin(hashedPassword)){
+        if (!adminLoggedIn) {
+            if (database.loginAdmin(hashedPassword)) {
                 this.adminLoggedIn = true;
                 return true;
             }
@@ -70,8 +74,8 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     @Override
     public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
         String bankShortcut = iban.substring(4, 8).toUpperCase();
-        for(IBankForCentralBank bank : banks){
-            if(bank.getShortcut().equals(bankShortcut)){
+        for (IBankForCentralBank bank : banks) {
+            if (bank.getShortcut().equals(bankShortcut)) {
                 return bank.loginClient(iban, hashedPassword);
             }
         }
@@ -85,34 +89,66 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
 
     @Override
     public void logOutClient(IBankForClient session) throws RemoteException {
-        for(IBankForCentralBank bank : banks){
-            if(bank.getSessions().contains(session)){
+        for (IBankForCentralBank bank : banks) {
+            if (bank.getSessions().contains(session)) {
                 bank.logOutClient(session);
             }
         }
     }
 
     @Override
-    public boolean createBank(String name, String shortcut) throws RemoteException {
+    public boolean createBank(String name, String shortcut) {
+        if (database.checkBankAvailablility(name, shortcut)){
+            //Creates new tables in database
+            database.insertBankAccountTable(shortcut);
+            database.insertAddressTable(shortcut);
+            database.insertTransactionTable(shortcut);
+            return database.insertBank(name, shortcut);
+        }
         return false;
     }
 
     @Override
-    public void deleteBank(Bank bank) throws RemoteException {
+    public void deleteBank(TempBank bank) throws RemoteException {
+        database.deleteAddressTable(bank.getShortcut());
+        database.deleteTransactionTable(bank.getShortcut());
+        database.deleteBankAccountTable(bank.getShortcut());
+        database.deleteBank(bank);
 
+        //Delete bank if online
+        for (IBankForCentralBank b : banks) {
+            if (b.getShortcut().equals(bank.getShortcut())) {
+                banks.remove(b);
+                break;
+            }
+        }
     }
 
     @Override
-    public void startUpBank(IBankForCentralBank bank) throws RemoteException{
+    public void startUpBank(IBankForCentralBank bank) {
         this.banks.add(bank);
     }
 
     @Override
-    public boolean transaction(String iban, String name, Transaction transaction) throws RemoteException {
+    public void shutDownBank(IBankForCentralBank bank) {
+        this.banks.remove(bank);
+    }
+
+    @Override
+    public boolean transaction(String iban, Transaction transaction) throws RemoteException {
+        String bankShortcut = iban.substring(4, 8).toUpperCase();
+        if (database.checkIbanExistence(iban)) {
+            for (IBankForCentralBank bank : banks) {
+                if (bank.getShortcut().equals(bankShortcut)) {
+                    return bank.transaction(iban, transaction);
+                }
+            }
+            System.out.println("Receiving bank is not online!");
+        }
         return false;
     }
 
-    private void createRegistry(){
+    private void createRegistry() {
         //Create registry at port number
         Registry registry = null;
         try {

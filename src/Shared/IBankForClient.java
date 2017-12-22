@@ -31,6 +31,27 @@ public interface IBankForClient extends Remote {
     List<Transaction> getTransactionHistory() throws RemoteException;
 
     /**
+     * Method for getting the the limit of money for transferring to people inside the addressbook
+     * @return The limit of money for transferring to people inside the addressbook
+     * @throws RemoteException for exception with RMI
+     */
+    Double getLimitIn() throws RemoteException;
+
+    /**
+     * Method for getting the limit of money for transferring to people outside the addressbook
+     * @return The limit of money for transferring to people outside the addressbook
+     * @throws RemoteException for exception with RMI
+     */
+    Double getLimitOut() throws RemoteException;
+
+    /**
+     * Method for getting the iban of the bank account in that session
+     * @return The iban number
+     * @throws RemoteException for exception with RMI
+     */
+    String getIban() throws RemoteException;
+
+    /**
      * Method to check if session is still valid
      * @return If session is still valid or not
      * @throws RemoteException for exception with RMI

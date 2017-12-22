@@ -37,6 +37,11 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
         return Collections.unmodifiableList(sessions);
     }
 
+    @Override
+    public List<IBankForCentralBank> getAllBanks(){
+        return Collections.unmodifiableList(database.getAllBanks());
+    }
+
     public Bank(String name, String shortcut) throws RemoteException {
         this.name = name;
         this.shortcut = shortcut;
@@ -46,7 +51,7 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
 
     @Override
     public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
-        BankAccount bankAccount = database.login(iban.toUpperCase(), hashedPassword, shortcut);
+        BankAccount bankAccount = database.login(iban.toUpperCase(), hashedPassword);
         if (bankAccount != null) {
             Session session = new Session(bankAccount);
             sessions.add(session);
@@ -56,12 +61,19 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     }
 
     @Override
-    public void logOutClient(IBankForClient session) throws RemoteException {
+    public void logOutClient(IBankForClient session) {
         sessions.remove(session);
     }
 
     @Override
-    public boolean transaction(String iban, String name, Transaction transaction) throws RemoteException {
+    public boolean transaction(String iban, Transaction transaction) throws RemoteException {
+        database.insertTransaction(iban, transaction);
+        database.updateAmount(iban, database.getAmount(iban) + transaction.getAmount());
+        for (IBankForClient session : sessions){
+            if (session.getIban().equals(iban)){
+                session.receiveBankAccountsTransaction(transaction);
+            }
+        }
         return false;
     }
 
@@ -95,6 +107,21 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
 
     }
 
+    public void shutDownBank() {
+        try {
+            centralBank.shutDownBank(this);
+            System.out.println("Bank: Bank removed in central bank");
+            if (database.setBankOffline(this)) {
+                System.out.println("Bank: Bank offline in database");
+                System.exit(0);
+            } else {
+                System.out.println("Bank: ERROR! Bank NOT offline in database");
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void bindBankInRegistry() {
         //Create registry at port number
         Registry registry = null;
@@ -112,7 +139,7 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
             System.out.println("Bank: Bank bound to registry");
             centralBank.startUpBank(this);
             System.out.println("Bank: Bank added in central bank");
-            if (database.setBankOnline(this)){
+            if (database.setBankOnline(this)) {
                 System.out.println("Bank: Bank online in database");
             }
         } catch (RemoteException e) {

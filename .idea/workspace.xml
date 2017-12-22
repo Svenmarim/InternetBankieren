@@ -2,30 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4db8163e-3351-4fbd-af2c-ec8130f5ca11" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/Shared/TempBank.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Sven.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Sven.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/createTableTransactionScript.txt" afterPath="$PROJECT_DIR$/createTableTransactionScript.txt" />
+      <change beforePath="$PROJECT_DIR$/createTableAddressScript.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/createTableBankAccountScript.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/createTableTransactionScript.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/createBank.fxml" afterPath="$PROJECT_DIR$/out/production/InternetBankieren/Client/Screens/createBank.fxml" />
       <change beforePath="$PROJECT_DIR$/src/BankServer/Bank.java" afterPath="$PROJECT_DIR$/src/BankServer/Bank.java" />
       <change beforePath="$PROJECT_DIR$/src/BankServer/BankAccount.java" afterPath="$PROJECT_DIR$/src/BankServer/BankAccount.java" />
       <change beforePath="$PROJECT_DIR$/src/BankServer/BankMain.java" afterPath="$PROJECT_DIR$/src/BankServer/BankMain.java" />
       <change beforePath="$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java" afterPath="$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java" />
       <change beforePath="$PROJECT_DIR$/src/BankServer/Session.java" afterPath="$PROJECT_DIR$/src/BankServer/Session.java" />
       <change beforePath="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" afterPath="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" />
+      <change beforePath="$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java" afterPath="$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" afterPath="$PROJECT_DIR$/src/Client/Client.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/ClientMain.java" afterPath="$PROJECT_DIR$/src/Client/ClientMain.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ControlledScreen.java" afterPath="$PROJECT_DIR$/src/Client/IControllers.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Controllers/AccountController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/AccountController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/AddressBookController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/AddressBookController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/AddressBookTransactionController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/AddressBookTransactionController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/BankAccountController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/BankAccountController.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Controllers/CreateBankAccountController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/CreateBankAccountController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/CreateBankController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/CreateBankController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/LimitsController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/LimitsController.java" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Controllers/LoginController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/LoginController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/ManageBanksController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/ManageBanksController.java" />
       <change beforePath="$PROJECT_DIR$/src/Client/Controllers/NewTransactionController.java" afterPath="$PROJECT_DIR$/src/Client/Controllers/NewTransactionController.java" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Screens/createBank.fxml" afterPath="$PROJECT_DIR$/src/Client/Screens/createBank.fxml" />
       <change beforePath="$PROJECT_DIR$/src/Client/ScreensController.java" afterPath="$PROJECT_DIR$/src/Client/ScreensController.java" />
       <change beforePath="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" afterPath="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" />
       <change beforePath="$PROJECT_DIR$/src/Shared/IBankForClient.java" afterPath="$PROJECT_DIR$/src/Shared/IBankForClient.java" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Transaction.java" afterPath="$PROJECT_DIR$/src/Shared/Transaction.java" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/ICentralBankForBank.java" afterPath="$PROJECT_DIR$/src/Shared/ICentralBankForBank.java" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/ICentralBankForClient.java" afterPath="$PROJECT_DIR$/src/Shared/ICentralBankForClient.java" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/ICentralBankForSession.java" afterPath="$PROJECT_DIR$/src/Shared/ICentralBankForSession.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,80 +43,104 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Bank.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BankServer/Bank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="36" column="44" lean-forward="false" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="44" />
-              <folding>
-                <element signature="e#951#952#0" expanded="true" />
-                <element signature="e#1012#1013#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BankMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BankServer/BankMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1532">
-              <caret line="50" column="31" lean-forward="false" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+            <state relative-caret-position="217">
+              <caret line="103" column="20" lean-forward="true" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseBankServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="636">
-              <caret line="207" column="1" lean-forward="true" selection-start-line="207" selection-start-column="1" selection-end-line="207" selection-end-column="1" />
-              <folding>
-                <marker date="1513955555933" expanded="true" signature="1566:1594" ph="SELECT * FRO... bank" />
-                <marker date="1513955555933" expanded="true" signature="1566:1611" ph="SELECT * FRO... bank" />
-                <marker date="1513955555933" expanded="true" signature="2328:2379" ph="UPDATE bankieren.bank... " />
-                <marker date="1513955555933" expanded="true" signature="2787:2838" ph="UPDATE bankieren.bank... " />
-                <marker date="1513955555933" expanded="true" signature="3367:3391" ph="SELECT * FRO... missingValue" />
-                <marker date="1513955555933" expanded="true" signature="3367:3447" ph="SELECT * FRO... bank" />
-                <marker date="1513955555933" expanded="true" signature="3367:3465" ph="SELECT * FRO... missingValue_bankaccount" />
-                <marker date="1513955555933" expanded="true" signature="4819:4908" ph="SELECT * FRO... missingValue_address" />
-                <marker date="1513955555933" expanded="true" signature="5410:5503" ph="SELECT * FRO... missingValue_transaction" />
-                <marker date="1513955555933" expanded="true" signature="6174:6279" ph="INSERT INTO bankieren.abna_bankaccount... " />
-                <marker date="1513955555933" expanded="true" signature="7296:7373" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
-                <marker date="1513955555933" expanded="true" signature="7872:7959" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Session.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/BankServer/Session.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-              <folding>
-                <element signature="e#682#683#0" expanded="true" />
-                <element signature="e#738#739#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CentralBank.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CentralBankServer/CentralBank.java">
+      <file leaf-file-name="Bank.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BankServer/Bank.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+              <caret line="18" column="28" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="18" selection-end-column="28" />
+              <folding>
+                <element signature="e#951#952#0" expanded="true" />
+                <element signature="e#1012#1013#0" expanded="true" />
+                <element signature="e#1079#1080#0" expanded="true" />
+                <element signature="e#1154#1155#0" expanded="true" />
+                <element signature="e#1846#1847#0" expanded="true" />
+                <element signature="e#1886#1887#0" expanded="true" />
+                <element signature="e#6073#6074#0" expanded="true" />
+                <element signature="e#6100#6101#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Session.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BankServer/Session.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="120" column="51" lean-forward="false" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseCentralBank.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="222" column="0" lean-forward="false" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1513983013258" expanded="true" signature="1496:1532" ph="SELECT * FRO... adminaccount" />
+                <marker date="1513983013258" expanded="true" signature="2152:2233" ph="SELECT * FRO... missingValue_bankaccount" />
+                <marker date="1513983013258" expanded="true" signature="2881:2986" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
+                <marker date="1513983013258" expanded="true" signature="3836:3895" ph="SELECT * FRO... bank" />
+                <marker date="1513983013258" expanded="true" signature="4460:4517" ph="SELECT * FRO... missingValue_bankaccount" />
+                <marker date="1513983013258" expanded="true" signature="4986:5009" ph="CREATE TABLE... bankieren." />
+                <marker date="1513983013258" expanded="true" signature="4986:5655" ph="CREATE TABLE... ingb_bankaccount" />
+                <marker date="1513983013258" expanded="true" signature="5975:5998" ph="CREATE TABLE... bankieren." />
+                <marker date="1513983013258" expanded="true" signature="5975:6231" ph="CREATE TABLE... bankieren._address" />
+                <marker date="1513983013258" expanded="true" signature="6342:6364" ph="ALTER TABLE bankieren.... " />
+                <marker date="1513983013258" expanded="true" signature="6342:6430" ph="ALTER TABLE bankieren.missingValue_address... " />
+                <marker date="1513983013258" expanded="true" signature="6342:6574" ph="ALTER TABLE bankieren.missingValue_address... " />
+                <marker date="1513983013258" expanded="true" signature="6342:6700" ph="ALTER TABLE `bankieren`.`ingb_address`... " />
+                <marker date="1513983013258" expanded="true" signature="7043:7360" ph="CREATE TABLE... missingValue_transaction" />
+                <marker date="1513983013258" expanded="true" signature="7471:7493" ph="ALTER TABLE bankieren.missingValue_address... " />
+                <marker date="1513983013258" expanded="true" signature="7471:7726" ph="ALTER TABLE bankieren.missingValue_transaction... " />
+                <marker date="1513983013258" expanded="true" signature="7471:7777" ph="ALTER TABLE bankieren.... " />
+                <marker date="1513983013258" expanded="true" signature="7471:7837" ph="ALTER TABLE bankieren.missingValue_transaction... " />
+                <marker date="1513983013258" expanded="true" signature="7821:7837" ph="UPDATE NO... " />
+                <marker date="1513983013258" expanded="true" signature="8166:8207" ph="DELETE FROM bankieren.bank... " />
+                <marker date="1513983013258" expanded="true" signature="8580:8601" ph="DROP TABLE b... " />
+                <marker date="1513983013258" expanded="true" signature="8580:8629" ph="DROP TABLE b... " />
+                <marker date="1513983013258" expanded="true" signature="8949:8987" ph="CREATE TABLE... missingValue_address" />
+                <marker date="1513983013258" expanded="true" signature="8949:8994" ph="DROP TABLE b... " />
+                <marker date="1513983013258" expanded="true" signature="9318:9339" ph="DROP TABLE b... " />
+                <marker date="1513983013258" expanded="true" signature="9318:9356" ph="CREATE TABLE... missingValue_transaction" />
+                <marker date="1513983013258" expanded="true" signature="9318:9367" ph="DROP TABLE b... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CentralBank.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CentralBankServer/CentralBank.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="104" column="54" lean-forward="true" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
+              <folding>
+                <element signature="e#4315#4316#0" expanded="true" />
+                <element signature="e#4351#4352#0" expanded="true" />
+                <element signature="e#4423#4424#0" expanded="true" />
+                <element signature="e#4462#4463#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TempBank.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Shared/TempBank.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,6 +162,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>System.out.println</find>
+      <find>shortcut</find>
+      <find>transaction</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -145,20 +177,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Client/createBank.fxml" />
-        <option value="$PROJECT_DIR$/src/BankServer/ISession.java" />
         <option value="$PROJECT_DIR$/src/Shared/ISession.java" />
         <option value="$PROJECT_DIR$/src/Client/Screens.java" />
         <option value="$PROJECT_DIR$/assets/database.properties" />
         <option value="$PROJECT_DIR$/src/Client/Main.java" />
-        <option value="$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java" />
         <option value="$PROJECT_DIR$/src/BankServer/chooseBank.fxml" />
-        <option value="$PROJECT_DIR$/createTableAddressScript.txt" />
-        <option value="$PROJECT_DIR$/src/Shared/ICentralBankForBank.java" />
         <option value="$PROJECT_DIR$/src/BankServer/MainBank.java" />
-        <option value="$PROJECT_DIR$/createTableBankAccountScript.txt" />
-        <option value="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" />
-        <option value="$PROJECT_DIR$/src/Shared/ICentralBankForClient.java" />
         <option value="$PROJECT_DIR$/src/Client/Screens/account.fxml" />
         <option value="$PROJECT_DIR$/src/Client/Screens/addressBook.fxml" />
         <option value="$PROJECT_DIR$/src/Client/Screens/addressBookTransaction.fxml" />
@@ -171,31 +195,39 @@
         <option value="$PROJECT_DIR$/src/Client/Screens/newTransaction.fxml" />
         <option value="$PROJECT_DIR$/src/Client/Controller.java" />
         <option value="$PROJECT_DIR$/src/Client/ControlledScreen.java" />
-        <option value="$PROJECT_DIR$/src/Client/Client.java" />
         <option value="$PROJECT_DIR$/src/Client/IControllers.java" />
         <option value="$PROJECT_DIR$/src/Client/Controllers/AccountController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/AddressBookController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/AddressBookTransactionController.java" />
         <option value="$PROJECT_DIR$/src/Client/Controllers/CreateBankAccountController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/CreateBankController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/LimitsController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/ManageBanksController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/NewTransactionController.java" />
-        <option value="$PROJECT_DIR$/src/Client/ScreensController.java" />
         <option value="$PROJECT_DIR$/src/Client/Controllers/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/Client/ClientMain.java" />
         <option value="$PROJECT_DIR$/src/BankServer/bankRunning.fxml" />
         <option value="$PROJECT_DIR$/src/BankServer/BankRunningController.java" />
-        <option value="$PROJECT_DIR$/src/BankServer/Bank.java" />
-        <option value="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" />
-        <option value="$PROJECT_DIR$/src/BankServer/BankMain.java" />
-        <option value="$PROJECT_DIR$/createTableTransactionScript.txt" />
-        <option value="$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java" />
-        <option value="$PROJECT_DIR$/src/Client/Controllers/BankAccountController.java" />
         <option value="$PROJECT_DIR$/src/Shared/Transaction.java" />
+        <option value="$PROJECT_DIR$/src/Shared/ICentralBankForBank.java" />
+        <option value="$PROJECT_DIR$/src/BankServer/BankMain.java" />
+        <option value="$PROJECT_DIR$/src/Client/ScreensController.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/AddressBookController.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/AddressBookTransactionController.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/BankAccountController.java" />
+        <option value="$PROJECT_DIR$/src/Client/ClientMain.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/LimitsController.java" />
         <option value="$PROJECT_DIR$/src/BankServer/BankAccount.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/NewTransactionController.java" />
+        <option value="$PROJECT_DIR$/src/Shared/ICentralBankForSession.java" />
+        <option value="$PROJECT_DIR$/src/Shared/IBankForCentralBank.java" />
         <option value="$PROJECT_DIR$/src/Shared/IBankForClient.java" />
         <option value="$PROJECT_DIR$/src/BankServer/Session.java" />
+        <option value="$PROJECT_DIR$/src/BankServer/Bank.java" />
+        <option value="$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/CreateBankController.java" />
+        <option value="$PROJECT_DIR$/createTableBankAccountScript.txt" />
+        <option value="$PROJECT_DIR$/createTableAddressScript.txt" />
+        <option value="$PROJECT_DIR$/createTableTransactionScript.txt" />
+        <option value="$PROJECT_DIR$/src/Shared/TempBank.java" />
+        <option value="$PROJECT_DIR$/src/Shared/ICentralBankForClient.java" />
+        <option value="$PROJECT_DIR$/src/Client/Client.java" />
+        <option value="$PROJECT_DIR$/src/Client/Controllers/ManageBanksController.java" />
+        <option value="$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java" />
+        <option value="$PROJECT_DIR$/src/CentralBankServer/CentralBank.java" />
       </list>
     </option>
   </component>
@@ -267,13 +299,6 @@
               <item name="InternetBankieren" type="b2602c69:ProjectViewProjectNode" />
               <item name="InternetBankieren" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="InternetBankieren" type="b2602c69:ProjectViewProjectNode" />
-              <item name="InternetBankieren" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Shared" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -314,7 +339,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BankMain">
+  <component name="RunManager" selected="Application.ClientMain">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -485,32 +510,41 @@
       <workItem from="1513765327031" duration="9302000" />
       <workItem from="1513777983560" duration="367000" />
       <workItem from="1513784034284" duration="23352000" />
-      <workItem from="1513930535979" duration="20382000" />
+      <workItem from="1513930535979" duration="44444000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139513000" />
+    <option name="totallyTimeSpent" value="163575000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17802057" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -522,7 +556,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,71 +566,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="63" />
+      <option name="time" value="77" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/createTableBankAccountScript.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/createTableAddressScript.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shared/ICentralBankForBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/event/EventType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Override.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="50" column="18" lean-forward="false" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Screens/account.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Screens/addressBook.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Screens/bankAccount.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -691,14 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/AddressBookController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Screens/addressBookTransaction.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -707,33 +672,6 @@
         <state relative-caret-position="187">
           <caret line="11" column="33" lean-forward="false" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/AddressBookTransactionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="71" lean-forward="true" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/LimitsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/NewTransactionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding>
-            <element signature="e#692#693#0" expanded="false" />
-            <element signature="e#773#774#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -793,34 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/ManageBanksController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#449#450#0" expanded="false" />
-            <element signature="e#1135#1136#0" expanded="false" />
-            <element signature="e#1178#1179#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shared/ICentralBankForClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="56" column="9" lean-forward="false" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shared/IBankForCentralBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="27" column="53" lean-forward="false" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BankServer/bankRunning.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -828,14 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="1773" column="0" lean-forward="false" selection-start-line="1773" selection-start-column="0" selection-end-line="1773" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -848,60 +750,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createTableTransactionScript.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Shared/Address.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="53" column="31" lean-forward="false" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
-          <folding>
-            <marker date="1513536914640" expanded="true" signature="1485:1521" ph="SELECT * FRO... adminaccount" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/ScreensController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1115">
-          <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/ClientMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="89" column="13" lean-forward="false" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/CreateBankController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="29" column="25" lean-forward="false" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/AccountController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -914,101 +766,321 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/IRemotePropertyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BankServer/BankMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="73" column="54" lean-forward="true" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/AccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="110" column="17" lean-forward="false" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/AddressBookTransactionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/AddressBookController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Controllers/BankAccountController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="52" column="58" lean-forward="false" selection-start-line="52" selection-start-column="58" selection-end-line="52" selection-end-column="58" />
+        <state relative-caret-position="357">
+          <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/ClientMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="100" column="48" lean-forward="true" selection-start-line="100" selection-start-column="48" selection-end-line="100" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/ScreensController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="e#1073#1074#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="1770" column="0" lean-forward="false" selection-start-line="1770" selection-start-column="0" selection-end-line="1770" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/LimitsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="26" column="53" lean-forward="false" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/NewTransactionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="39" column="24" lean-forward="true" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+          <folding>
+            <element signature="e#2694#2695#0" expanded="false" />
+            <element signature="e#2737#2738#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BankServer/BankAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="129" column="16" lean-forward="false" selection-start-line="129" selection-start-column="16" selection-end-line="129" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/ICentralBankForBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/ICentralBankForSession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Shared/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CentralBankServer/CentralBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankServer/Bank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="36" column="44" lean-forward="false" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="44" />
+        <state relative-caret-position="183">
+          <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
           <folding>
-            <element signature="e#951#952#0" expanded="true" />
-            <element signature="e#1012#1013#0" expanded="true" />
+            <element signature="e#445#446#0" expanded="false" />
+            <element signature="e#474#475#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankServer/BankMain.java">
+    <entry file="file://$PROJECT_DIR$/src/Shared/IBankForCentralBank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        <state relative-caret-position="228">
+          <caret line="56" column="56" lean-forward="false" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Shared/IBankForClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="1768">
+          <caret line="122" column="9" lean-forward="false" selection-start-line="122" selection-start-column="9" selection-end-line="122" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/CreateBankController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1532">
-          <caret line="50" column="31" lean-forward="false" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+        <state relative-caret-position="347">
+          <caret line="33" column="101" lean-forward="false" selection-start-line="33" selection-start-column="101" selection-end-line="33" selection-end-column="101" />
+          <folding>
+            <element signature="e#1269#1270#0" expanded="false" />
+            <element signature="e#1312#1313#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createTableBankAccountScript.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankServer/BankAccount.java">
+    <entry file="file://$PROJECT_DIR$/createTableAddressScript.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+        <state relative-caret-position="170">
+          <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BankServer/DatabaseBankServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="207" column="1" lean-forward="true" selection-start-line="207" selection-start-column="1" selection-end-line="207" selection-end-column="1" />
+        <state relative-caret-position="-1880">
+          <caret line="111" column="20" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
           <folding>
-            <marker date="1513955555933" expanded="true" signature="1566:1594" ph="SELECT * FRO... bank" />
-            <marker date="1513955555933" expanded="true" signature="1566:1611" ph="SELECT * FRO... bank" />
-            <marker date="1513955555933" expanded="true" signature="2328:2379" ph="UPDATE bankieren.bank... " />
-            <marker date="1513955555933" expanded="true" signature="2787:2838" ph="UPDATE bankieren.bank... " />
-            <marker date="1513955555933" expanded="true" signature="3367:3391" ph="SELECT * FRO... missingValue" />
-            <marker date="1513955555933" expanded="true" signature="3367:3447" ph="SELECT * FRO... bank" />
-            <marker date="1513955555933" expanded="true" signature="3367:3465" ph="SELECT * FRO... missingValue_bankaccount" />
-            <marker date="1513955555933" expanded="true" signature="4819:4908" ph="SELECT * FRO... missingValue_address" />
-            <marker date="1513955555933" expanded="true" signature="5410:5503" ph="SELECT * FRO... missingValue_transaction" />
-            <marker date="1513955555933" expanded="true" signature="6174:6279" ph="INSERT INTO bankieren.abna_bankaccount... " />
-            <marker date="1513955555933" expanded="true" signature="7296:7373" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
-            <marker date="1513955555933" expanded="true" signature="7872:7959" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
+            <element signature="imports" expanded="true" />
+            <marker date="1513976403331" expanded="true" signature="1624:1652" ph="SELECT * FRO... bank" />
+            <marker date="1513976403331" expanded="true" signature="1624:1669" ph="SELECT * FRO... bank" />
+            <marker date="1513976403331" expanded="true" signature="2424:2452" ph="SELECT * FRO... bank" />
+            <marker date="1513976403331" expanded="true" signature="3169:3220" ph="UPDATE bankieren.bank... " />
+            <marker date="1513976403331" expanded="true" signature="3661:3712" ph="UPDATE bankieren.bank... " />
+            <marker date="1513976403331" expanded="true" signature="4231:4255" ph="SELECT * FRO... missingValue" />
+            <marker date="1513976403331" expanded="true" signature="4231:4311" ph="SELECT * FRO... bank" />
+            <marker date="1513976403331" expanded="true" signature="4231:4329" ph="SELECT * FRO... missingValue_bankaccount" />
+            <marker date="1513976403331" expanded="true" signature="5683:5772" ph="SELECT * FRO... missingValue_address" />
+            <marker date="1513976403331" expanded="true" signature="6274:6367" ph="SELECT * FRO... missingValue_transaction" />
+            <marker date="1513976403331" expanded="true" signature="7047:7124" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
+            <marker date="1513976403331" expanded="true" signature="7654:7741" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
+            <marker date="1513976403331" expanded="true" signature="8399:8416" ph="UPDATE bankieren.missingValue... " />
+            <marker date="1513976403331" expanded="true" signature="8399:8488" ph="UPDATE bankieren.\&quot; + shortcut.toLowerCase() + \&quot;... " />
+            <marker date="1513976403331" expanded="true" signature="9311:9392" ph="SELECT * FRO... missingValue_bankaccount" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BankServer/Session.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="221">
+          <caret line="120" column="51" lean-forward="false" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createTableTransactionScript.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BankServer/Bank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="28" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="18" selection-end-column="28" />
           <folding>
-            <element signature="e#682#683#0" expanded="true" />
-            <element signature="e#738#739#0" expanded="true" />
+            <element signature="e#951#952#0" expanded="true" />
+            <element signature="e#1012#1013#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+            <element signature="e#1154#1155#0" expanded="true" />
+            <element signature="e#1846#1847#0" expanded="true" />
+            <element signature="e#1886#1887#0" expanded="true" />
+            <element signature="e#6073#6074#0" expanded="true" />
+            <element signature="e#6100#6101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Controllers/ManageBanksController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="30" column="56" lean-forward="false" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="103" column="20" lean-forward="true" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/ICentralBankForClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="83" column="27" lean-forward="false" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/TempBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CentralBankServer/DatabaseCentralBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="222" column="0" lean-forward="false" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1513983013258" expanded="true" signature="1496:1532" ph="SELECT * FRO... adminaccount" />
+            <marker date="1513983013258" expanded="true" signature="2152:2233" ph="SELECT * FRO... missingValue_bankaccount" />
+            <marker date="1513983013258" expanded="true" signature="2881:2986" ph="INSERT INTO bankieren.missingValue_bankaccount... " />
+            <marker date="1513983013258" expanded="true" signature="3836:3895" ph="SELECT * FRO... bank" />
+            <marker date="1513983013258" expanded="true" signature="4460:4517" ph="SELECT * FRO... missingValue_bankaccount" />
+            <marker date="1513983013258" expanded="true" signature="4986:5009" ph="CREATE TABLE... bankieren." />
+            <marker date="1513983013258" expanded="true" signature="4986:5655" ph="CREATE TABLE... ingb_bankaccount" />
+            <marker date="1513983013258" expanded="true" signature="5975:5998" ph="CREATE TABLE... bankieren." />
+            <marker date="1513983013258" expanded="true" signature="5975:6231" ph="CREATE TABLE... bankieren._address" />
+            <marker date="1513983013258" expanded="true" signature="6342:6364" ph="ALTER TABLE bankieren.... " />
+            <marker date="1513983013258" expanded="true" signature="6342:6430" ph="ALTER TABLE bankieren.missingValue_address... " />
+            <marker date="1513983013258" expanded="true" signature="6342:6574" ph="ALTER TABLE bankieren.missingValue_address... " />
+            <marker date="1513983013258" expanded="true" signature="6342:6700" ph="ALTER TABLE `bankieren`.`ingb_address`... " />
+            <marker date="1513983013258" expanded="true" signature="7043:7360" ph="CREATE TABLE... missingValue_transaction" />
+            <marker date="1513983013258" expanded="true" signature="7471:7493" ph="ALTER TABLE bankieren.missingValue_address... " />
+            <marker date="1513983013258" expanded="true" signature="7471:7726" ph="ALTER TABLE bankieren.missingValue_transaction... " />
+            <marker date="1513983013258" expanded="true" signature="7471:7777" ph="ALTER TABLE bankieren.... " />
+            <marker date="1513983013258" expanded="true" signature="7471:7837" ph="ALTER TABLE bankieren.missingValue_transaction... " />
+            <marker date="1513983013258" expanded="true" signature="7821:7837" ph="UPDATE NO... " />
+            <marker date="1513983013258" expanded="true" signature="8166:8207" ph="DELETE FROM bankieren.bank... " />
+            <marker date="1513983013258" expanded="true" signature="8580:8601" ph="DROP TABLE b... " />
+            <marker date="1513983013258" expanded="true" signature="8580:8629" ph="DROP TABLE b... " />
+            <marker date="1513983013258" expanded="true" signature="8949:8987" ph="CREATE TABLE... missingValue_address" />
+            <marker date="1513983013258" expanded="true" signature="8949:8994" ph="DROP TABLE b... " />
+            <marker date="1513983013258" expanded="true" signature="9318:9339" ph="DROP TABLE b... " />
+            <marker date="1513983013258" expanded="true" signature="9318:9356" ph="CREATE TABLE... missingValue_transaction" />
+            <marker date="1513983013258" expanded="true" signature="9318:9367" ph="DROP TABLE b... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CentralBankServer/CentralBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="104" column="54" lean-forward="true" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
+          <folding>
+            <element signature="e#4315#4316#0" expanded="true" />
+            <element signature="e#4351#4352#0" expanded="true" />
+            <element signature="e#4423#4424#0" expanded="true" />
+            <element signature="e#4462#4463#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -114,13 +114,12 @@ public class BankAccount {
         this.transactionHistory.add(transaction);
     }
 
-    public void makeTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) {
-        amount -= amount + amount;
-        changeAmount(amount);
-        transactionHistory.add(new Transaction(new Date(), ibanReceiver, amount, description));
+    public void makeTransaction(String nameReceiver, Transaction transaction, boolean addToAddress) {
+        changeAmount(transaction.getAmount());
+        transactionHistory.add(transaction);
 
         if (addToAddress) {
-            addressbook.add(new Address(nameReceiver, ibanReceiver));
+            addressbook.add(new Address(nameReceiver, transaction.getIban()));
         }
     }
 

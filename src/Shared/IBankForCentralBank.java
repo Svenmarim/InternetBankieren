@@ -30,6 +30,13 @@ public interface IBankForCentralBank extends Remote {
     List<IBankForClient> getSessions() throws RemoteException;
 
     /**
+     * Method for getting all the banks
+     * @return The list of all the banks
+     * @throws RemoteException for exception with RMI
+     */
+    List<IBankForCentralBank> getAllBanks() throws RemoteException;
+
+    /**
      * Method to log the client in on the app
      * @param iban Identical bank account number
      * @param hashedPassword The password for the clients account but then hashed
@@ -48,10 +55,9 @@ public interface IBankForCentralBank extends Remote {
     /**
      * Method to send the transaction from central bank to bank
      * @param iban Identical account number for receiver
-     * @param name name for receiver
      * @param transaction transaction history to be added to bank account receiver
      * @return if transaction was succeeded
      * @throws RemoteException for exception with RMI
      */
-    boolean transaction(String iban, String name, Transaction transaction) throws RemoteException;
+    boolean transaction(String iban, Transaction transaction) throws RemoteException;
 }

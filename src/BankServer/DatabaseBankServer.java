@@ -1,6 +1,7 @@
 package BankServer;
 
 import Shared.Address;
+import Shared.IBankForCentralBank;
 import Shared.Transaction;
 
 import java.io.FileInputStream;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.sql.*;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -71,6 +73,27 @@ public class DatabaseBankServer {
         return banks;
     }
 
+    public List<IBankForCentralBank> getAllBanks() {
+        List<IBankForCentralBank> banks = new ArrayList<>();
+        setConnection();
+        try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren.bank")) {
+            try (ResultSet myRs = myStmt.executeQuery()) {
+                while (myRs.next()) {
+                    String name = myRs.getString("name");
+                    String shortcut = myRs.getString("shortcut");
+                    banks.add(new Bank(name, shortcut));
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return banks;
+    }
+
     public boolean setBankOnline(Bank bank) {
         int rowsAffected = 0;
         setConnection();
@@ -85,23 +108,24 @@ public class DatabaseBankServer {
         return rowsAffected == 1;
     }
 
-    public void setBankOffline(Bank bank) {
+    public boolean setBankOffline(Bank bank) {
+        int rowsAffected = 0;
         setConnection();
         try (PreparedStatement myStmt = conn.prepareStatement("UPDATE bankieren.bank SET online = 0 WHERE name = ?")) {
             myStmt.setString(1, bank.getName());
-            myStmt.executeUpdate();
+            rowsAffected = myStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
-            System.out.println("Bank: Bank offline in database");
         }
-        System.exit(0);
+        return rowsAffected == 1;
     }
 
-    public BankAccount login(String iban, String hashedPassword, String shortcut) {
+    public BankAccount login(String iban, String hashedPassword) {
         BankAccount bankAccount = null;
         setConnection();
+        String shortcut = iban.substring(4, 8);
         try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren." + shortcut.toLowerCase() + "_bankaccount WHERE iban = ? AND password = ?")) {
             myStmt.setString(1, iban);
             myStmt.setString(2, hashedPassword);
@@ -154,30 +178,9 @@ public class DatabaseBankServer {
         return bankAccount;
     }
 
-    public void insertBankAccount(BankAccount bankAccount, String hashedPassword, String shortcut){
+    public void insertAddress(String iban, Address address){
         setConnection();
-        try (PreparedStatement myStmt = conn.prepareStatement("INSERT INTO bankieren." + shortcut.toLowerCase() + "_bankaccount VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-            myStmt.setString(1, bankAccount.getIban());
-            myStmt.setString(2, hashedPassword);
-            myStmt.setDouble(3, bankAccount.getAmount());
-            myStmt.setString(4, bankAccount.getFirstName());
-            myStmt.setString(5, bankAccount.getLastName());
-            myStmt.setString(6, bankAccount.getPostalCode());
-            myStmt.setInt(7, bankAccount.getHouseNumber());
-            myStmt.setDate(8, (Date)bankAccount.getDateOfBirth());
-            myStmt.setString(9, bankAccount.getEmail());
-            myStmt.setDouble(10, bankAccount.getLimitInAddressbook());
-            myStmt.setDouble(11, bankAccount.getLimitOutAddressbook());
-            myStmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-    }
-
-    public void insertAddress(String iban, Address address, String shortcut){
-        setConnection();
+        String shortcut = iban.substring(4, 8);
         try (PreparedStatement myStmt = conn.prepareStatement("INSERT INTO bankieren." + shortcut.toLowerCase() + "_address VALUES (?, ?, ?)")) {
             myStmt.setString(1, address.getIban());
             myStmt.setString(2, iban);
@@ -190,11 +193,12 @@ public class DatabaseBankServer {
         }
     }
 
-    public void insertTransaction(String iban, Transaction transaction, String shortcut){
+    public void insertTransaction(String iban, Transaction transaction){
         setConnection();
+        String shortcut = iban.substring(4, 8);
         try (PreparedStatement myStmt = conn.prepareStatement("INSERT INTO bankieren." + shortcut.toLowerCase() + "_transaction VALUES (?, ?, ?, ?, ?)")) {
             myStmt.setString(1, iban);
-            myStmt.setDate(2, (Date)transaction.getDate());
+            myStmt.setDate(2, (java.sql.Date)transaction.getDate());
             myStmt.setString(3, transaction.getIban());
             myStmt.setDouble(4, transaction.getAmount());
             myStmt.setString(5, transaction.getDescription());
@@ -204,5 +208,49 @@ public class DatabaseBankServer {
         } finally {
             closeConnection();
         }
+    }
+
+    public void updateAmount(String iban, double amount) {
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("UPDATE bankieren." + shortcut.toLowerCase() + "_bankaccount SET amount = ? WHERE iban = ?")) {
+            myStmt.setDouble(1, amount);
+            myStmt.setString(2, iban);
+            myStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+    }
+
+    public void deleteBankAccount() {
+    }
+
+    public void editBankAccountLimits(double limitIn, double limitOut) {
+    }
+
+    public void deleteBankAccountAddress(Address address) {
+    }
+
+    public double getAmount(String iban) {
+        double amount = 0;
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren." + shortcut.toLowerCase() + "_bankaccount WHERE iban = ?")) {
+            myStmt.setString(1, iban);
+            ResultSet myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                amount = myRs.getDouble("amount");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return amount;
     }
 }

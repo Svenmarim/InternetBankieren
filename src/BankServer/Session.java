@@ -17,6 +17,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     private Date lastActivity;
     private BankAccount bankAccount;
     private ICentralBankForSession centralBank;
+    private DatabaseBankServer database;
 
     @Override
     public Date getLastActivity() {
@@ -33,9 +34,25 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         return this.bankAccount.getTransactionHistory();
     }
 
+    @Override
+    public Double getLimitIn() {
+        return this.bankAccount.getLimitInAddressbook();
+    }
+
+    @Override
+    public Double getLimitOut() {
+        return this.bankAccount.getLimitOutAddressbook();
+    }
+
+    @Override
+    public String getIban() {
+        return this.bankAccount.getIban();
+    }
+
     public Session(BankAccount bankAccount) throws RemoteException {
         this.bankAccount = bankAccount;
         this.lastActivity = new Date();
+        this.database = new DatabaseBankServer();
         getCentralBank();
     }
 
@@ -48,37 +65,45 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
         this.lastActivity = new Date();
-        //TODO Edit account in database
+        database.editBankAccount(hashedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
         bankAccount.editAccount(firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
     }
 
     @Override
     public void deleteBankAccount() {
         this.lastActivity = new Date();
-        //TODO Delete account in database
+        database.deleteBankAccount();
         this.bankAccount = null;
     }
 
     @Override
     public void editBankAccountsLimits(double limitIn, double limitOut) {
         this.lastActivity = new Date();
-        //TODO Edit limits in database
+        database.editBankAccountLimits(limitIn, limitOut);
         bankAccount.editLimits(limitIn, limitOut);
     }
 
     @Override
     public void deleteBankAccountsAddress(Address address) {
         this.lastActivity = new Date();
-        //TODO Delete bank accounts address in database
+        database.deleteBankAccountAddress(address);
         bankAccount.deleteAddress(address);
     }
 
     @Override
     public boolean makeBankAccountsTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
         this.lastActivity = new Date();
-        Transaction transaction = new Transaction(new Date(), bankAccount.getIban(), amount, description);
-        if (centralBank.transaction(ibanReceiver, nameReceiver, transaction)){
-            bankAccount.makeTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
+        Transaction transactionReceiver = new Transaction(new Date(), bankAccount.getIban(), amount, description);
+        if (centralBank.transaction(ibanReceiver, transactionReceiver)){
+            amount -= amount + amount;
+            Transaction transaction = new Transaction(new Date(), ibanReceiver, amount, description);
+            bankAccount.makeTransaction(nameReceiver, transaction, addToAddress);
+            //Make changes to database
+            database.insertTransaction(bankAccount.getIban(), transaction);
+            database.updateAmount(bankAccount.getIban(), bankAccount.getAmount());
+            if (addToAddress){
+                database.insertAddress(bankAccount.getIban(), new Address(nameReceiver, ibanReceiver));
+            }
             return true;
         }
         return false;
@@ -93,11 +118,13 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public void receiveBankAccountsTransaction(Transaction transaction) {
         bankAccount.receiveTransaction(transaction);
+        //Changes in database happens in Bank class
     }
 
     @Override
     public void changeAmountBankAccount(double amount) {
         bankAccount.changeAmount(amount);
+        database.updateAmount(bankAccount.getIban(), bankAccount.getAmount());
     }
 
     private void getCentralBank() {

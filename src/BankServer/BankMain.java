@@ -71,7 +71,7 @@ public class BankMain extends Application {
             stage.getIcons().add(new Image("file:assets/ideal_logo.jpg"));
             stage.setScene(scene);
             stage.sizeToScene();
-            stage.setOnCloseRequest(event -> database.setBankOffline(bank));
+            stage.setOnCloseRequest(event -> bank.shutDownBank());
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

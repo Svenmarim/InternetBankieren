@@ -10,10 +10,9 @@ public interface ICentralBankForSession extends Remote {
     /**
      * Method to send the transfer from session to central bank
      * @param iban Iban number from receiver
-     * @param name Name of the receiver
      * @param transaction Transfer details for transaction history
      * @return If transfer was succeeded or not
      * @throws RemoteException for exception with RMI
      */
-    boolean transaction(String iban, String name, Transaction transaction) throws RemoteException;
+    boolean transaction(String iban, Transaction transaction) throws RemoteException;
 }

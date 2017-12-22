@@ -7,6 +7,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.rmi.RemoteException;
+
 /**
  * InternetBankieren Created by Sven de Vries on 20-12-2017
  */
@@ -32,8 +34,15 @@ public class NewTransactionController implements IControllers {
         String description = tbDescription.getText();
         boolean addToAddress = cbAddToAddressBook.isSelected();
         if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
-            myController.getClient().makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress);
-            myController.setScreen(ClientMain.screenBankAccountId);
+            try {
+                if (myController.getClient().makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress)){
+                    myController.setScreen(ClientMain.screenBankAccountId);
+                } else {
+                    myController.showErrorMessage("The request is not sended.");
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         } else {
             myController.showErrorMessage("Amount and receiver details can not be empty.");
         }

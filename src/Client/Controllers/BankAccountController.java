@@ -3,6 +3,7 @@ package Client.Controllers;
 import Client.ClientMain;
 import Client.IControllers;
 import Client.ScreensController;
+import Shared.Transaction;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
@@ -10,6 +11,7 @@ import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * InternetBankieren Created by Sven de Vries on 20-12-2017
@@ -48,9 +50,10 @@ public class BankAccountController implements IControllers {
         }
     }
 
-    public void setTransaction(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        dateFormat.format(date); //Set this value in table
+    public void setTransactionHistory(List<Transaction> transactionHistory){
+        //TODO set transaction history
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        dateFormat.format(date);
     }
 
     @Override
