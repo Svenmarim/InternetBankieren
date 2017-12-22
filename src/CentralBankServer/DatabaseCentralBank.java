@@ -5,8 +5,11 @@ import Shared.TempBank;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.rmi.RemoteException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -253,5 +256,23 @@ public class DatabaseCentralBank {
         } finally {
             closeConnection();
         }
+    }
+
+    public List<TempBank> getAllBanks() {
+        List<TempBank> banks = new ArrayList<>();
+        setConnection();
+        try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren.bank")) {
+            ResultSet myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                String name = myRs.getString("name");
+                String shortcut = myRs.getString("shortcut");
+                banks.add(new TempBank(name, shortcut));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return banks;
     }
 }

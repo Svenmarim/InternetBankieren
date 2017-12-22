@@ -41,7 +41,7 @@ public class ManageBanksController implements IControllers {
         }
     }
 
-    public void setBanks(List<IBankForCentralBank> banks){
+    public void setBanks(List<TempBank> banks){
         //TODO set banks
     }
 

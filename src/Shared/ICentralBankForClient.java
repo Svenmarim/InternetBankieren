@@ -17,7 +17,7 @@ public interface ICentralBankForClient extends Remote {
      * @return List of all the banks
      * @throws RemoteException for exception with RMI
      */
-    List<IBankForCentralBank> getAllBanks() throws RemoteException;
+    List<TempBank> getAllBanks() throws RemoteException;
 
     /**
      * Method to create an bank account on a specific bank

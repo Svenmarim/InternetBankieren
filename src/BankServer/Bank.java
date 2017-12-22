@@ -37,11 +37,6 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
         return Collections.unmodifiableList(sessions);
     }
 
-    @Override
-    public List<IBankForCentralBank> getAllBanks(){
-        return Collections.unmodifiableList(database.getAllBanks());
-    }
-
     public Bank(String name, String shortcut) throws RemoteException {
         this.name = name;
         this.shortcut = shortcut;

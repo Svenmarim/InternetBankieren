@@ -118,7 +118,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public void receiveBankAccountsTransaction(Transaction transaction) {
         bankAccount.receiveTransaction(transaction);
-        //Changes in database happens in Bank class
+        //The updates of values in database, happens in Bank class
     }
 
     @Override

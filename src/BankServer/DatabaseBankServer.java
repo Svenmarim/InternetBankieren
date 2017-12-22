@@ -73,27 +73,6 @@ public class DatabaseBankServer {
         return banks;
     }
 
-    public List<IBankForCentralBank> getAllBanks() {
-        List<IBankForCentralBank> banks = new ArrayList<>();
-        setConnection();
-        try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren.bank")) {
-            try (ResultSet myRs = myStmt.executeQuery()) {
-                while (myRs.next()) {
-                    String name = myRs.getString("name");
-                    String shortcut = myRs.getString("shortcut");
-                    banks.add(new Bank(name, shortcut));
-                }
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-        return banks;
-    }
-
     public boolean setBankOnline(Bank bank) {
         int rowsAffected = 0;
         setConnection();

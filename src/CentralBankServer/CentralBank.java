@@ -44,8 +44,8 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public List<IBankForCentralBank> getAllBanks() throws RemoteException {
-        return banks.get(0).getAllBanks();
+    public List<TempBank> getAllBanks() {
+        return database.getAllBanks();
     }
 
     public CentralBank() throws RemoteException {

@@ -60,7 +60,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         return null;
     }
 
-    public List<IBankForCentralBank> getBanks() {
+    public List<TempBank> getBanks() {
         try {
             return centralBank.getAllBanks();
         } catch (RemoteException e) {
