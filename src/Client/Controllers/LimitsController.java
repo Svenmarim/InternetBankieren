@@ -34,17 +34,23 @@ public class LimitsController implements IControllers {
         }
     }
 
-    public void setLimits(double limitIn, double limitOut) {
-        int inEuro = (int) limitIn;
-        int inCent = (int) ((limitIn - inEuro) * 100);
+    public void setLimits() {
+        try {
+            double limitIn = myController.getClient().getLimitIn();
+            double limitOut = myController.getClient().getLimitOut();
+            int inEuro = (int) limitIn;
+            int inCent = (int) ((limitIn - inEuro) * 100);
 
-        int outEuro = (int) limitOut;
-        int outCent = (int) ((limitOut - outEuro) * 100);
+            int outEuro = (int) limitOut;
+            int outCent = (int) ((limitOut - outEuro) * 100);
 
-        tbEuroIn.setText(((Integer)inEuro).toString());
-        tbCentIn.setText(String.format("%02d", inCent));
-        tbEuroOut.setText(((Integer)outEuro).toString());
-        tbCentOut.setText(String.format("%02d", outCent));
+            tbEuroIn.setText(((Integer)inEuro).toString());
+            tbCentIn.setText(String.format("%02d", inCent));
+            tbEuroOut.setText(((Integer)outEuro).toString());
+            tbCentOut.setText(String.format("%02d", outCent));
+        } catch (RemoteException e) {
+            myController.showErrorMessage(e.getMessage());
+        }
     }
 
     @Override

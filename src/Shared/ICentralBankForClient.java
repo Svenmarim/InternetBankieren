@@ -23,7 +23,7 @@ public interface ICentralBankForClient extends Remote {
      * Method to create an bank account on a specific bank
      *
      * @param bankName       The bank the account is made for
-     * @param hashedPassword The password from the account
+     * @param encryptedPassword The password from the account
      * @param firstName      The first name of the account holder
      * @param lastName       The last name of the account holder
      * @param postalCode     The postal code of the account holder
@@ -33,26 +33,26 @@ public interface ICentralBankForClient extends Remote {
      * @return The generated iban number
      * @throws RemoteException for exception with RMI
      */
-    String createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
+    String createBankAccount(String bankName, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
 
     /**
      * Method to login the admin
      *
-     * @param hashedPassword The password of the admin account
+     * @param encryptedPassword The password of the admin account
      * @return If login was succeeded or not
      * @throws RemoteException for exception with RMI
      */
-    boolean loginAdmin(String hashedPassword) throws RemoteException;
+    boolean loginAdmin(String encryptedPassword) throws RemoteException;
 
     /**
      * Method to login the client
      *
      * @param iban           Iban number from the clients account
-     * @param hashedPassword Password from the clients account
+     * @param encryptedPassword Password from the clients account
      * @return The session from the client he just logged in to
      * @throws RemoteException for exception with RMI
      */
-    IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException;
+    IBankForClient loginClient(String iban, String encryptedPassword) throws RemoteException;
 
     /**
      * Method to logout the admin

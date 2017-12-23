@@ -52,6 +52,13 @@ public interface IBankForClient extends Remote {
     String getIban() throws RemoteException;
 
     /**
+     * Method for getting the account details
+     * @return The account details
+     * @throws RemoteException for exception with RMI
+     */
+    TempAccount getAccountDetails() throws RemoteException;
+
+    /**
      * Method to check if session is still valid
      * @return If session is still valid or not
      * @throws RemoteException for exception with RMI
@@ -60,7 +67,7 @@ public interface IBankForClient extends Remote {
 
     /**
      * Method to change account details
-     * @param hashedPassword Hashed password of account holder
+     * @param encryptedPassword Encrypted password of account holder
      * @param firstName First name of account holder
      * @param lastName Last name of account holder
      * @param postalCode Postal code of account holder
@@ -69,7 +76,7 @@ public interface IBankForClient extends Remote {
      * @param email Email of account holder
      * @throws RemoteException for exception with RMI
      */
-    void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
+    void editBankAccount(String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
 
     /**
      * Method to delete own bank account

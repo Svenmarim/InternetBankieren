@@ -55,11 +55,20 @@ public class NewTransactionController implements IControllers {
         String description = tbDescription.getText();
         boolean addToAddress = cbAddToAddressBook.isSelected();
         if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
-            myController.getClient().makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress);
-            myController.setScreen(ClientMain.screenBankAccountId);
+            try {
+                if (myController.getClient().makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress)){
+                    myController.setScreen(ClientMain.screenBankAccountId);
+                }
+            } catch (RemoteException e) {
+                myController.showErrorMessage(e.getMessage());
+            }
         } else {
             myController.showErrorMessage("Amount and receiver details can not be empty.");
         }
+    }
+
+    public void setCheckboxEnable(){
+        cbAddToAddressBook.setDisable(false);
     }
 
     @Override

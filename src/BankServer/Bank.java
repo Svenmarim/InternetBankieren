@@ -45,8 +45,8 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     }
 
     @Override
-    public IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException {
-        BankAccount bankAccount = database.login(iban.toUpperCase(), hashedPassword);
+    public IBankForClient loginClient(String iban, String encryptedPassword) throws RemoteException {
+        BankAccount bankAccount = database.login(iban.toUpperCase(), encryptedPassword);
         if (bankAccount != null) {
             Session session = new Session(bankAccount);
             sessions.add(session);

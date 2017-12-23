@@ -3,6 +3,7 @@ package Client.Controllers;
 import Client.ClientMain;
 import Client.IControllers;
 import Client.ScreensController;
+import Shared.TempAccount;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -68,5 +69,14 @@ public class AccountController implements IControllers {
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
+    }
+
+    public void setAccountDetails() {
+        try {
+            TempAccount account = myController.getClient().getAccountDetails();
+
+        } catch (RemoteException e) {
+            myController.showErrorMessage(e.getMessage());
+        }
     }
 }

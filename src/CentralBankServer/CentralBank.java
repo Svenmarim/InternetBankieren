@@ -54,16 +54,16 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public String createBankAccount(String bankName, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+    public String createBankAccount(String bankName, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
         //TODO Generate iban
-//        database.insertBankAccount(iban, hashedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+//        database.insertBankAccount(iban, encryptedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
         return null; //return iban
     }
 
     @Override
-    public boolean loginAdmin(String hashedPassword) {
+    public boolean loginAdmin(String encryptedPassword) {
         if (!adminLoggedIn) {
-            if (database.loginAdmin(hashedPassword)) {
+            if (database.loginAdmin(encryptedPassword)) {
                 this.adminLoggedIn = true;
                 return true;
             }

@@ -44,7 +44,7 @@
          </font>
       </Label>
       <TextField fx:id="tbNameReceiver" layoutX="99.0" layoutY="98.0" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 5;" />
-      <TextField fx:id="tbIbanReceiver" layoutX="99.0" layoutY="130.0" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 5;" />
+      <TextField fx:id="tbIbanReceiver" layoutX="99.0" layoutY="130.0" onKeyPressed="#setCheckboxEnable" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 5;" />
       <Button layoutX="274.0" layoutY="98.0" mnemonicParsing="false" onAction="#openAddressBookTransaction" prefHeight="25.0" prefWidth="106.0" style="-fx-background-radius: 5;" text="Address book">
          <font>
             <Font name="Arial" size="14.0" />

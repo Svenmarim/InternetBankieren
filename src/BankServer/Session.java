@@ -49,6 +49,11 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         return this.bankAccount.getIban();
     }
 
+    @Override
+    public TempAccount getAccountDetails() {
+        return database.getAccountDetails(bankAccount.getIban());
+    }
+
     public Session(BankAccount bankAccount) throws RemoteException {
         this.bankAccount = bankAccount;
         this.lastActivity = new Date();
@@ -63,30 +68,30 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     }
 
     @Override
-    public void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+    public void editBankAccount(String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
         this.lastActivity = new Date();
-        database.editBankAccount(hashedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+        database.editBankAccount(encryptedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email, bankAccount.getIban());
         bankAccount.editAccount(firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
     }
 
     @Override
     public void deleteBankAccount() {
         this.lastActivity = new Date();
-        database.deleteBankAccount();
+        database.deleteBankAccount(bankAccount.getIban());
         this.bankAccount = null;
     }
 
     @Override
     public void editBankAccountsLimits(double limitIn, double limitOut) {
         this.lastActivity = new Date();
-        database.editBankAccountLimits(limitIn, limitOut);
+        database.editBankAccountLimits(limitIn, limitOut, bankAccount.getIban());
         bankAccount.editLimits(limitIn, limitOut);
     }
 
     @Override
     public void deleteBankAccountsAddress(Address address) {
         this.lastActivity = new Date();
-        database.deleteBankAccountAddress(address);
+        database.deleteBankAccountAddress(address, bankAccount.getIban());
         bankAccount.deleteAddress(address);
     }
 
@@ -96,13 +101,13 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
         Transaction transactionReceiver = new Transaction(new Date(), bankAccount.getIban(), amount, description);
         if (centralBank.transaction(ibanReceiver, transactionReceiver)){
             amount -= amount + amount;
-            Transaction transaction = new Transaction(new Date(), ibanReceiver, amount, description);
+            Transaction transaction = new Transaction(new Date(), ibanReceiver.toUpperCase(), amount, description);
             bankAccount.makeTransaction(nameReceiver, transaction, addToAddress);
             //Make changes to database
             database.insertTransaction(bankAccount.getIban(), transaction);
             database.updateAmount(bankAccount.getIban(), bankAccount.getAmount());
             if (addToAddress){
-                database.insertAddress(bankAccount.getIban(), new Address(nameReceiver, ibanReceiver));
+                database.insertAddress(bankAccount.getIban(), new Address(nameReceiver, ibanReceiver.toUpperCase()));
             }
             return true;
         }

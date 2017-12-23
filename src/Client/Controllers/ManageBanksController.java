@@ -5,7 +5,10 @@ import Client.IControllers;
 import Client.ScreensController;
 import Shared.IBankForCentralBank;
 import Shared.TempBank;
+import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -18,6 +21,8 @@ public class ManageBanksController implements IControllers {
 
     //FXML fields
     public TableView tabelBanks;
+    public TableColumn clmName;
+    public TableColumn clmShortcut;
 
     public void openCreateBank() {
         myController.setScreen(ClientMain.screenCreateBankId);
@@ -27,6 +32,7 @@ public class ManageBanksController implements IControllers {
         try {
             TempBank bank = (TempBank) tabelBanks.getSelectionModel().getSelectedItem();
             myController.getClient().deleteBank(bank);
+            setBanks();
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());
         }
@@ -41,8 +47,15 @@ public class ManageBanksController implements IControllers {
         }
     }
 
-    public void setBanks(List<TempBank> banks){
-        //TODO set banks
+    public void setBanks(){
+        try {
+            List<TempBank> banks = myController.getClient().getBanks();
+            clmName.setCellValueFactory(new PropertyValueFactory<TempBank, String>("name"));
+            clmShortcut.setCellValueFactory(new PropertyValueFactory<TempBank, String>("shortcut"));
+            tabelBanks.setItems((FXCollections.observableArrayList(banks)));
+        } catch (RemoteException e) {
+            myController.showErrorMessage(e.getMessage());
+        }
     }
 
     @Override

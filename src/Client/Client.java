@@ -2,16 +2,17 @@ package Client;
 
 import Shared.Address;
 import Shared.*;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
-import javax.xml.bind.DatatypeConverter;
 import java.beans.PropertyChangeEvent;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -24,49 +25,30 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private IBankForClient session;
     private IRemotePublisherForListener publisherForListener;
 
-    public List<Address> getAddressBook() {
-        try {
-            return session.getAddressbook();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<Address> getAddressBook() throws RemoteException {
+        return session.getAddressbook();
     }
 
-    public List<Transaction> getTransactionHistory() {
-        try {
-            return session.getTransactionHistory();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<Transaction> getTransactionHistory() throws RemoteException {
+        return session.getTransactionHistory();
     }
 
-    public Double getLimitIn() {
-        try {
-            return session.getLimitIn();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Double getLimitIn() throws RemoteException {
+        return session.getLimitIn();
     }
 
-    public Double getLimitOut() {
-        try {
-            return session.getLimitOut();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Double getLimitOut() throws RemoteException {
+        return session.getLimitOut();
     }
 
-    public List<TempBank> getBanks() {
-        try {
-            return centralBank.getAllBanks();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<TempBank> getBanks() throws RemoteException {
+        return centralBank.getAllBanks();
+    }
+
+    public TempAccount getAccountDetails() throws RemoteException {
+        TempAccount account = session.getAccountDetails();
+        account.setPassword(decryptPassword(account.getEncryptedPassword()));
+        return account;
     }
 
     public Client() throws RemoteException {
@@ -75,10 +57,10 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     public boolean login(String iban, String password) throws RemoteException {
         if (iban.equals("admin")) {
-            admin = centralBank.loginAdmin(hashPassword(password));
+            admin = centralBank.loginAdmin(encryptPassword(password));
             return admin;
         } else if (iban.length() == 18) {
-            session = centralBank.loginClient(iban, hashPassword(password));
+            session = centralBank.loginClient(iban, encryptPassword(password));
             if (session != null) {
                 bindClientInRegistry(iban);
             }
@@ -110,12 +92,12 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     }
 
     public boolean createBankAccount(String bankName, String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
-        String iban = centralBank.createBankAccount(bankName, hashPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+        String iban = centralBank.createBankAccount(bankName, encryptPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
         return login(iban, password);
     }
 
     public void editBankAccount(String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
-        session.editBankAccount(hashPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+        session.editBankAccount(encryptPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
     }
 
     public void deleteBankAccount() throws RemoteException {
@@ -128,12 +110,12 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         session.editBankAccountsLimits(limitIn, limitOut);
     }
 
-    public void deleteBankAccountsAddress(Address address) {
-
+    public void deleteBankAccountsAddress(Address address) throws RemoteException {
+        session.deleteBankAccountsAddress(address);
     }
 
-    public void makeBankAccountsTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) {
-
+    public boolean makeBankAccountsTransaction(double amount, String name, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
+        return session.makeBankAccountsTransaction(amount, name, ibanReceiver, description, addToAddress);
     }
 
     public boolean makeBankAccountsRequest(double amount, String name, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
@@ -149,14 +131,20 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    private String hashPassword(String password) {
+    private String encryptPassword(String password) {
+        BASE64Encoder enc = new BASE64Encoder();
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            byte[] digest = md.digest();
-            return DatatypeConverter.printHexBinary(digest).toUpperCase();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            return enc.encode(password.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+    }
+
+    private String decryptPassword(String encryptedPassword) {
+        BASE64Decoder dec = new BASE64Decoder();
+        try {
+            return new String(dec.decodeBuffer(encryptedPassword), "UTF-8");
+        } catch (IOException e) {
             return null;
         }
     }

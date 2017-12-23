@@ -71,21 +71,22 @@ public class ClientMain extends Application {
             case "account":
                 primaryStage.setTitle("Account");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                mainContainer.getAccountController().setAccountDetails();
                 break;
             case "addressBook":
                 primaryStage.setTitle("Address Book");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
-                mainContainer.getAddressBookController().setAddressBook(mainContainer.getClient().getAddressBook());
+                mainContainer.getAddressBookController().setAddressBook();
                 break;
             case "addressBookTransaction":
                 primaryStage.setTitle("Address Book");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenNewTransactionId));
-                mainContainer.getAddressBookTransactionController().setAddressBook(mainContainer.getClient().getAddressBook());
+                mainContainer.getAddressBookTransactionController().setAddressBook();
                 break;
             case "bankAccount":
                 primaryStage.setTitle("Bank Account");
                 primaryStage.setOnCloseRequest(event -> mainContainer.getBankAccountController().logoutClient());
-                mainContainer.getBankAccountController().setTransactionHistory(mainContainer.getClient().getTransactionHistory());
+                mainContainer.getBankAccountController().setTransactionHistory();
                 break;
             case "createBank":
                 primaryStage.setTitle("Create Bank");
@@ -98,7 +99,7 @@ public class ClientMain extends Application {
             case "limits":
                 primaryStage.setTitle("Limits");
                 primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
-                mainContainer.getLimitsController().setLimits(mainContainer.getClient().getLimitIn(), mainContainer.getClient().getLimitOut());
+                mainContainer.getLimitsController().setLimits();
                 break;
             case "login":
                 primaryStage.setTitle("Login");
@@ -107,7 +108,7 @@ public class ClientMain extends Application {
             case "manageBanks":
                 primaryStage.setTitle("Manage Banks");
                 primaryStage.setOnCloseRequest(event -> mainContainer.getManageBanksController().logoutAdmin());
-                mainContainer.getManageBanksController().setBanks(mainContainer.getClient().getBanks());
+                mainContainer.getManageBanksController().setBanks();
                 break;
             case "newTransaction":
                 primaryStage.setTitle("New Transaction");

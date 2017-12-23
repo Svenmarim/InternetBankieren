@@ -5,7 +5,6 @@ import Shared.TempBank;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +49,7 @@ public class DatabaseCentralBank {
         }
     }
 
-    public boolean loginAdmin(String hashedPassword) {
+    public boolean loginAdmin(String encryptedPassword) {
         String passwordInDatabase = null;
         setConnection();
         try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren.adminaccount")) {
@@ -64,7 +63,7 @@ public class DatabaseCentralBank {
         } finally {
             closeConnection();
         }
-        return hashedPassword.equals(passwordInDatabase);
+        return encryptedPassword.equals(passwordInDatabase);
     }
 
     public boolean checkIbanExistence(String iban) {
@@ -85,12 +84,12 @@ public class DatabaseCentralBank {
         return correct;
     }
 
-    public void insertBankAccount(String iban, String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+    public void insertBankAccount(String iban, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
         setConnection();
         String shortcut = iban.substring(4, 8);
         try (PreparedStatement myStmt = conn.prepareStatement("INSERT INTO bankieren." + shortcut.toLowerCase() + "_bankaccount VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             myStmt.setString(1, iban);
-            myStmt.setString(2, hashedPassword);
+            myStmt.setString(2, encryptedPassword);
             myStmt.setDouble(3, 50);
             myStmt.setString(4, firstName);
             myStmt.setString(5, lastName);

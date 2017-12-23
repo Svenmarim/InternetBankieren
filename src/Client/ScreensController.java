@@ -21,6 +21,7 @@ public class ScreensController extends StackPane {
 
     private HashMap<String, Node> screens = new HashMap<>();
     private Client client;
+    private AccountController accountController;
     private NewTransactionController newTransactionController;
     private BankAccountController bankAccountController;
     private ManageBanksController manageBanksController;
@@ -30,6 +31,10 @@ public class ScreensController extends StackPane {
 
     public Client getClient() {
         return this.client;
+    }
+
+    public AccountController getAccountController() {
+        return this.accountController;
     }
 
     public NewTransactionController getNewTransactionController() {
@@ -92,6 +97,8 @@ public class ScreensController extends StackPane {
                 this.addressBookController = (AddressBookController) myScreenController;
             } else if (myScreenController instanceof AddressBookTransactionController) {
                 this.addressBookTransactionController = (AddressBookTransactionController) myScreenController;
+            } else if (myScreenController instanceof AccountController) {
+                this.accountController = (AccountController) myScreenController;
             }
             myScreenController.setScreenParent(this);
             addScreen(name, loadScreen);

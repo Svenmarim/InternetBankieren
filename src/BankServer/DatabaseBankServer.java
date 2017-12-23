@@ -2,6 +2,7 @@ package BankServer;
 
 import Shared.Address;
 import Shared.IBankForCentralBank;
+import Shared.TempAccount;
 import Shared.Transaction;
 
 import java.io.FileInputStream;
@@ -203,16 +204,66 @@ public class DatabaseBankServer {
         }
     }
 
-    public void editBankAccount(String hashedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+    public void editBankAccount(String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email, String iban) {
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("UPDATE bankieren." + shortcut.toLowerCase() + "_bankaccount SET password = ?, firstName = ?, lastName = ?, postalCode = ?, houseNumber = ?, dateOfBirth = ?, email = ? WHERE iban = ?")) {
+            myStmt.setString(1, encryptedPassword);
+            myStmt.setString(2, firstName);
+            myStmt.setString(3, lastName);
+            myStmt.setString(4, postalCode);
+            myStmt.setInt(5, houseNumber);
+            myStmt.setDate(6, (java.sql.Date)dateOfBirth);
+            myStmt.setString(7, email);
+            myStmt.setString(8, iban);
+            myStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
     }
 
-    public void deleteBankAccount() {
+    public void deleteBankAccount(String iban) {
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("DELETE FROM bankieren." + shortcut.toLowerCase() + "_bankaccount WHERE iban = ?")) {
+            myStmt.setString(1, iban);
+            myStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
     }
 
-    public void editBankAccountLimits(double limitIn, double limitOut) {
+    public void editBankAccountLimits(double limitIn, double limitOut, String iban) {
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("UPDATE bankieren." + shortcut.toLowerCase() + "_bankaccount SET limitIn = ?, limitOut = ? WHERE iban = ?")) {
+            myStmt.setDouble(1, limitIn);
+            myStmt.setDouble(2, limitOut);
+            myStmt.setString(3, iban);
+            myStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
     }
 
-    public void deleteBankAccountAddress(Address address) {
+    public void deleteBankAccountAddress(Address address, String iban) {
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("DELETE FROM bankieren." + shortcut.toLowerCase() + "_address WHERE iban = ? AND bankAccount_iban = ?")) {
+            myStmt.setString(1, address.getIban());
+            myStmt.setString(2, iban);
+            myStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
     }
 
     public double getAmount(String iban) {
@@ -231,5 +282,31 @@ public class DatabaseBankServer {
             closeConnection();
         }
         return amount;
+    }
+
+    public TempAccount getAccountDetails(String iban) {
+        TempAccount account = null;
+        setConnection();
+        String shortcut = iban.substring(4, 8);
+        try (PreparedStatement myStmt = conn.prepareStatement("SELECT * FROM bankieren." + shortcut.toLowerCase() + "_bankaccount WHERE iban = ?")) {
+            myStmt.setString(1, iban);
+            ResultSet myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                double amount = myRs.getDouble("amount");
+                String password = myRs.getString("password");
+                String firstName = myRs.getString("firstName");
+                String lastName = myRs.getString("lastName");
+                String postalCode = myRs.getString("postalCode");
+                int houseNumber = myRs.getInt("houseNumber");
+                Date dateOfBirth = myRs.getDate("dateOfBirth");
+                String email = myRs.getString("email");
+                account = new TempAccount(amount, iban, password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return account;
     }
 }

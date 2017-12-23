@@ -4,8 +4,11 @@ import Client.ClientMain;
 import Client.IControllers;
 import Client.ScreensController;
 import Shared.Transaction;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.rmi.RemoteException;
 import java.text.DateFormat;
@@ -24,6 +27,10 @@ public class BankAccountController implements IControllers {
     public Label lbIban;
     public Label lbAmount;
     public TableView tabelTransactions;
+    public TableColumn clmDate;
+    public TableColumn clmIban;
+    public TableColumn clmAmount;
+    public TableColumn clmDescription;
 
     public void openAccount() {
         myController.setScreen(ClientMain.screenAccountId);
@@ -50,10 +57,19 @@ public class BankAccountController implements IControllers {
         }
     }
 
-    public void setTransactionHistory(List<Transaction> transactionHistory){
-        //TODO set transaction history
-//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//        dateFormat.format(date);
+    public void setTransactionHistory(){
+        try {
+            List<Transaction> transactionHistory = myController.getClient().getTransactionHistory();
+            clmDate.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("date"));
+            clmIban.setCellValueFactory(new PropertyValueFactory<Transaction, String>("iban"));
+            clmAmount.setCellValueFactory(new PropertyValueFactory<Transaction, Double>("amount"));
+            clmDescription.setCellValueFactory(new PropertyValueFactory<Transaction, String>("description"));
+            tabelTransactions.setItems((FXCollections.observableArrayList(transactionHistory)));
+//            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            dateFormat.format(date);
+        } catch (RemoteException e) {
+            myController.showErrorMessage(e.getMessage());
+        }
     }
 
     @Override

@@ -32,11 +32,11 @@ public interface IBankForCentralBank extends Remote {
     /**
      * Method to log the client in on the app
      * @param iban Identical bank account number
-     * @param hashedPassword The password for the clients account but then hashed
+     * @param encryptedPassword The password for the clients account but then encrypted
      * @return Current session for client to work with
      * @throws RemoteException for exception with RMI
      */
-    IBankForClient loginClient(String iban, String hashedPassword) throws RemoteException;
+    IBankForClient loginClient(String iban, String encryptedPassword) throws RemoteException;
 
     /**
      * Method for logging out the client
