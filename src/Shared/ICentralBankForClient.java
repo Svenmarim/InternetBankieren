@@ -22,7 +22,7 @@ public interface ICentralBankForClient extends Remote {
     /**
      * Method to create an bank account on a specific bank
      *
-     * @param bankName       The bank the account is made for
+     * @param bank       The bank the account is made for
      * @param encryptedPassword The password from the account
      * @param firstName      The first name of the account holder
      * @param lastName       The last name of the account holder
@@ -33,7 +33,7 @@ public interface ICentralBankForClient extends Remote {
      * @return The generated iban number
      * @throws RemoteException for exception with RMI
      */
-    String createBankAccount(String bankName, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
+    String createBankAccount(TempBank bank, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException;
 
     /**
      * Method to login the admin

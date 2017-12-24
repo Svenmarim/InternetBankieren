@@ -47,7 +47,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     public TempAccount getAccountDetails() throws RemoteException {
         TempAccount account = session.getAccountDetails();
-        account.setPassword(decryptPassword(account.getEncryptedPassword()));
+        account.setPassword(decryptPassword(account.getPassword()));
         return account;
     }
 
@@ -91,8 +91,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
     }
 
-    public boolean createBankAccount(String bankName, String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
-        String iban = centralBank.createBankAccount(bankName, encryptPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+    public boolean createBankAccount(TempBank bank, String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {
+        String iban = centralBank.createBankAccount(bank, encryptPassword(password), firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
         return login(iban, password);
     }
 

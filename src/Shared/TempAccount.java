@@ -9,7 +9,7 @@ import java.util.Date;
 public class TempAccount implements Serializable {
     private double amount;
     private String iban;
-    private String encryptedPassword;
+    private String password;
     private String firstName;
     private String lastName;
     private String postalCode;
@@ -25,8 +25,8 @@ public class TempAccount implements Serializable {
         return iban;
     }
 
-    public String getEncryptedPassword() {
-        return encryptedPassword;
+    public String getPassword() {
+        return password;
     }
 
     public String getFirstName() {
@@ -54,7 +54,7 @@ public class TempAccount implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.encryptedPassword = password;
+        this.password = password;
     }
 
     public TempAccount(double amount, String iban, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
@@ -62,7 +62,7 @@ public class TempAccount implements Serializable {
         this.amount = amount;
         this.iban = iban;
 
-        this.encryptedPassword = encryptedPassword;
+        this.password = encryptedPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.postalCode = postalCode;

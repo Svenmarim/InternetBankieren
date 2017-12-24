@@ -3,6 +3,7 @@ package Client.Controllers;
 import Client.ClientMain;
 import Client.IControllers;
 import Client.ScreensController;
+import Shared.TempAccount;
 import Shared.Transaction;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
@@ -52,6 +53,17 @@ public class BankAccountController implements IControllers {
         try {
             myController.getClient().logout();
             myController.setScreen(ClientMain.screenLoginId);
+        } catch (RemoteException e) {
+            myController.showErrorMessage(e.getMessage());
+        }
+    }
+
+    public void setAccountDetails(){
+        try {
+            TempAccount account = myController.getClient().getAccountDetails();
+            lbName.setText(account.getFirstName() + " " + account.getLastName());
+            lbIban.setText(account.getIban());
+            lbAmount.setText(String.valueOf(account.getAmount()));
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());
         }

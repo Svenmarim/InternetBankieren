@@ -3,6 +3,7 @@ package Client.Controllers;
 import Client.ClientMain;
 import Client.IControllers;
 import Client.ScreensController;
+import Shared.TempBank;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
@@ -19,7 +20,7 @@ public class CreateBankAccountController implements IControllers {
     private ScreensController myController;
 
     //FXML fields
-    public ComboBox cmbbank;
+    public ComboBox cmbBank;
     public PasswordField tbPassword;
     public PasswordField tbRepeatPassword;
     public TextField tbFirstName;
@@ -28,6 +29,15 @@ public class CreateBankAccountController implements IControllers {
     public TextField tbHouseNumber;
     public DatePicker dtpDateOfBirth;
     public TextField tbEmail;
+
+    public void setBanksInComboBox() {
+        cmbBank.getItems().clear();
+        try {
+            cmbBank.getItems().addAll(myController.getClient().getBanks());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void createBankAccount() {
         String password = tbPassword.getText();
@@ -38,11 +48,11 @@ public class CreateBankAccountController implements IControllers {
         int houseNumber = Integer.parseInt(tbHouseNumber.getText());
         Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         String email = tbEmail.getText();
-        String bankName = cmbbank.getValue().toString();
-        if (password.equals(passwordRepeat) && !password.equals("")){
-            if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && !bankName.equals("")){
+        TempBank bank = (TempBank) cmbBank.getValue();
+        if (password.equals(passwordRepeat) && !password.equals("")) {
+            if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && bank != null) {
                 try {
-                    if (myController.getClient().createBankAccount(bankName, password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email)){
+                    if (myController.getClient().createBankAccount(bank, password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email)) {
                         myController.setScreen(ClientMain.screenBankAccountId);
                     } else {
                         myController.showErrorMessage("Something went wrong with creating your account.");

@@ -54,7 +54,7 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
     }
 
     @Override
-    public String createBankAccount(String bankName, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
+    public String createBankAccount(TempBank bank, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
         //TODO Generate iban
 //        database.insertBankAccount(iban, encryptedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
         return null; //return iban

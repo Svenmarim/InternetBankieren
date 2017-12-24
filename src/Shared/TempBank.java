@@ -21,4 +21,9 @@ public class TempBank implements Serializable {
         this.name = name;
         this.shortcut = shortcut;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

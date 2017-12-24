@@ -23,7 +23,6 @@ import java.net.UnknownHostException;
  */
 public class BankMain extends Application {
     public ComboBox cmbBank;
-    private DatabaseBankServer database;
 
     public static void main(String[] args) {
         launch(args);
@@ -42,10 +41,8 @@ public class BankMain extends Application {
 
     public void setBanksInComboBox() {
         cmbBank.getItems().clear();
-        database = new DatabaseBankServer();
-        for (Bank bank : database.getOfflineBanks()) {
-            cmbBank.getItems().add(bank);
-        }
+        DatabaseBankServer database = new DatabaseBankServer();
+        cmbBank.getItems().addAll(database.getOfflineBanks());
     }
 
     public void chooseBankToStartUpFrom() {

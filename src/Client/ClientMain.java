@@ -70,35 +70,57 @@ public class ClientMain extends Application {
         switch (name){
             case "account":
                 primaryStage.setTitle("Account");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenBankAccountId);
+                });
                 mainContainer.getAccountController().setAccountDetails();
                 break;
             case "addressBook":
                 primaryStage.setTitle("Address Book");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenBankAccountId);
+                });
                 mainContainer.getAddressBookController().setAddressBook();
                 break;
             case "addressBookTransaction":
                 primaryStage.setTitle("Address Book");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenNewTransactionId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenNewTransactionId);
+                });
                 mainContainer.getAddressBookTransactionController().setAddressBook();
                 break;
             case "bankAccount":
                 primaryStage.setTitle("Bank Account");
-                primaryStage.setOnCloseRequest(event -> mainContainer.getBankAccountController().logoutClient());
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.getBankAccountController().logoutClient();
+                });
+                mainContainer.getBankAccountController().setAccountDetails();
                 mainContainer.getBankAccountController().setTransactionHistory();
                 break;
             case "createBank":
                 primaryStage.setTitle("Create Bank");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenManageBanksId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenManageBanksId);
+                });
                 break;
             case "createBankAccount":
                 primaryStage.setTitle("Create Bank Account");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenLoginId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenLoginId);
+                });
                 break;
             case "limits":
                 primaryStage.setTitle("Limits");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenBankAccountId);
+                });
                 mainContainer.getLimitsController().setLimits();
                 break;
             case "login":
@@ -107,12 +129,18 @@ public class ClientMain extends Application {
                 break;
             case "manageBanks":
                 primaryStage.setTitle("Manage Banks");
-                primaryStage.setOnCloseRequest(event -> mainContainer.getManageBanksController().logoutAdmin());
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.getManageBanksController().logoutAdmin();
+                });
                 mainContainer.getManageBanksController().setBanks();
                 break;
             case "newTransaction":
                 primaryStage.setTitle("New Transaction");
-                primaryStage.setOnCloseRequest(event -> mainContainer.setScreen(screenBankAccountId));
+                primaryStage.setOnCloseRequest(event -> {
+                    event.consume();
+                    mainContainer.setScreen(screenBankAccountId);
+                });
                 break;
         }
     }
