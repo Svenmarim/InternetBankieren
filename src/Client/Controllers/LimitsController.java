@@ -21,7 +21,7 @@ public class LimitsController implements IControllers {
 
     public void editBankAccountsLimits() {
         double limitIn = Double.parseDouble(tbEuroIn.getText() + "." + tbCentIn.getText());
-        double limitOut = Double.parseDouble(tbEuroOut.getText() + "." + tbCentOut.getText());
+        double limitOut = Double.parseDouble(tbEuroOut.getText() + "." + tbCentOut.getText());//TODO round to max 2 numbers
         if (limitIn > 0 && limitOut > 0) {
             try {
                 myController.getClient().editBankAccountsLimits(limitIn, limitOut);

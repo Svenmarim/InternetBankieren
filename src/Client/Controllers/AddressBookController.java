@@ -26,6 +26,7 @@ public class AddressBookController implements IControllers {
         try {
             Address address = (Address) tabelAddresses.getSelectionModel().getSelectedItem();
             myController.getClient().deleteBankAccountsAddress(address);
+            setAddressBook();
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());
         }

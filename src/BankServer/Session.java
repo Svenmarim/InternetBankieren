@@ -98,6 +98,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public boolean makeBankAccountsTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
         this.lastActivity = new Date();
+        //TODO if (ibanReceiver is in addressbook && amount < limitIn && amount < bankAccount.getAmount() || ibanReceiver is NOT in addressbook && amount < limitOut && amount < bankAccount.getAmount())
         Transaction transactionReceiver = new Transaction(new Date(), bankAccount.getIban(), amount, description);
         if (centralBank.transaction(ibanReceiver, transactionReceiver)){
             amount -= amount + amount;

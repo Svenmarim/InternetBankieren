@@ -107,7 +107,12 @@ public class BankAccount {
     }
 
     public void deleteAddress(Address address) {
-        this.addressbook.remove(address);
+        for(Address a : addressbook){
+            if (a.getIban().equals(address.getIban())){
+                this.addressbook.remove(a);
+                break;
+            }
+        }
     }
 
     public void addTransaction(Transaction transaction){

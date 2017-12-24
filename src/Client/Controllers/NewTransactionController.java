@@ -28,7 +28,7 @@ public class NewTransactionController implements IControllers {
     }
 
     public void makeBankAccountsRequest() {
-        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText());
+        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText()); //TODO round to max 2 numbers
         String nameReceiver = tbNameReceiver.getText();
         String ibanReceiver = tbIbanReceiver.getText();
         String description = tbDescription.getText();
@@ -49,7 +49,7 @@ public class NewTransactionController implements IControllers {
     }
 
     public void makeBankAccountsTransaction() {
-        double amount = Double.parseDouble(tbEuroAmount.getText() + "," + tbCentAmount.getText());
+        double amount = Double.parseDouble(tbEuroAmount.getText() + "." + tbCentAmount.getText()); //TODO round to max 2 numbers
         String nameReceiver = tbNameReceiver.getText();
         String ibanReceiver = tbIbanReceiver.getText();
         String description = tbDescription.getText();

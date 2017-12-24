@@ -178,7 +178,7 @@ public class DatabaseBankServer {
         String shortcut = iban.substring(4, 8);
         try (PreparedStatement myStmt = conn.prepareStatement("INSERT INTO bankieren." + shortcut.toLowerCase() + "_transaction VALUES (?, ?, ?, ?, ?)")) {
             myStmt.setString(1, iban);
-            myStmt.setDate(2, (java.sql.Date)transaction.getDate());
+            myStmt.setDate(2, new java.sql.Date(transaction.getDate().getTime()));
             myStmt.setString(3, transaction.getIban());
             myStmt.setDouble(4, transaction.getAmount());
             myStmt.setString(5, transaction.getDescription());
@@ -213,7 +213,7 @@ public class DatabaseBankServer {
             myStmt.setString(3, lastName);
             myStmt.setString(4, postalCode);
             myStmt.setInt(5, houseNumber);
-            myStmt.setDate(6, (java.sql.Date)dateOfBirth);
+            myStmt.setDate(6, new java.sql.Date(dateOfBirth.getTime()));
             myStmt.setString(7, email);
             myStmt.setString(8, iban);
             myStmt.executeUpdate();

@@ -9,12 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.rmi.RemoteException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -48,22 +44,26 @@ public class AccountController implements IControllers {
         String firstName = tbFirstName.getText();
         String lastName = tbLastName.getText();
         String postalCode = tbPostalCode.getText();
-        int houseNumber = Integer.parseInt(tbHouseNumber.getText());
-        Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        String email = tbEmail.getText();
-        if (password.equals(passwordRepeat) && !password.equals("")) {
-            if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("")) {
-                try {
-                    myController.getClient().editBankAccount(password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
-                    myController.setScreen(ClientMain.screenBankAccountId);
-                } catch (RemoteException e) {
-                    myController.showErrorMessage(e.getMessage());
+        try{
+            int houseNumber = Integer.parseInt(tbHouseNumber.getText());
+            Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            String email = tbEmail.getText();
+            if (password.equals(passwordRepeat) && !password.equals("")) {
+                if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && email.contains("@")) {
+                    try {
+                        myController.getClient().editBankAccount(password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+                        myController.setScreen(ClientMain.screenBankAccountId);
+                    } catch (RemoteException e) {
+                        myController.showErrorMessage(e.getMessage());
+                    }
+                } else {
+                    myController.showErrorMessage("Personal details are not valid.");
                 }
             } else {
-                myController.showErrorMessage("Personal details are not valid.");
+                myController.showErrorMessage("Password can not be empty or is not the same as repeated password.");
             }
-        } else {
-            myController.showErrorMessage("Password can not be empty or is not the same as repeated password.");
+        } catch (NumberFormatException e){
+            myController.showErrorMessage("Enter only number for house number.");
         }
     }
 
@@ -85,8 +85,7 @@ public class AccountController implements IControllers {
             tbLastName.setText(account.getLastName());
             tbPostalCode.setText(account.getPostalCode());
             tbHouseNumber.setText(String.valueOf(account.getHouseNumber()));
-            LocalDate date = Instant.ofEpochMilli(account.getDateOfBirth().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-            dtpDateOfBirth.setValue(date);
+            dtpDateOfBirth.setValue(Instant.ofEpochMilli(account.getDateOfBirth().getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
             tbEmail.setText(account.getEmail());
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());
