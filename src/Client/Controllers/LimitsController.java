@@ -6,12 +6,14 @@ import Client.ScreensController;
 import javafx.scene.control.TextField;
 
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 
 /**
  * InternetBankieren Created by Sven de Vries on 20-12-2017
  */
 public class LimitsController implements IControllers {
     private ScreensController myController;
+    private static DecimalFormat df = new DecimalFormat("#.##");
 
     //FXML fields
     public TextField tbEuroIn;
@@ -21,7 +23,13 @@ public class LimitsController implements IControllers {
 
     public void editBankAccountsLimits() {
         double limitIn = Double.parseDouble(tbEuroIn.getText() + "." + tbCentIn.getText());
-        double limitOut = Double.parseDouble(tbEuroOut.getText() + "." + tbCentOut.getText());//TODO round to max 2 numbers
+        limitIn = limitIn*100;
+        limitIn = (double)((int) limitIn);
+        limitIn = limitIn /100;
+        double limitOut = Double.parseDouble(tbEuroOut.getText() + "." + tbCentOut.getText());
+        limitOut = limitOut*100;
+        limitOut = (double)((int) limitOut);
+        limitOut = limitOut /100;
         if (limitIn > 0 && limitOut > 0) {
             try {
                 myController.getClient().editBankAccountsLimits(limitIn, limitOut);
@@ -39,10 +47,10 @@ public class LimitsController implements IControllers {
             double limitIn = myController.getClient().getLimitIn();
             double limitOut = myController.getClient().getLimitOut();
             int inEuro = (int) limitIn;
-            int inCent = (int) ((limitIn - inEuro) * 100);
+            int inCent = (int) (limitIn * 100 - inEuro * 100);
 
             int outEuro = (int) limitOut;
-            int outCent = (int) ((limitOut - outEuro) * 100);
+            int outCent = (int) (limitOut * 100 - outEuro * 100);
 
             tbEuroIn.setText(((Integer)inEuro).toString());
             tbCentIn.setText(String.format("%02d", inCent));

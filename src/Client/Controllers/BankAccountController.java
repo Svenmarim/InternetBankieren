@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class BankAccountController implements IControllers {
     private ScreensController myController;
+    private static DecimalFormat df = new DecimalFormat("#.00");
 
     //FXML fields
     public Label lbName;
@@ -64,7 +65,7 @@ public class BankAccountController implements IControllers {
             TempAccount account = myController.getClient().getAccountDetails();
             lbName.setText(account.getFirstName() + " " + account.getLastName());
             lbIban.setText(account.getIban());
-            lbAmount.setText("€" + account.getAmount()); //TODO show 2 decimals
+            lbAmount.setText("€" + df.format(account.getAmount()));
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());
         }

@@ -56,8 +56,13 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
     }
 
     @Override
-    public void logOutClient(IBankForClient session) {
-        sessions.remove(session);
+    public void logOutClient(IBankForClient session) throws RemoteException {
+        for (IBankForClient s : sessions){
+            if (s.getIban().equals(session.getIban())){
+                sessions.remove(s);
+                break;
+            }
+        }
     }
 
     @Override
@@ -69,7 +74,7 @@ public class Bank extends UnicastRemoteObject implements IBankForCentralBank, IR
                 session.receiveBankAccountsTransaction(transaction);
             }
         }
-        return false;
+        return true;
     }
 
     @Override

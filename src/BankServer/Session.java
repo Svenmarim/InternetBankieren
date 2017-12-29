@@ -64,7 +64,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public boolean isSessionValid() {
         //Returns false if difference is MORE then 5 minutes
-        return new Date().getTime() - lastActivity.getTime() >= 5*60*1000;
+        return new Date().getTime() - lastActivity.getTime() >= 5 * 60 * 1000;
     }
 
     @Override
@@ -98,16 +98,30 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public boolean makeBankAccountsTransaction(double amount, String nameReceiver, String ibanReceiver, String description, boolean addToAddress) throws RemoteException {
         this.lastActivity = new Date();
-        //TODO if (ibanReceiver is in addressbook && amount < limitIn && amount < bankAccount.getAmount() || ibanReceiver is NOT in addressbook && amount < limitOut && amount < bankAccount.getAmount())
+        for (Address a : getAddressbook()) {
+            if (a.getIban().equals(ibanReceiver) && amount <= getLimitIn() && amount <= bankAccount.getAmount()) {
+                System.out.println("Transaction activated to contact inside address book");
+                return transaction(amount, description, ibanReceiver, nameReceiver, addToAddress);
+            }
+        }
+
+        if (amount <= getLimitOut() && amount <= bankAccount.getAmount()) {
+            System.out.println("Transaction activated to contact outside address book");
+            return transaction(amount, description, ibanReceiver, nameReceiver, addToAddress);
+        }
+        return false;
+    }
+
+    private boolean transaction(double amount, String description, String ibanReceiver, String nameReceiver, boolean addToAddress) throws RemoteException {
         Transaction transactionReceiver = new Transaction(new Date(), bankAccount.getIban(), amount, description);
-        if (centralBank.transaction(ibanReceiver, transactionReceiver)){
+        if (centralBank.transaction(ibanReceiver, transactionReceiver)) {
             amount -= amount + amount;
             Transaction transaction = new Transaction(new Date(), ibanReceiver.toUpperCase(), amount, description);
             bankAccount.makeTransaction(nameReceiver, transaction, addToAddress);
             //Make changes to database
             database.insertTransaction(bankAccount.getIban(), transaction);
             database.updateAmount(bankAccount.getIban(), bankAccount.getAmount());
-            if (addToAddress){
+            if (addToAddress) {
                 database.insertAddress(bankAccount.getIban(), new Address(nameReceiver, ibanReceiver.toUpperCase()));
             }
             return true;

@@ -102,20 +102,20 @@ public class BankAccount {
         this.limitOutAddressbook = limitOut;
     }
 
-    public void addAddress(Address address){
+    public void addAddress(Address address) {
         this.addressbook.add(address);
     }
 
     public void deleteAddress(Address address) {
-        for(Address a : addressbook){
-            if (a.getIban().equals(address.getIban())){
+        for (Address a : addressbook) {
+            if (a.getIban().equals(address.getIban())) {
                 this.addressbook.remove(a);
                 break;
             }
         }
     }
 
-    public void addTransaction(Transaction transaction){
+    public void addTransaction(Transaction transaction) {
         this.transactionHistory.add(transaction);
     }
 
@@ -138,10 +138,6 @@ public class BankAccount {
     }
 
     public void changeAmount(double amount) {
-        if (amount < 0) {
-            this.amount -= amount;
-        } else if (amount > 0) {
-            this.amount += amount;
-        }
+        this.amount += amount;
     }
 }
