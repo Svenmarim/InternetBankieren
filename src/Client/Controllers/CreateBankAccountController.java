@@ -33,7 +33,7 @@ public class CreateBankAccountController implements IControllers {
     public void setBanksInComboBox() {
         cmbBank.getItems().clear();
         try {
-            cmbBank.getItems().addAll(myController.getClient().getBanks());
+            cmbBank.getItems().addAll(myController.getClient().getOnlineBanks());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -45,26 +45,32 @@ public class CreateBankAccountController implements IControllers {
         String firstName = tbFirstName.getText();
         String lastName = tbLastName.getText();
         String postalCode = tbPostalCode.getText();
-        int houseNumber = Integer.parseInt(tbHouseNumber.getText());
-        Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        String email = tbEmail.getText();
-        TempBank bank = (TempBank) cmbBank.getValue();
-        if (password.equals(passwordRepeat) && !password.equals("")) {
-            if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && bank != null) {
-                try {
-                    if (myController.getClient().createBankAccount(bank, password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email)) {
-                        myController.setScreen(ClientMain.screenBankAccountId);
-                    } else {
-                        myController.showErrorMessage("Something went wrong with creating your account.");
+        try {
+            int houseNumber = Integer.parseInt(tbHouseNumber.getText());
+            Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            String email = tbEmail.getText();
+            TempBank bank = (TempBank) cmbBank.getValue();
+            if (password.equals(passwordRepeat) && !password.equals("")) {
+                if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && email.contains("@") && bank != null) {
+                    try {
+                        if (myController.getClient().createBankAccount(bank, password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email)) {
+                            myController.setScreen(ClientMain.screenBankAccountId);
+                        } else {
+                            myController.showErrorMessage("Something went wrong with creating your account.");
+                        }
+                    } catch (RemoteException e) {
+                        myController.showErrorMessage(e.getMessage());
                     }
-                } catch (RemoteException e) {
-                    myController.showErrorMessage(e.getMessage());
+                } else {
+                    myController.showErrorMessage("Personal details are not valid or there is no bank selected.");
                 }
             } else {
-                myController.showErrorMessage("Personal details are not valid or there is no bank selected.");
+                myController.showErrorMessage("Password can not be empty or is not the same as repeated password.");
             }
-        } else {
-            myController.showErrorMessage("Password can not be empty or is not the same as repeated password.");
+        } catch (NumberFormatException e) {
+            myController.showErrorMessage("Enter only numbers for house number.");
+        } catch (NullPointerException e) {
+            myController.showErrorMessage("Please fill in a correct date.");
         }
     }
 

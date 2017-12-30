@@ -13,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * InternetBankieren Created by Sven de Vries on 1-12-2017
@@ -48,6 +49,15 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
         return database.getAllBanks();
     }
 
+    @Override
+    public List<TempBank> getOnlineBanks() throws RemoteException{
+        List<TempBank> tempBanks = new ArrayList<>();
+        for(IBankForCentralBank b : banks){
+            tempBanks.add(new TempBank(b.getName(), b.getShortcut()));
+        }
+        return tempBanks;
+    }
+
     public CentralBank() throws RemoteException {
         this.banks = new ArrayList<>();
         this.database = new DatabaseCentralBank();
@@ -55,9 +65,21 @@ public class CentralBank extends UnicastRemoteObject implements ICentralBankForB
 
     @Override
     public String createBankAccount(TempBank bank, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
-        //TODO Generate iban
-//        database.insertBankAccount(iban, encryptedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
-        return null; //return iban
+        StringBuilder iban;
+        do{
+            iban = new StringBuilder("NL");
+            for(int i = 0; i < 2; i++){
+                iban.append(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+            }
+            iban.append(bank.getShortcut().toUpperCase());
+            iban.append("0");
+            for(int i = 0; i < 9; i++){
+                iban.append(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+            }
+        } while(database.checkIbanExistence(iban.toString()));
+
+        database.insertBankAccount(iban.toString(), encryptedPassword, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+        return iban.toString();
     }
 
     @Override

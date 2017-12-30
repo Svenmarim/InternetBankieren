@@ -97,7 +97,7 @@ public class DatabaseCentralBank {
             myStmt.setInt(7, houseNumber);
             myStmt.setDate(8, new java.sql.Date(dateOfBirth.getTime()));
             myStmt.setString(9, email);
-            myStmt.setDouble(10, 10);
+            myStmt.setDouble(10, 20);
             myStmt.setDouble(11, 10);
             myStmt.executeUpdate();
         } catch (SQLException e) {

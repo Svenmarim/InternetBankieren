@@ -45,6 +45,10 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         return centralBank.getAllBanks();
     }
 
+    public List<TempBank> getOnlineBanks() throws RemoteException {
+        return centralBank.getOnlineBanks();
+    }
+
     public TempAccount getAccountDetails() throws RemoteException {
         TempAccount account = session.getAccountDetails();
         account.setPassword(decryptPassword(account.getPassword()));
@@ -101,8 +105,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     }
 
     public void deleteBankAccount() throws RemoteException {
-        session.deleteBankAccount();
         centralBank.logOutClient(session);
+        session.deleteBankAccount();
         this.session = null;
     }
 

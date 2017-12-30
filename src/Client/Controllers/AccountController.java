@@ -63,7 +63,7 @@ public class AccountController implements IControllers {
                 myController.showErrorMessage("Password can not be empty or is not the same as repeated password.");
             }
         } catch (NumberFormatException e){
-            myController.showErrorMessage("Enter only number for house number.");
+            myController.showErrorMessage("Enter only numbers for house number.");
         }
     }
 

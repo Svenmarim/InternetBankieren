@@ -32,7 +32,7 @@ public class LoginController implements IControllers {
                 if (iban.equals("admin")) {
                     myController.showErrorMessage("Wrong username or password or there is already an admin logged in.");
                 } else {
-                    myController.showErrorMessage("Wrong iban or password.");
+                    myController.showErrorMessage("Wrong iban or password or the bank server is offline.");
                 }
             }
         } catch (RemoteException e) {
