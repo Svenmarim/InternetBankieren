@@ -126,10 +126,6 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         return session.makeBankAccountsRequest(amount, name, ibanReceiver, description, addToAddress);
     }
 
-    public void receiveBankAccountsTransaction(Transaction transaction) {
-
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent event) throws RemoteException {
 

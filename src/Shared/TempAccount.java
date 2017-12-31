@@ -58,10 +58,8 @@ public class TempAccount implements Serializable {
     }
 
     public TempAccount(double amount, String iban, String encryptedPassword, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) {
-
         this.amount = amount;
         this.iban = iban;
-
         this.password = encryptedPassword;
         this.firstName = firstName;
         this.lastName = lastName;

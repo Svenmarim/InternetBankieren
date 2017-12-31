@@ -19,7 +19,6 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     private ICentralBankForSession centralBank;
     private DatabaseBankServer database;
 
-    @Override
     public Date getLastActivity() {
         return this.lastActivity;
     }
@@ -139,12 +138,6 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     public void receiveBankAccountsTransaction(Transaction transaction) {
         bankAccount.receiveTransaction(transaction);
         //The updates of values in database, happens in Bank class
-    }
-
-    @Override
-    public void changeAmountBankAccount(double amount) {
-        bankAccount.changeAmount(amount);
-        database.updateAmount(bankAccount.getIban(), bankAccount.getAmount());
     }
 
     private void getCentralBank() {

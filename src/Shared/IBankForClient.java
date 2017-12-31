@@ -10,13 +10,6 @@ import java.util.List;
  */
 public interface IBankForClient extends Remote {
     /**
-     * Method for getting the last activity date
-     * @return The date that the user was last active on
-     * @throws RemoteException for exception with RMI
-     */
-    Date getLastActivity() throws RemoteException;
-
-    /**
      * Method for getting the addressbook
      * @return The addressbook
      * @throws RemoteException for exception with RMI
@@ -128,11 +121,4 @@ public interface IBankForClient extends Remote {
      * @throws RemoteException for exception with RMI
      */
     void receiveBankAccountsTransaction(Transaction transaction) throws RemoteException;
-
-    /**
-     * Method for changing your amount of your bank account
-     * @param amount the positive or negative amount
-     * @throws RemoteException for exception with RMI
-     */
-    void changeAmountBankAccount(double amount) throws RemoteException;
 }
