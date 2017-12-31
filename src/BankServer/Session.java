@@ -19,8 +19,8 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     private ICentralBankForSession centralBank;
     private DatabaseBankServer database;
 
-    public Date getLastActivity() {
-        return this.lastActivity;
+    public void setLastActivity(Date date) {
+        this.lastActivity = date;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Session extends UnicastRemoteObject implements IBankForClient {
     @Override
     public boolean isSessionValid() {
         //Returns false if difference is MORE then 5 minutes
-        return new Date().getTime() - lastActivity.getTime() >= 5 * 60 * 1000;
+        return new Date().getTime() - lastActivity.getTime() <= 5 * 60 * 1000;
     }
 
     @Override

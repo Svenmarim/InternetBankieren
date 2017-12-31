@@ -91,8 +91,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         centralBank.deleteBank(bank);
     }
 
-    private void isSessionValid() {
-
+    public boolean isSessionValid() throws RemoteException {
+        return session.isSessionValid();
     }
 
     public boolean createBankAccount(TempBank bank, String password, String firstName, String lastName, String postalCode, int houseNumber, Date dateOfBirth, String email) throws RemoteException {

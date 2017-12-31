@@ -23,20 +23,26 @@ public class LimitsController implements IControllers {
 
     public void editBankAccountsLimits() {
         double limitIn = Double.parseDouble(tbEuroIn.getText() + "." + tbCentIn.getText());
-        limitIn = limitIn*100;
-        limitIn = (double)((int) limitIn);
-        limitIn = limitIn /100;
+        limitIn = limitIn * 100;
+        limitIn = (double) ((int) limitIn);
+        limitIn = limitIn / 100;
         double limitOut = Double.parseDouble(tbEuroOut.getText() + "." + tbCentOut.getText());
-        limitOut = limitOut*100;
-        limitOut = (double)((int) limitOut);
-        limitOut = limitOut /100;
+        limitOut = limitOut * 100;
+        limitOut = (double) ((int) limitOut);
+        limitOut = limitOut / 100;
         if (limitIn > 0 && limitOut > 0) {
             try {
-                myController.getClient().editBankAccountsLimits(limitIn, limitOut);
+                if (myController.getClient().isSessionValid()) {
+                    myController.getClient().editBankAccountsLimits(limitIn, limitOut);
+                    myController.setScreen(ClientMain.screenBankAccountId);
+                } else {
+                    myController.showErrorMessage("Session has ended because of inactivity for more then 5 minutes.");
+                    myController.getClient().logout();
+                    myController.setScreen(ClientMain.screenLoginId);
+                }
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
-            myController.setScreen(ClientMain.screenBankAccountId);
         } else {
             myController.showErrorMessage("Limits can not be 0 or negative.");
         }
@@ -52,9 +58,9 @@ public class LimitsController implements IControllers {
             int outEuro = (int) limitOut;
             int outCent = (int) (limitOut * 100 - outEuro * 100);
 
-            tbEuroIn.setText(((Integer)inEuro).toString());
+            tbEuroIn.setText(((Integer) inEuro).toString());
             tbCentIn.setText(String.format("%02d", inCent));
-            tbEuroOut.setText(((Integer)outEuro).toString());
+            tbEuroOut.setText(((Integer) outEuro).toString());
             tbCentOut.setText(String.format("%02d", outCent));
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());

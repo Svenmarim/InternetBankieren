@@ -1,5 +1,6 @@
 package Client.Controllers;
 
+import Client.ClientMain;
 import Client.IControllers;
 import Client.ScreensController;
 import Shared.Address;
@@ -24,15 +25,21 @@ public class AddressBookController implements IControllers {
 
     public void deleteBankAccountsAddress() {
         try {
-            Address address = (Address) tabelAddresses.getSelectionModel().getSelectedItem();
-            myController.getClient().deleteBankAccountsAddress(address);
-            setAddressBook();
+            if (myController.getClient().isSessionValid()) {
+                Address address = (Address) tabelAddresses.getSelectionModel().getSelectedItem();
+                myController.getClient().deleteBankAccountsAddress(address);
+                setAddressBook();
+            } else {
+                myController.showErrorMessage("Session has ended because of inactivity for more then 5 minutes.");
+                myController.getClient().logout();
+                myController.setScreen(ClientMain.screenLoginId);
+            }
         } catch (RemoteException e) {
             myController.showErrorMessage(e.getMessage());
         }
     }
 
-    public void setAddressBook(){
+    public void setAddressBook() {
         try {
             List<Address> addressBook = myController.getClient().getAddressBook();
             clmName.setCellValueFactory(new PropertyValueFactory<Address, String>("name"));

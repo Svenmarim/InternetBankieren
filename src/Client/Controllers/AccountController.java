@@ -44,15 +44,21 @@ public class AccountController implements IControllers {
         String firstName = tbFirstName.getText();
         String lastName = tbLastName.getText();
         String postalCode = tbPostalCode.getText();
-        try{
+        try {
             int houseNumber = Integer.parseInt(tbHouseNumber.getText());
             Date dateOfBirth = Date.from(dtpDateOfBirth.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
             String email = tbEmail.getText();
             if (password.equals(passwordRepeat) && !password.equals("")) {
                 if (!firstName.equals("") && !lastName.equals("") && !postalCode.equals("") && houseNumber != 0 && dateOfBirth.before(new Date()) && !email.equals("") && email.contains("@")) {
                     try {
-                        myController.getClient().editBankAccount(password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
-                        myController.setScreen(ClientMain.screenBankAccountId);
+                        if (myController.getClient().isSessionValid()) {
+                            myController.getClient().editBankAccount(password, firstName, lastName, postalCode, houseNumber, dateOfBirth, email);
+                            myController.setScreen(ClientMain.screenBankAccountId);
+                        } else {
+                            myController.showErrorMessage("Session has ended because of inactivity for more then 5 minutes.");
+                            myController.getClient().logout();
+                            myController.setScreen(ClientMain.screenLoginId);
+                        }
                     } catch (RemoteException e) {
                         myController.showErrorMessage(e.getMessage());
                     }
@@ -62,7 +68,7 @@ public class AccountController implements IControllers {
             } else {
                 myController.showErrorMessage("Password can not be empty or is not the same as repeated password.");
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             myController.showErrorMessage("Enter only numbers for house number.");
         }
     }

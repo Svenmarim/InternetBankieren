@@ -29,19 +29,25 @@ public class NewTransactionController implements IControllers {
 
     public void makeBankAccountsRequest() {
         double amount = Double.parseDouble(tbEuroAmount.getText() + "." + tbCentAmount.getText());
-        amount = amount*100;
-        amount = (double)((int) amount);
-        amount = amount /100;
+        amount = amount * 100;
+        amount = (double) ((int) amount);
+        amount = amount / 100;
         String nameReceiver = tbNameReceiver.getText();
         String ibanReceiver = tbIbanReceiver.getText();
         String description = tbDescription.getText();
         boolean addToAddress = cbAddToAddressBook.isSelected();
-        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
+        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")) {
             try {
-                if (myController.getClient().makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress)){
-                    myController.setScreen(ClientMain.screenBankAccountId);
+                if (myController.getClient().isSessionValid()) {
+                    if (myController.getClient().makeBankAccountsRequest(amount, nameReceiver, ibanReceiver, description, addToAddress)) {
+                        myController.setScreen(ClientMain.screenBankAccountId);
+                    } else {
+                        myController.showErrorMessage("The request is not sended.");
+                    }
                 } else {
-                    myController.showErrorMessage("The request is not sended.");
+                    myController.showErrorMessage("Session has ended because of inactivity for more then 5 minutes.");
+                    myController.getClient().logout();
+                    myController.setScreen(ClientMain.screenLoginId);
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -53,19 +59,25 @@ public class NewTransactionController implements IControllers {
 
     public void makeBankAccountsTransaction() {
         double amount = Double.parseDouble(tbEuroAmount.getText() + "." + tbCentAmount.getText());
-        amount = amount*100;
-        amount = (double)((int) amount);
-        amount = amount /100;
+        amount = amount * 100;
+        amount = (double) ((int) amount);
+        amount = amount / 100;
         String nameReceiver = tbNameReceiver.getText();
         String ibanReceiver = tbIbanReceiver.getText();
         String description = tbDescription.getText();
         boolean addToAddress = cbAddToAddressBook.isSelected();
-        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")){
+        if (amount > 0 && !nameReceiver.equals("") && !ibanReceiver.equals("")) {
             try {
-                if (myController.getClient().makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress)){
-                    myController.setScreen(ClientMain.screenBankAccountId);
+                if (myController.getClient().isSessionValid()) {
+                    if (myController.getClient().makeBankAccountsTransaction(amount, nameReceiver, ibanReceiver, description, addToAddress)) {
+                        myController.setScreen(ClientMain.screenBankAccountId);
+                    } else {
+                        myController.showErrorMessage("Check if other bank is online, otherwise amount or receiver details are not valid or you are trying to transfer a higher amount of money that is above your transfer limit.");
+                    }
                 } else {
-                    myController.showErrorMessage("Check if other bank is online, otherwise amount or receiver details are not valid or you are trying to transfer a higher amount of money that is above your transfer limit.");
+                    myController.showErrorMessage("Session has ended because of inactivity for more then 5 minutes.");
+                    myController.getClient().logout();
+                    myController.setScreen(ClientMain.screenLoginId);
                 }
             } catch (RemoteException e) {
                 myController.showErrorMessage(e.getMessage());
@@ -75,7 +87,7 @@ public class NewTransactionController implements IControllers {
         }
     }
 
-    public void setCheckboxEnable(){
+    public void setCheckboxEnable() {
         cbAddToAddressBook.setDisable(false);
     }
 
