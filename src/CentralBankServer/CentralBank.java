@@ -1,6 +1,5 @@
 package CentralBankServer;
 
-import BankServer.Bank;
 import Shared.Transaction;
 import Shared.*;
 
