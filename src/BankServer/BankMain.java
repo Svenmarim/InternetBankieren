@@ -50,7 +50,7 @@ public class BankMain extends Application {
             //Creates bank
             Bank bank = (Bank) cmbBank.getValue();
             bank.getCentralBank();
-            bank.bindBankInRegistry();
+            bank.bindPublisherInRegistry();
             System.out.println("Bank: Bank created");
 
             //Closes the GUI

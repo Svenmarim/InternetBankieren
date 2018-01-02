@@ -5,6 +5,7 @@ import Client.IControllers;
 import Client.ScreensController;
 import Shared.TempAccount;
 import Shared.Transaction;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -117,5 +118,17 @@ public class BankAccountController implements IControllers {
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
+    }
+
+    public void updateAccountDetails(TempAccount account) {
+        Platform.runLater(() -> {
+            lbName.setText(account.getFirstName() + " " + account.getLastName());
+            lbIban.setText(account.getIban());
+            lbAmount.setText("€" + df.format(account.getAmount()));
+        });
+    }
+
+    public void updateTransactionHistory(Transaction transaction) {
+        Platform.runLater(() -> tabelTransactions.getItems().add(transaction));
     }
 }

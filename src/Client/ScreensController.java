@@ -63,7 +63,7 @@ public class ScreensController extends StackPane {
 
     public ScreensController() {
         try {
-            this.client = new Client();
+            this.client = new Client(this);
             System.out.println("Client: Client created");
         } catch (RemoteException e) {
             System.out.println("Client: Cannot create Client");

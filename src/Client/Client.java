@@ -24,6 +24,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private ICentralBankForClient centralBank;
     private IBankForClient session;
     private IRemotePublisherForListener publisherForListener;
+    private ScreensController screensController;
 
     public List<Address> getAddressBook() throws RemoteException {
         return session.getAddressbook();
@@ -55,7 +56,8 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         return account;
     }
 
-    public Client() throws RemoteException {
+    public Client(ScreensController screensController) throws RemoteException {
+        this.screensController = screensController;
         getCentralBank();
     }
 
@@ -66,7 +68,9 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         } else if (iban.length() == 18) {
             session = centralBank.loginClient(iban, encryptPassword(password));
             if (session != null) {
-                bindClientInRegistry(iban);
+                String shortcut = iban.substring(4, 8);
+                getPublisher(shortcut);
+                publisherForListener.subscribeRemoteListener(this, session.getIban().toUpperCase());
             }
             return session != null;
         }
@@ -78,6 +82,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
             centralBank.logOutAdmin();
             admin = false;
         } else {
+            publisherForListener.unsubscribeRemoteListener(this, session.getIban().toUpperCase());
             centralBank.logOutClient(session);
             this.session = null;
         }
@@ -127,8 +132,12 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent event) throws RemoteException {
-
+    public void propertyChange(PropertyChangeEvent event) {
+        if (event.getNewValue() instanceof TempAccount){
+            screensController.getBankAccountController().updateAccountDetails((TempAccount)event.getNewValue());
+        } else if (event.getNewValue() instanceof Transaction){
+            screensController.getBankAccountController().updateTransactionHistory((Transaction)event.getNewValue());
+        }
     }
 
     private String encryptPassword(String password) {
@@ -149,43 +158,30 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         }
     }
 
-    private void bindClientInRegistry(String iban) {
-        //Create registry at port number
-        Registry registry = null;
-        try {
-            registry = LocateRegistry.getRegistry("localhost", 1234);
-            System.out.println("Client: Registry located");
-        } catch (RemoteException e1) {
-            System.out.println("Client: Cannot locate registry");
-            System.exit(0);
-        }
+    private void getPublisher(String shortcut) {
+        // Locate registry at IP address and port number
+        Registry registry = getRegistry();
 
-        //Bind using registry
-        try {
-            registry.rebind(iban, this);
-            System.out.println("Client: Client bound to registry");
-        } catch (RemoteException e) {
-            System.out.println("Client: Cannot bind Client");
-            System.out.println("Client: RemoteException: " + e.getMessage());
-            System.exit(0);
-        } catch (NullPointerException e) {
-            System.out.println("Client: Port already in use. \nClient: Please check if the server isn't already running");
-            System.out.println("Client: NullPointerException: " + e.getMessage());
-            System.exit(0);
+        //Get Publisher from registry
+        if (registry != null) {
+            try {
+                publisherForListener = (IRemotePublisherForListener) registry.lookup(shortcut.toUpperCase());
+                System.out.println("Client: publisher retrieved");
+            } catch (RemoteException e) {
+                System.out.println("Client: RemoteException on publisher");
+                System.out.println("Client: RemoteException: " + e.getMessage());
+                System.exit(0);
+            } catch (NotBoundException e) {
+                System.out.println("Client: Cannot bind publisher");
+                System.out.println("Client: NotBoundException: " + e.getMessage());
+                System.exit(0);
+            }
         }
     }
 
     private void getCentralBank() {
         // Locate registry at IP address and port number
-        Registry registry = null;
-        try {
-            registry = LocateRegistry.getRegistry("localhost", 1234);
-            System.out.println("Client: Registry located");
-        } catch (RemoteException ex) {
-            System.out.println("Client: Cannot locate registry");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
-            System.exit(0);
-        }
+        Registry registry = getRegistry();
 
         //Get CentralBank from registry
         if (registry != null) {
@@ -202,5 +198,18 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
                 System.exit(0);
             }
         }
+    }
+
+    private Registry getRegistry(){
+        try {
+            Registry registry = LocateRegistry.getRegistry("localhost", 1234);
+            System.out.println("Client: Registry located");
+            return registry;
+        } catch (RemoteException ex) {
+            System.out.println("Client: Cannot locate registry");
+            System.out.println("Client: RemoteException: " + ex.getMessage());
+            System.exit(0);
+        }
+        return null;
     }
 }
