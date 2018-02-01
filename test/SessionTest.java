@@ -28,7 +28,6 @@ public class SessionTest {
     @Test
     public void testIsSessionValidTrue() {
         Date date = new Date();
-        date.setMinutes(1);
         session.setLastActivity(date);
         assertTrue(session.isSessionValid());
     }
